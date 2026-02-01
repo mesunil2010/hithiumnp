@@ -1,0 +1,29 @@
+{
+  "name": "hithium-backend",
+  "version": "1.0.0",
+  "description": "HiTHIUM Bangladesh - MedusaJS Backend",
+  "private": true,
+  "scripts": {
+    "dev": "medusa develop",
+    "build": "medusa build",
+    "start": "medusa start",
+    "seed": "medusa exec ./src/seed/index.ts",
+    "db:migrate": "medusa db:migrate"
+  },
+  "dependencies": {
+    "@medusajs/framework": "^2.6.1",
+    "@medusajs/medusa": "^2.6.1",
+    "@medusajs/medusa-cli": "^2.2.1",
+    "@medusajs/admin-sdk": "^2.6.1",
+    "@medusajs/js-sdk": "^2.6.1",
+    "@medusajs/icons": "^2.3.0",
+    "awilix": "^12.0.6",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@medusajs/test-utils": "^2.6.1",
+    "@swc/core": "^1.10.7",
+    "@types/node": "^22.10.7",
+    "typescript": "^5.7.3"
+  }
+}

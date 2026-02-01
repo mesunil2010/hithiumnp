@@ -1,0 +1,346 @@
+import {
+  createProductCategoriesWorkflow,
+  createProductsWorkflow,
+  createRegionsWorkflow,
+  createSalesChannelsWorkflow,
+  createShippingOptionsWorkflow,
+  createStockLocationsWorkflow,
+  linkSalesChannelsToStockLocationWorkflow,
+} from "@medusajs/medusa/core-flows";
+import { ExecArgs } from "@medusajs/framework/types";
+import { ContainerRegistrationKeys, Modules } from "@medusajs/framework/utils";
+
+export default async function seed({ container }: ExecArgs) {
+  const logger = container.resolve(ContainerRegistrationKeys.LOGGER);
+  const remoteLink = container.resolve(ContainerRegistrationKeys.REMOTE_LINK);
+  const fulfillmentModuleService = container.resolve(Modules.FULFILLMENT);
+  const salesChannelModuleService = container.resolve(Modules.SALES_CHANNEL);
+  const storeModuleService = container.resolve(Modules.STORE);
+
+  logger.info("Seeding HiTHIUM Bangladesh store data...");
+
+  // Update store details
+  const [store] = await storeModuleService.listStores();
+  if (store) {
+    await storeModuleService.updateStores(store.id, {
+      name: "HiTHIUM Bangladesh",
+      supported_currencies: [
+        { currency_code: "bdt", is_default: true },
+        { currency_code: "usd" },
+      ],
+    });
+  }
+
+  logger.info("Creating sales channels...");
+  const { result: salesChannelsResult } =
+    await createSalesChannelsWorkflow(container).run({
+      input: {
+        salesChannelsData: [
+          {
+            name: "HiTHIUM BD Online Store",
+            description: "HiTHIUM Bangladesh official online storefront",
+          },
+        ],
+      },
+    });
+  const defaultSalesChannel = salesChannelsResult[0];
+
+  logger.info("Creating regions...");
+  const { result: regionsResult } = await createRegionsWorkflow(container).run({
+    input: {
+      regions: [
+        {
+          name: "Bangladesh",
+          currency_code: "bdt",
+          countries: ["bd"],
+          payment_providers: ["pp_manual_manual"],
+        },
+      ],
+    },
+  });
+  const bangladeshRegion = regionsResult[0];
+
+  logger.info("Creating stock location...");
+  const { result: stockLocationResult } =
+    await createStockLocationsWorkflow(container).run({
+      input: {
+        locations: [
+          {
+            name: "HiTHIUM BD Warehouse",
+            address: {
+              city: "Dhaka",
+              country_code: "BD",
+              address_1: "Dhaka, Bangladesh",
+            },
+          },
+        ],
+      },
+    });
+
+  await linkSalesChannelsToStockLocationWorkflow(container).run({
+    input: {
+      id: stockLocationResult[0].id,
+      add: [defaultSalesChannel.id],
+    },
+  });
+
+  logger.info("Creating fulfillment provider...");
+  const fulfillmentSet = await fulfillmentModuleService.createFulfillmentSets({
+    name: "HiTHIUM BD Fulfillment",
+    type: "shipping",
+    service_zones: [
+      {
+        name: "Bangladesh",
+        geo_zones: [{ country_code: "bd", type: "country" }],
+      },
+    ],
+  });
+
+  logger.info("Creating shipping options...");
+  await createShippingOptionsWorkflow(container).run({
+    input: {
+      options: [
+        {
+          name: "Standard Delivery (Dhaka)",
+          price_type: "flat",
+          service_zone_id: fulfillmentSet.service_zones[0].id,
+          shipping_profile_id: (
+            await fulfillmentModuleService.listShippingProfiles()
+          )[0].id,
+          provider_id: "manual_manual",
+          type: {
+            code: "standard",
+            label: "Standard Delivery",
+            description: "Delivery within Dhaka - 2-3 business days",
+          },
+          prices: [
+            { region_id: bangladeshRegion.id, amount: 500 },
+          ],
+        },
+        {
+          name: "Nationwide Delivery",
+          price_type: "flat",
+          service_zone_id: fulfillmentSet.service_zones[0].id,
+          shipping_profile_id: (
+            await fulfillmentModuleService.listShippingProfiles()
+          )[0].id,
+          provider_id: "manual_manual",
+          type: {
+            code: "nationwide",
+            label: "Nationwide Delivery",
+            description: "Delivery across Bangladesh - 5-7 business days",
+          },
+          prices: [
+            { region_id: bangladeshRegion.id, amount: 1500 },
+          ],
+        },
+      ],
+    },
+  });
+
+  logger.info("Creating product categories...");
+  const { result: categoriesResult } =
+    await createProductCategoriesWorkflow(container).run({
+      input: {
+        product_categories: [
+          {
+            name: "Energy Storage Systems",
+            description:
+              "HiTHIUM residential and commercial energy storage systems with LiFePO₄ technology",
+            is_active: true,
+          },
+          {
+            name: "Portable Power Stations",
+            description:
+              "Compact and portable HiTHIUM HeroEE power stations for on-the-go energy",
+            is_active: true,
+          },
+          {
+            name: "Solar Accessories",
+            description:
+              "Portable solar panels and accessories for off-grid charging",
+            is_active: true,
+          },
+        ],
+      },
+    });
+
+  const [essCategory, portableCategory, solarCategory] = categoriesResult;
+
+  logger.info("Creating HiTHIUM products...");
+  await createProductsWorkflow(container).run({
+    input: {
+      products: [
+        {
+          title: "HiTHIUM HeroEE 1 — 1kWh Portable Power Station",
+          handle: "heroee-1",
+          description:
+            "The HITHIUM HeroEE1 Power Station (1000Wh) is a portable, eco-friendly energy backup solution with a long-lasting LiFePO₄ battery (10,000+ cycles). It delivers 200W pure sine wave output, supports both solar and AC charging, and features built-in UPS functionality. Ideal for home backup, outdoor adventures, and emergency power needs.",
+          status: "published",
+          category_ids: [portableCategory.id],
+          sales_channels: [{ id: defaultSalesChannel.id }],
+          options: [
+            { title: "Variant", values: ["Standard"] },
+          ],
+          variants: [
+            {
+              title: "HeroEE 1 Standard",
+              sku: "HEROEE-1-STD",
+              manage_inventory: true,
+              prices: [
+                { amount: 29900, currency_code: "bdt" },
+                { amount: 280, currency_code: "usd" },
+              ],
+              options: { Variant: "Standard" },
+            },
+          ],
+          metadata: {
+            battery_type: "LiFePO₄ (LFP)",
+            capacity: "1000Wh (1kWh)",
+            output_power: "200W Pure Sine Wave",
+            cycle_life: "10,000+",
+            charging: "Solar + AC",
+            ups: "Yes",
+            weight: "12kg",
+            warranty: "5 Years",
+          },
+        },
+        {
+          title: "HiTHIUM HeroEE 2 — 2kWh Home Backup System",
+          handle: "heroee-2",
+          description:
+            "The HiTHIUM HeroEE 2 is a 2kWh residential power supply with 1000W output, built with premium LiFePO₄ 314Ah cells and an ultra-long life cycle of 11,000 cycles. Perfect for home backup during load shedding, it provides reliable and clean energy for essential appliances.",
+          status: "published",
+          category_ids: [portableCategory.id],
+          sales_channels: [{ id: defaultSalesChannel.id }],
+          options: [
+            { title: "Variant", values: ["Standard"] },
+          ],
+          variants: [
+            {
+              title: "HeroEE 2 Standard",
+              sku: "HEROEE-2-STD",
+              manage_inventory: true,
+              prices: [
+                { amount: 78800, currency_code: "bdt" },
+                { amount: 720, currency_code: "usd" },
+              ],
+              options: { Variant: "Standard" },
+            },
+          ],
+          metadata: {
+            battery_type: "LiFePO₄ (LFP) 314Ah Cells",
+            capacity: "2048Wh (2kWh)",
+            output_power: "1000W",
+            cycle_life: "11,000",
+            charging: "Solar + AC",
+            ups: "Yes",
+            warranty: "5 Years",
+          },
+        },
+        {
+          title: "HiTHIUM HeroEE 8 — 8kWh Energy Storage System",
+          handle: "heroee-8",
+          description:
+            "The HiTHIUM HeroEE 8 is a high-performance 8kWh lithium iron phosphate (LiFePO₄) energy storage system designed for both residential and commercial applications. Engineered with advanced safety features, long cycle life, and intelligent communication ports (CAN/RS485/RS232, optional WiFi/Bluetooth), it offers seamless integration with leading inverter brands including Victron, Deye, SMA, and GoodWe.",
+          status: "published",
+          category_ids: [essCategory.id],
+          sales_channels: [{ id: defaultSalesChannel.id }],
+          options: [
+            { title: "Variant", values: ["Standard"] },
+          ],
+          variants: [
+            {
+              title: "HeroEE 8 Standard",
+              sku: "HEROEE-8-STD",
+              manage_inventory: true,
+              prices: [
+                { amount: 165000, currency_code: "bdt" },
+                { amount: 1500, currency_code: "usd" },
+              ],
+              options: { Variant: "Standard" },
+            },
+          ],
+          metadata: {
+            battery_type: "LiFePO₄ (LFP)",
+            capacity: "8192Wh (8kWh)",
+            voltage: "51.2V",
+            cycle_life: "11,000+",
+            communication: "CAN/RS485/RS232, WiFi/Bluetooth (optional)",
+            compatible_inverters: "Victron, Deye, SMA, GoodWe",
+            expandable: "Up to 16 units in parallel (128kWh)",
+            warranty: "10 Years",
+          },
+        },
+        {
+          title: "HiTHIUM HeroEE 16 — 16kWh LiFePO₄ Battery Pack",
+          handle: "heroee-16",
+          description:
+            "The HiTHIUM HeroEE 16 is a 16kWh LiFePO₄ portable battery pack with 43.2–56.8V DC output, designed for solar integration and reliable home or commercial energy storage. With 314Ah cells and up to 11,000 cycle life, it can be expanded up to 256kWh by connecting 16 units in parallel. Features intelligent BMS with comprehensive protections.",
+          status: "published",
+          category_ids: [essCategory.id],
+          sales_channels: [{ id: defaultSalesChannel.id }],
+          options: [
+            { title: "Variant", values: ["Standard"] },
+          ],
+          variants: [
+            {
+              title: "HeroEE 16 Standard",
+              sku: "HEROEE-16-STD",
+              manage_inventory: true,
+              prices: [
+                { amount: 306000, currency_code: "bdt" },
+                { amount: 2800, currency_code: "usd" },
+              ],
+              options: { Variant: "Standard" },
+            },
+          ],
+          metadata: {
+            battery_type: "LiFePO₄ (LFP) 314Ah Cells",
+            capacity: "16076.8Wh (16kWh)",
+            voltage: "51.2V (43.2–56.8V range)",
+            max_current: "200A charge/discharge",
+            cycle_life: "11,000",
+            expandable: "Up to 16 units in parallel (256kWh)",
+            communication: "CAN/RS485/RS232",
+            warranty: "10 Years",
+          },
+        },
+        {
+          title: "HiTHIUM 200W Portable Solar Folding Panel",
+          handle: "hithium-solar-200w",
+          description:
+            "HiTHIUM 200W Portable Solar Folding Panel (MD23-CS200E) with high-efficiency monocrystalline cells. Foldable, lightweight, and waterproof design perfect for pairing with HeroEE portable power stations. Features MC4 connectors for universal compatibility and an adjustable kickstand for optimal sun angle.",
+          status: "published",
+          category_ids: [solarCategory.id],
+          sales_channels: [{ id: defaultSalesChannel.id }],
+          options: [
+            { title: "Variant", values: ["Standard"] },
+          ],
+          variants: [
+            {
+              title: "200W Solar Panel",
+              sku: "SOLAR-200W-STD",
+              manage_inventory: true,
+              prices: [
+                { amount: 23950, currency_code: "bdt" },
+                { amount: 220, currency_code: "usd" },
+              ],
+              options: { Variant: "Standard" },
+            },
+          ],
+          metadata: {
+            power: "200W",
+            cell_type: "Monocrystalline",
+            connector: "MC4",
+            waterproof: "IP65",
+            foldable: "Yes",
+            warranty: "2 Years",
+          },
+        },
+      ],
+    },
+  });
+
+  logger.info("Seed completed successfully!");
+}

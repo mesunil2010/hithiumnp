@@ -1,0 +1,22 @@
+{
+  "name": "hithium-np",
+  "version": "1.0.0",
+  "description": "HiTHIUM Bangladesh E-Commerce Platform - Powered by MedusaJS & HeroUI",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "storefront"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:storefront\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:storefront": "cd storefront && npm run dev",
+    "build": "npm run build:backend && npm run build:storefront",
+    "build:backend": "cd backend && npm run build",
+    "build:storefront": "cd storefront && npm run build",
+    "seed": "cd backend && npm run seed"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

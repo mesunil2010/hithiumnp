@@ -307,6 +307,43 @@ export default async function seed({ container }: ExecArgs) {
           },
         },
         {
+          title: "HiTHIUM HeroEE MaxPower 8 AIO — 8kWh All-In-One ESS",
+          handle: "heroee-maxpower-8-aio",
+          description:
+            "The HiTHIUM HeroEE MaxPower 8 AIO is a revolutionary all-in-one energy storage system that integrates inverter, battery, and MPPT charge controller in a single compact unit. With 5kW rated output (38% above comparable 3.6kW units) and 180% DC/AC ratio supporting up to 9kW solar input, it delivers exceptional performance. Built with premium LiFePO₄ 314Ah cells in an 8S1P configuration, expandable from 8kWh to 128kWh.",
+          status: "published",
+          category_ids: [essCategory.id],
+          sales_channels: [{ id: defaultSalesChannel.id }],
+          options: [
+            { title: "Variant", values: ["Standard"] },
+          ],
+          variants: [
+            {
+              title: "MaxPower 8 AIO Standard",
+              sku: "HEROEE-MP8-AIO-STD",
+              manage_inventory: true,
+              prices: [
+                { amount: 245000, currency_code: "bdt" },
+                { amount: 2250, currency_code: "usd" },
+              ],
+              options: { Variant: "Standard" },
+            },
+          ],
+          metadata: {
+            battery_type: "LiFePO₄ (LFP) 314Ah Cells (8S1P)",
+            capacity: "8038.4Wh (8kWh)",
+            voltage: "25.6V",
+            rated_output: "5,000W (5kW)",
+            solar_input: "Up to 9,000W (9kW)",
+            dc_ac_ratio: "180%",
+            cycle_life: "11,000",
+            built_in_inverter: "Yes (Pure Sine Wave)",
+            built_in_mppt: "Yes",
+            expandable: "Up to 16 units in parallel (128kWh)",
+            warranty: "10 Years",
+          },
+        },
+        {
           title: "HiTHIUM 200W Portable Solar Folding Panel",
           handle: "hithium-solar-200w",
           description:

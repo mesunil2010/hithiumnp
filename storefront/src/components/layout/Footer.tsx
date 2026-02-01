@@ -45,18 +45,18 @@ export function Footer() {
                   HiTHIUM
                 </span>
                 <span className="text-xs text-gray-400 block -mt-1">
-                  Bangladesh
+                  Nepal
                 </span>
               </div>
             </Link>
             <p className="text-sm text-gray-400 mb-4 max-w-xs">
               Exclusive distributor of HiTHIUM and HiTHIUM HeroEE energy storage
-              products in Bangladesh. Powering a cleaner, greener future.
+              products in Nepal. Powering a cleaner, greener future.
             </p>
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-hithium-accent" />
-                <span>Dhaka, Bangladesh</span>
+                <span>Dhaka, Nepal</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-hithium-accent" />

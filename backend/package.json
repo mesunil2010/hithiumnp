@@ -1,7 +1,7 @@
 {
   "name": "hithium-backend",
   "version": "1.0.0",
-  "description": "HiTHIUM Bangladesh - MedusaJS Backend",
+  "description": "HiTHIUM Nepal - MedusaJS Backend",
   "private": true,
   "scripts": {
     "dev": "medusa develop",

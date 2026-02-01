@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+"use client";
+
 import {
   Card,
   CardBody,
@@ -12,19 +13,12 @@ import {
 import {
   FileText,
   Shield,
-  HelpCircle,
   Wrench,
   Download,
   Phone,
   Mail,
 } from "lucide-react";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Support",
-  description:
-    "HiTHIUM Nepal product support, warranty information, FAQ, and after-sales service.",
-};
 
 const faqs = [
   {
@@ -61,14 +55,9 @@ const faqs = [
   },
 ];
 
-export default function SupportPage() {
+export default function SupportClient() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <Breadcrumbs className="mb-6">
-        <BreadcrumbItem href="/">Home</BreadcrumbItem>
-        <BreadcrumbItem>Support</BreadcrumbItem>
-      </Breadcrumbs>
-
+    <div>
       <div className="text-center mb-12">
         <Chip color="primary" variant="flat" className="mb-4">
           Customer Support
@@ -185,17 +174,15 @@ export default function SupportPage() {
           Frequently Asked Questions
         </h2>
         <Accordion variant="bordered" selectionMode="multiple">
-          <>
-            {faqs.map((faq, i) => (
-              <AccordionItem
-                key={i}
-                aria-label={faq.q}
-                title={<span className="font-medium">{faq.q}</span>}
-              >
-                <p className="text-gray-600 pb-2">{faq.a}</p>
-              </AccordionItem>
-            ))}
-          </>
+          {faqs.map((faq, i) => (
+            <AccordionItem
+              key={i}
+              aria-label={faq.q}
+              title={<span className="font-medium">{faq.q}</span>}
+            >
+              <p className="text-gray-600 pb-2">{faq.a}</p>
+            </AccordionItem>
+          ))}
         </Accordion>
       </div>
 

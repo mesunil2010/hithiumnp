@@ -1,7 +1,7 @@
 {
   "name": "hithium-storefront",
   "version": "1.0.0",
-  "description": "HiTHIUM Bangladesh Storefront - Next.js + HeroUI",
+  "description": "HiTHIUM Nepal Storefront - Next.js + HeroUI",
   "private": true,
   "scripts": {
     "dev": "next dev -p 8000",

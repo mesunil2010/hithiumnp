@@ -207,7 +207,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
             <div className="space-y-3 py-2 text-sm text-gray-600">
               <p><strong>Dhaka:</strong> Free delivery, 2-3 business days</p>
               <p><strong>Outside Dhaka:</strong> ৳1,500 flat rate, 5-7 business days</p>
-              <p><strong>Warranty:</strong> {product.specs.Warranty} manufacturer warranty through HiTHIUM Bangladesh</p>
+              <p><strong>Warranty:</strong> {product.specs.Warranty} manufacturer warranty through HiTHIUM Nepal</p>
               <p><strong>After-Sales:</strong> Local service & support available</p>
             </div>
           </AccordionItem>

@@ -52,7 +52,7 @@ export default function ContactPage() {
             {
               icon: <MapPin className="w-5 h-5" />,
               title: "Address",
-              details: ["Dhaka, Bangladesh"],
+              details: ["Dhaka, Nepal"],
             },
             {
               icon: <Clock className="w-5 h-5" />,

@@ -1,7 +1,7 @@
 {
   "name": "hithium-np",
   "version": "1.0.0",
-  "description": "HiTHIUM Bangladesh E-Commerce Platform - Powered by MedusaJS & HeroUI",
+  "description": "HiTHIUM Nepal E-Commerce Platform - Powered by MedusaJS & HeroUI",
   "private": true,
   "workspaces": [
     "backend",
@@ -18,5 +18,8 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.0"
+  },
+  "dependencies": {
+    "@medusajs/cli": "2.13.1"
   }
 }

@@ -67,7 +67,7 @@ export function Header() {
       <div className="bg-hithium-secondary text-white text-xs py-1.5 hidden sm:block">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <p>
-            Exclusive Distributor of HiTHIUM & HiTHIUM HeroEE in Bangladesh
+            Exclusive Distributor of HiTHIUM & HiTHIUM HeroEE in Nepal
           </p>
           <div className="flex items-center gap-4">
             <a
@@ -104,7 +104,7 @@ export function Header() {
                   HiTHIUM
                 </span>
                 <span className="text-[10px] text-gray-500 leading-tight -mt-0.5">
-                  Bangladesh
+                  Nepal
                 </span>
               </div>
             </Link>
@@ -136,23 +136,25 @@ export function Header() {
               </DropdownTrigger>
             </NavbarItem>
             <DropdownMenu aria-label="Product categories" className="w-64">
-              <DropdownItem
-                key="all"
-                href="/products"
-                description="Browse all HiTHIUM products"
-              >
-                All Products
-              </DropdownItem>
-              {productCategories.map((cat) => (
+              <>
                 <DropdownItem
-                  key={cat.name}
-                  href={cat.href}
-                  description={cat.description}
-                  startContent={cat.icon}
+                  key="all"
+                  href="/products"
+                  description="Browse all HiTHIUM products"
                 >
-                  {cat.name}
+                  All Products
                 </DropdownItem>
-              ))}
+                {productCategories.map((cat) => (
+                  <DropdownItem
+                    key={cat.name}
+                    href={cat.href}
+                    description={cat.description}
+                    startContent={cat.icon}
+                  >
+                    {cat.name}
+                  </DropdownItem>
+                ))}
+              </>
             </DropdownMenu>
           </Dropdown>
 

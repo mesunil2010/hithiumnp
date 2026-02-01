@@ -17,13 +17,13 @@ export default async function seed({ container }: ExecArgs) {
   const salesChannelModuleService = container.resolve(Modules.SALES_CHANNEL);
   const storeModuleService = container.resolve(Modules.STORE);
 
-  logger.info("Seeding HiTHIUM Bangladesh store data...");
+  logger.info("Seeding HiTHIUM Nepal store data...");
 
   // Update store details
   const [store] = await storeModuleService.listStores();
   if (store) {
     await storeModuleService.updateStores(store.id, {
-      name: "HiTHIUM Bangladesh",
+      name: "HiTHIUM Nepal",
       supported_currencies: [
         { currency_code: "bdt", is_default: true },
         { currency_code: "usd" },
@@ -38,7 +38,7 @@ export default async function seed({ container }: ExecArgs) {
         salesChannelsData: [
           {
             name: "HiTHIUM BD Online Store",
-            description: "HiTHIUM Bangladesh official online storefront",
+            description: "HiTHIUM Nepal official online storefront",
           },
         ],
       },
@@ -50,7 +50,7 @@ export default async function seed({ container }: ExecArgs) {
     input: {
       regions: [
         {
-          name: "Bangladesh",
+          name: "Nepal",
           currency_code: "bdt",
           countries: ["bd"],
           payment_providers: ["pp_manual_manual"],
@@ -58,7 +58,7 @@ export default async function seed({ container }: ExecArgs) {
       ],
     },
   });
-  const bangladeshRegion = regionsResult[0];
+  const NepalRegion = regionsResult[0];
 
   logger.info("Creating stock location...");
   const { result: stockLocationResult } =
@@ -70,7 +70,7 @@ export default async function seed({ container }: ExecArgs) {
             address: {
               city: "Dhaka",
               country_code: "BD",
-              address_1: "Dhaka, Bangladesh",
+              address_1: "Dhaka, Nepal",
             },
           },
         ],
@@ -90,7 +90,7 @@ export default async function seed({ container }: ExecArgs) {
     type: "shipping",
     service_zones: [
       {
-        name: "Bangladesh",
+        name: "Nepal",
         geo_zones: [{ country_code: "bd", type: "country" }],
       },
     ],
@@ -114,7 +114,7 @@ export default async function seed({ container }: ExecArgs) {
             description: "Delivery within Dhaka - 2-3 business days",
           },
           prices: [
-            { region_id: bangladeshRegion.id, amount: 500 },
+            { region_id: NepalRegion.id, amount: 500 },
           ],
         },
         {
@@ -128,10 +128,10 @@ export default async function seed({ container }: ExecArgs) {
           type: {
             code: "nationwide",
             label: "Nationwide Delivery",
-            description: "Delivery across Bangladesh - 5-7 business days",
+            description: "Delivery across Nepal - 5-7 business days",
           },
           prices: [
-            { region_id: bangladeshRegion.id, amount: 1500 },
+            { region_id: NepalRegion.id, amount: 1500 },
           ],
         },
       ],

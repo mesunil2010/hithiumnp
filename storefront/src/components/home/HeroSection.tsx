@@ -17,7 +17,7 @@ export function HeroSection() {
           <div className="text-white">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 text-sm">
               <span className="w-2 h-2 rounded-full bg-hithium-accent animate-pulse" />
-              <span>Exclusive Distributor in Bangladesh</span>
+              <span>Exclusive Distributor in Nepal</span>
             </div>
 
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
@@ -29,7 +29,7 @@ export function HeroSection() {
             <p className="text-lg text-gray-300 mb-8 max-w-lg">
               Advanced LiFePO₄ battery technology with 11,000+ cycle life.
               From portable power stations to whole-home energy storage —
-              reliable, safe, and built for Bangladesh.
+              reliable, safe, and built for Nepal.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">

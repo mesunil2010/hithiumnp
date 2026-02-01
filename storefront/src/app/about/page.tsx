@@ -20,7 +20,7 @@ import {
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about HiTHIUM Bangladesh — exclusive distributor of HiTHIUM and HiTHIUM HeroEE energy storage products.",
+    "Learn about HiTHIUM Nepal — exclusive distributor of HiTHIUM and HiTHIUM HeroEE energy storage products.",
 };
 
 const milestones = [
@@ -49,14 +49,14 @@ export default function AboutPage() {
       {/* Hero */}
       <div className="text-center mb-16">
         <Chip color="primary" variant="flat" className="mb-4">
-          About HiTHIUM Bangladesh
+          About HiTHIUM Nepal
         </Chip>
         <h1 className="font-display text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-          Powering Bangladesh&apos;s Energy Future
+          Powering Nepal&apos;s Energy Future
         </h1>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
           HiTHIUM Energy Storage Technology BD Ltd. is the exclusive distributor
-          of HiTHIUM and HiTHIUM HeroEE energy storage products in Bangladesh.
+          of HiTHIUM and HiTHIUM HeroEE energy storage products in Nepal.
           We are committed to providing clean, reliable, and affordable energy
           solutions to homes and businesses across the country.
         </p>
@@ -110,12 +110,12 @@ export default function AboutPage() {
 
         <div>
           <h2 className="font-display text-3xl font-bold text-gray-900 mb-4">
-            Our Mission in Bangladesh
+            Our Mission in Nepal
           </h2>
           <div className="space-y-4 text-gray-600">
             <p>
-              Bangladesh faces unique energy challenges — from frequent load
-              shedding to rising electricity costs. HiTHIUM Bangladesh is here
+              Nepal faces unique energy challenges — from frequent load
+              shedding to rising electricity costs. HiTHIUM Nepal is here
               to provide world-class energy storage solutions that address these
               challenges head-on.
             </p>
@@ -128,7 +128,7 @@ export default function AboutPage() {
             </p>
             <p>
               With local after-sales support, warranty services, and a growing
-              dealer network, we ensure every HiTHIUM customer in Bangladesh
+              dealer network, we ensure every HiTHIUM customer in Nepal
               receives the best possible experience.
             </p>
           </div>
@@ -165,7 +165,7 @@ export default function AboutPage() {
         {[
           { icon: <Shield className="w-6 h-6" />, title: "Safety First", desc: "LiFePO₄ technology with zero thermal runaway risk" },
           { icon: <Target className="w-6 h-6" />, title: "Quality", desc: "In-house manufacturing with Lighthouse Factory standards" },
-          { icon: <Users className="w-6 h-6" />, title: "Local Support", desc: "Dedicated after-sales team in Bangladesh" },
+          { icon: <Users className="w-6 h-6" />, title: "Local Support", desc: "Dedicated after-sales team in Nepal" },
           { icon: <Factory className="w-6 h-6" />, title: "Innovation", desc: "Continuous R&D from 587Ah to 1300Ah cells" },
         ].map((v) => (
           <Card key={v.title} className="border border-gray-100" shadow="sm">

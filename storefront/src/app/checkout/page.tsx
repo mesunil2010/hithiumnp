@@ -139,7 +139,7 @@ export default function CheckoutPage() {
                 </Radio>
                 <Radio
                   value="nationwide"
-                  description="5-7 business days across Bangladesh"
+                  description="5-7 business days across Nepal"
                 >
                   Nationwide Delivery — ৳1,500
                 </Radio>

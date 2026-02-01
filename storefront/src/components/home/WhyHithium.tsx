@@ -39,15 +39,15 @@ const features = [
   },
   {
     icon: <ThermometerSun className="w-6 h-6" />,
-    title: "Bangladesh-Ready",
+    title: "Nepal-Ready",
     description:
-      "Engineered for tropical climates with superior thermal stability. Ideal for Bangladesh's temperature conditions.",
+      "Engineered for tropical climates with superior thermal stability. Ideal for Nepal's temperature conditions.",
   },
   {
     icon: <Clock className="w-6 h-6" />,
     title: "Up to 10-Year Warranty",
     description:
-      "Backed by comprehensive warranty coverage, with local after-sales support from HiTHIUM Bangladesh.",
+      "Backed by comprehensive warranty coverage, with local after-sales support from HiTHIUM Nepal.",
   },
   {
     icon: <Leaf className="w-6 h-6" />,
@@ -72,7 +72,7 @@ export function WhyHithium() {
             Why Choose HiTHIUM?
           </Chip>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Trusted by the World, Built for Bangladesh
+            Trusted by the World, Built for Nepal
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             HiTHIUM is a global leader in energy storage, powering utility-scale

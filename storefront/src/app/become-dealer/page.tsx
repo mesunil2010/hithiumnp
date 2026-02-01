@@ -24,7 +24,7 @@ const benefits = [
   {
     icon: <TrendingUp className="w-6 h-6" />,
     title: "Growing Market",
-    desc: "Bangladesh's energy storage market is rapidly expanding with increasing demand for backup power solutions.",
+    desc: "Nepal's energy storage market is rapidly expanding with increasing demand for backup power solutions.",
   },
   {
     icon: <Shield className="w-6 h-6" />,

@@ -6,15 +6,15 @@ import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "HiTHIUM Bangladesh — Energy Storage Solutions",
-    template: "%s | HiTHIUM Bangladesh",
+    default: "HiTHIUM Nepal — Energy Storage Solutions",
+    template: "%s | HiTHIUM Nepal",
   },
   description:
-    "Official distributor of HiTHIUM and HiTHIUM HeroEE energy storage products in Bangladesh. LiFePO₄ batteries, portable power stations, and solar solutions.",
+    "Official distributor of HiTHIUM and HiTHIUM HeroEE energy storage products in Nepal. LiFePO₄ batteries, portable power stations, and solar solutions.",
   keywords: [
     "HiTHIUM",
     "HeroEE",
-    "Bangladesh",
+    "Nepal",
     "energy storage",
     "LiFePO₄",
     "battery",
@@ -25,11 +25,11 @@ export const metadata: Metadata = {
     "load shedding",
   ],
   openGraph: {
-    title: "HiTHIUM Bangladesh — Energy Storage Solutions",
+    title: "HiTHIUM Nepal — Energy Storage Solutions",
     description:
-      "Official distributor of HiTHIUM and HiTHIUM HeroEE energy storage products in Bangladesh.",
+      "Official distributor of HiTHIUM and HiTHIUM HeroEE energy storage products in Nepal.",
     url: "https://hithiumbd.com",
-    siteName: "HiTHIUM Bangladesh",
+    siteName: "HiTHIUM Nepal",
     locale: "en_BD",
     type: "website",
   },

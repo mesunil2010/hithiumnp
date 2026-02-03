@@ -36,13 +36,13 @@ const useCases = [
 
 export function UseCases() {
   return (
-    <section className="section-padding bg-hithium-dark text-white">
+    <section className="section-padding bg-hithium-light">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-white/10 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 bg-hithium-primary/10 text-hithium-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
             Use Cases
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Energy Solutions for Every Need
           </h2>
           <p className="text-gray-500 max-w-2xl mx-auto">
@@ -55,19 +55,20 @@ export function UseCases() {
           {useCases.map((useCase) => (
             <Card
               key={useCase.title}
-              className="bg-white/[0.04] backdrop-blur border border-white/10 card-hover"
+              className="bg-white border border-gray-100 card-hover"
+              shadow="sm"
             >
               <CardBody className="p-6">
-                <div className="w-14 h-14 rounded-xl bg-hithium-primary/20 flex items-center justify-center text-hithium-accent mb-4">
+                <div className="w-14 h-14 rounded-xl bg-hithium-light flex items-center justify-center text-hithium-primary mb-4">
                   {useCase.icon}
                 </div>
-                <h3 className="font-display font-bold text-white text-lg mb-2">
+                <h3 className="font-display font-bold text-gray-900 text-lg mb-2">
                   {useCase.title}
                 </h3>
-                <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+                <p className="text-sm text-gray-500 mb-4 leading-relaxed">
                   {useCase.description}
                 </p>
-                <span className="inline-block px-3 py-1 rounded-full bg-hithium-primary/20 text-hithium-accent text-xs font-medium">
+                <span className="inline-block px-3 py-1 rounded-full bg-hithium-light text-hithium-primary text-xs font-medium">
                   {useCase.products}
                 </span>
               </CardBody>

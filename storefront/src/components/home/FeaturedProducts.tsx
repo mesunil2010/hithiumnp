@@ -11,7 +11,7 @@ export function FeaturedProducts() {
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-hithium-primary/10 text-hithium-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 bg-hithium-light text-hithium-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
             Our Products
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -28,12 +28,12 @@ export function FeaturedProducts() {
           {products.map((product) => (
             <Card
               key={product.id}
-              className="card-hover bg-white border border-gray-100/80"
+              className="card-hover bg-white border border-gray-100"
               shadow="sm"
             >
               <CardBody className="p-0">
                 {/* Image placeholder */}
-                <div className="relative h-56 bg-gradient-to-br from-gray-50 to-white flex items-center justify-center">
+                <div className="relative h-56 bg-gradient-to-br from-hithium-light to-white flex items-center justify-center">
                   {product.badge && (
                     <Chip
                       size="sm"
@@ -43,8 +43,8 @@ export function FeaturedProducts() {
                     </Chip>
                   )}
                   <div className="text-center">
-                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mx-auto mb-3 shadow-lg">
-                      <Battery className="w-8 h-8 text-hithium-accent" />
+                    <div className="w-16 h-16 rounded-xl bg-white border border-hithium-primary/10 flex items-center justify-center mx-auto mb-3 shadow-sm">
+                      <Battery className="w-8 h-8 text-hithium-primary" />
                     </div>
                     <p className="text-sm text-gray-400 font-medium">
                       {product.specs.Capacity || product.specs.Power}
@@ -55,7 +55,7 @@ export function FeaturedProducts() {
                 {/* Content */}
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-2">
-                    <Chip size="sm" variant="flat" className="bg-hithium-dark/5 text-hithium-dark text-xs">
+                    <Chip size="sm" variant="flat" className="bg-gray-100 text-gray-600 text-xs">
                       {product.category}
                     </Chip>
                   </div>
@@ -92,7 +92,7 @@ export function FeaturedProducts() {
                   as={Link}
                   href={`/product/${product.handle}`}
                   variant="flat"
-                  className="flex-1 font-semibold bg-hithium-primary/10 text-hithium-primary hover:bg-hithium-primary/20"
+                  className="flex-1 font-semibold bg-hithium-light text-hithium-primary hover:bg-hithium-primary/15"
                   endContent={<ArrowRight className="w-4 h-4" />}
                 >
                   View Details

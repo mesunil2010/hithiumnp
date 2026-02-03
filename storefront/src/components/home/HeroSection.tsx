@@ -6,34 +6,31 @@ import { ArrowRight, Shield, RotateCcw, Battery } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden">
-      {/* Background */}
+    <section className="relative overflow-hidden bg-white">
+      {/* Light background */}
       <div className="hero-gradient absolute inset-0" />
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-        backgroundSize: "40px 40px"
-      }} />
 
-      {/* Green glow accent */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-hithium-primary/10 rounded-full blur-[120px] translate-x-1/3 translate-y-1/3" />
+      {/* Decorative circles */}
+      <div className="absolute top-20 right-10 w-72 h-72 bg-hithium-primary/5 rounded-full blur-[80px]" />
+      <div className="absolute bottom-10 left-10 w-56 h-56 bg-hithium-accent/5 rounded-full blur-[60px]" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-36">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
-          <div className="text-white">
-            <div className="inline-flex items-center gap-2 bg-hithium-primary/20 border border-hithium-primary/30 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 text-sm">
-              <span className="w-2 h-2 rounded-full bg-hithium-accent animate-pulse" />
-              <span className="text-gray-300">Exclusive Distributor in Nepal</span>
+          <div>
+            <div className="inline-flex items-center gap-2 bg-hithium-light border border-hithium-primary/10 rounded-full px-4 py-1.5 mb-6 text-sm">
+              <span className="w-2 h-2 rounded-full bg-hithium-primary animate-pulse" />
+              <span className="text-hithium-primary font-medium">Exclusive Distributor in Nepal</span>
             </div>
 
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 text-gray-900">
               Power Your Life{" "}
               <br className="hidden sm:block" />
               with{" "}
               <span className="brand-gradient-text">HiTHIUM</span>
             </h1>
 
-            <p className="text-lg text-gray-400 mb-8 max-w-lg leading-relaxed">
+            <p className="text-lg text-gray-500 mb-8 max-w-lg leading-relaxed">
               Advanced LiFePO&#x2084; battery technology with 11,000+ cycle life.
               From portable power stations to whole-home energy storage —
               reliable, safe, and built for Nepal.
@@ -44,7 +41,7 @@ export function HeroSection() {
                 as={Link}
                 href="/products"
                 size="lg"
-                className="font-semibold px-8 bg-hithium-primary text-white hover:bg-hithium-accent"
+                className="font-semibold px-8 bg-hithium-primary text-white hover:bg-hithium-accent shadow-lg shadow-hithium-primary/20"
                 endContent={<ArrowRight className="w-4 h-4" />}
               >
                 Shop Products
@@ -54,7 +51,7 @@ export function HeroSection() {
                 href="/watt-calculator"
                 variant="bordered"
                 size="lg"
-                className="font-semibold text-white border-white/20 hover:bg-white/5 px-8"
+                className="font-semibold text-gray-700 border-gray-200 hover:bg-gray-50 px-8"
               >
                 Watt Calculator
               </Button>
@@ -63,30 +60,30 @@ export function HeroSection() {
             {/* Trust badges */}
             <div className="grid grid-cols-3 gap-6 max-w-md">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-hithium-primary/20 flex items-center justify-center">
-                  <Shield className="w-5 h-5 text-hithium-accent" />
+                <div className="w-10 h-10 rounded-xl bg-hithium-light flex items-center justify-center">
+                  <Shield className="w-5 h-5 text-hithium-primary" />
                 </div>
                 <div className="text-sm">
-                  <p className="font-semibold text-white">10 Year</p>
-                  <p className="text-gray-500 text-xs">Warranty</p>
+                  <p className="font-semibold text-gray-900">10 Year</p>
+                  <p className="text-gray-400 text-xs">Warranty</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-hithium-primary/20 flex items-center justify-center">
-                  <RotateCcw className="w-5 h-5 text-hithium-accent" />
+                <div className="w-10 h-10 rounded-xl bg-hithium-light flex items-center justify-center">
+                  <RotateCcw className="w-5 h-5 text-hithium-primary" />
                 </div>
                 <div className="text-sm">
-                  <p className="font-semibold text-white">11,000+</p>
-                  <p className="text-gray-500 text-xs">Cycles</p>
+                  <p className="font-semibold text-gray-900">11,000+</p>
+                  <p className="text-gray-400 text-xs">Cycles</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-hithium-primary/20 flex items-center justify-center">
-                  <Battery className="w-5 h-5 text-hithium-accent" />
+                <div className="w-10 h-10 rounded-xl bg-hithium-light flex items-center justify-center">
+                  <Battery className="w-5 h-5 text-hithium-primary" />
                 </div>
                 <div className="text-sm">
-                  <p className="font-semibold text-white">LiFePO&#x2084;</p>
-                  <p className="text-gray-500 text-xs">Technology</p>
+                  <p className="font-semibold text-gray-900">LiFePO&#x2084;</p>
+                  <p className="text-gray-400 text-xs">Technology</p>
                 </div>
               </div>
             </div>
@@ -96,33 +93,33 @@ export function HeroSection() {
           <div className="hidden lg:flex justify-center">
             <div className="relative">
               {/* Outer glow */}
-              <div className="absolute -inset-8 green-gradient rounded-full opacity-10 blur-3xl" />
+              <div className="absolute -inset-8 bg-hithium-primary/5 rounded-full blur-3xl" />
               {/* Main card */}
-              <div className="relative w-[400px] h-[420px] rounded-3xl bg-white/[0.04] backdrop-blur-sm border border-white/10 flex flex-col items-center justify-center p-8">
+              <div className="relative w-[400px] h-[420px] rounded-3xl bg-white border border-gray-100 shadow-xl flex flex-col items-center justify-center p-8">
                 {/* HeroEE product visual */}
-                <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-gray-700 to-gray-900 border border-gray-600 flex items-center justify-center mb-6 shadow-2xl">
+                <div className="w-32 h-32 rounded-2xl bg-hithium-light border border-hithium-primary/10 flex items-center justify-center mb-6">
                   <div className="text-center">
-                    <Battery className="w-10 h-10 text-hithium-accent mx-auto" />
+                    <Battery className="w-10 h-10 text-hithium-primary mx-auto" />
                     <div className="w-8 h-1 rounded-full bg-hithium-orange mx-auto mt-2" />
                   </div>
                 </div>
-                <p className="text-white font-display text-2xl font-bold mb-1">
+                <p className="text-gray-900 font-display text-2xl font-bold mb-1">
                   HeroEE Series
                 </p>
-                <p className="text-gray-500 text-sm mb-4">
+                <p className="text-gray-400 text-sm mb-4">
                   Portable &amp; Home Energy Storage
                 </p>
                 <div className="flex gap-3">
                   {["1kWh", "2kWh", "8kWh", "16kWh"].map((cap) => (
                     <span
                       key={cap}
-                      className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400"
+                      className="px-3 py-1 rounded-full bg-hithium-light border border-hithium-primary/10 text-xs text-hithium-primary font-medium"
                     >
                       {cap}
                     </span>
                   ))}
                 </div>
-                <p className="text-hithium-accent text-sm mt-4 font-medium">
+                <p className="text-hithium-primary text-sm mt-4 font-medium">
                   LiFePO&#x2084; Energy Storage
                 </p>
               </div>

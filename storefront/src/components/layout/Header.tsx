@@ -63,15 +63,15 @@ export function Header() {
   return (
     <>
       {/* Top bar */}
-      <div className="bg-hithium-dark text-white text-xs py-2 hidden sm:block">
+      <div className="bg-hithium-primary text-white text-xs py-2 hidden sm:block">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <p className="text-gray-400">
+          <p className="text-blue-100">
             Exclusive Distributor of HiTHIUM & HiTHIUM HeroEE in Nepal
           </p>
           <div className="flex items-center gap-4">
             <a
               href="tel:+8801XXXXXXXXX"
-              className="flex items-center gap-1 text-gray-400 hover:text-hithium-accent transition-colors"
+              className="flex items-center gap-1 text-blue-100 hover:text-white transition-colors"
             >
               <Phone className="w-3 h-3" />
               <span>+880 1XXX-XXXXXX</span>
@@ -97,7 +97,7 @@ export function Header() {
             <Link href="/" className="flex items-center gap-2.5">
               {/* HiTHIUM Logo Mark */}
               <div className="relative w-9 h-9">
-                <div className="absolute inset-0 rounded-lg green-gradient" />
+                <div className="absolute inset-0 rounded-lg blue-gradient" />
                 <svg
                   viewBox="0 0 36 36"
                   className="relative w-9 h-9"
@@ -121,7 +121,7 @@ export function Header() {
               <div className="flex flex-col">
                 <span className="font-display font-extrabold text-xl tracking-tight leading-tight">
                   <span className="text-hithium-primary">Hi</span>
-                  <span className="text-hithium-dark">THIUM</span>
+                  <span className="text-gray-800">THIUM</span>
                 </span>
                 <span className="text-[10px] font-medium text-gray-400 leading-tight tracking-widest uppercase">
                   Nepal
@@ -136,7 +136,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/"
-              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
+              className="text-sm font-medium text-gray-600 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
             >
               Home
             </Link>
@@ -147,7 +147,7 @@ export function Header() {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="bg-transparent text-sm font-medium text-gray-700 hover:text-hithium-primary data-[hover=true]:bg-hithium-light px-3"
+                  className="bg-transparent text-sm font-medium text-gray-600 hover:text-hithium-primary data-[hover=true]:bg-hithium-light px-3"
                   endContent={<ChevronDown className="w-3 h-3" />}
                   variant="light"
                 >
@@ -181,7 +181,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/about"
-              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
+              className="text-sm font-medium text-gray-600 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
             >
               About
             </Link>
@@ -190,7 +190,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/support"
-              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
+              className="text-sm font-medium text-gray-600 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
             >
               Support
             </Link>
@@ -199,7 +199,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/contact"
-              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
+              className="text-sm font-medium text-gray-600 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
             >
               Contact
             </Link>
@@ -211,7 +211,7 @@ export function Header() {
           <NavbarItem>
             <Link href="/account">
               <Button isIconOnly variant="light" aria-label="Account" size="sm">
-                <User className="w-5 h-5 text-gray-600" />
+                <User className="w-5 h-5 text-gray-500" />
               </Button>
             </Link>
           </NavbarItem>
@@ -224,7 +224,7 @@ export function Header() {
                   aria-label="Shopping cart"
                   size="sm"
                 >
-                  <ShoppingCart className="w-5 h-5 text-gray-600" />
+                  <ShoppingCart className="w-5 h-5 text-gray-500" />
                 </Button>
               </Badge>
             </Link>
@@ -237,7 +237,7 @@ export function Header() {
             <NavbarMenuItem key={link.name}>
               <Link
                 href={link.href}
-                className="w-full text-lg text-gray-700 hover:text-hithium-primary py-2 block"
+                className="w-full text-lg text-gray-600 hover:text-hithium-primary py-2 block"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}

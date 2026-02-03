@@ -10,13 +10,12 @@ const config: Config = {
     extend: {
       colors: {
         hithium: {
-          primary: "#00843D",    // HiTHIUM corporate green (from brand)
-          secondary: "#0D1117",  // Deep dark (near-black)
-          accent: "#00B050",     // Bright green accent
-          dark: "#0D1117",       // Dark backgrounds
-          light: "#F0FAF4",      // Light green tint background
+          primary: "#0F62FE",    // HiTHIUM brand blue
+          accent: "#4589FF",     // Lighter blue accent
+          light: "#EDF5FF",      // Very light blue tint
+          dark: "#161616",       // Dark for footers/contrast sections
           orange: "#F26522",     // HeroEE product accent orange
-          gray: "#F7F8FA",       // Light gray sections
+          gray: "#F4F4F4",       // Light gray sections
         },
       },
       fontFamily: {
@@ -32,31 +31,31 @@ const config: Config = {
         light: {
           colors: {
             primary: {
-              50: "#E6F4EC",
-              100: "#C0E5D0",
-              200: "#96D4B2",
-              300: "#6BC394",
-              400: "#4CB77D",
-              500: "#00843D",
-              600: "#007537",
-              700: "#006330",
-              800: "#005228",
-              900: "#003A1C",
-              DEFAULT: "#00843D",
+              50: "#EDF5FF",
+              100: "#D0E2FF",
+              200: "#A6C8FF",
+              300: "#78A9FF",
+              400: "#4589FF",
+              500: "#0F62FE",
+              600: "#0043CE",
+              700: "#002D9C",
+              800: "#001D6C",
+              900: "#001141",
+              DEFAULT: "#0F62FE",
               foreground: "#FFFFFF",
             },
             secondary: {
-              50: "#E8E8E9",
-              100: "#C5C6C8",
-              200: "#9EA0A4",
-              300: "#777A80",
-              400: "#595E64",
-              500: "#0D1117",
-              600: "#0B0F14",
-              700: "#090C10",
-              800: "#07090C",
-              900: "#040507",
-              DEFAULT: "#0D1117",
+              50: "#F4F4F4",
+              100: "#E0E0E0",
+              200: "#C6C6C6",
+              300: "#A8A8A8",
+              400: "#8D8D8D",
+              500: "#6F6F6F",
+              600: "#525252",
+              700: "#393939",
+              800: "#262626",
+              900: "#161616",
+              DEFAULT: "#393939",
               foreground: "#FFFFFF",
             },
           },
@@ -64,17 +63,17 @@ const config: Config = {
         dark: {
           colors: {
             primary: {
-              50: "#003A1C",
-              100: "#005228",
-              200: "#006330",
-              300: "#007537",
-              400: "#00843D",
-              500: "#00B050",
-              600: "#4CB77D",
-              700: "#6BC394",
-              800: "#96D4B2",
-              900: "#C0E5D0",
-              DEFAULT: "#00B050",
+              50: "#001141",
+              100: "#001D6C",
+              200: "#002D9C",
+              300: "#0043CE",
+              400: "#0F62FE",
+              500: "#4589FF",
+              600: "#78A9FF",
+              700: "#A6C8FF",
+              800: "#D0E2FF",
+              900: "#EDF5FF",
+              DEFAULT: "#4589FF",
               foreground: "#FFFFFF",
             },
           },

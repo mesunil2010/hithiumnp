@@ -10,21 +10,21 @@
   }
 
   body {
-    @apply font-sans antialiased;
+    @apply font-sans antialiased text-gray-800;
   }
 }
 
 @layer components {
   .hero-gradient {
-    background: linear-gradient(135deg, #0D1117 0%, #0D1117 40%, #003A1C 100%);
+    background: linear-gradient(135deg, #EDF5FF 0%, #FFFFFF 50%, #D0E2FF 100%);
   }
 
-  .green-gradient {
-    background: linear-gradient(135deg, #00843D 0%, #00B050 100%);
+  .blue-gradient {
+    background: linear-gradient(135deg, #0F62FE 0%, #4589FF 100%);
   }
 
   .brand-gradient-text {
-    background: linear-gradient(135deg, #00843D 0%, #00B050 100%);
+    background: linear-gradient(135deg, #0F62FE 0%, #4589FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

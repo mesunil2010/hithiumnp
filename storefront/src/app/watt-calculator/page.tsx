@@ -264,7 +264,7 @@ export default function WattCalculatorPage() {
           </Card>
 
           {/* Recommendation */}
-          <Card className="green-gradient text-white" shadow="lg">
+          <Card className="bg-hithium-dark text-white border border-hithium-primary/20" shadow="lg">
             <CardBody className="p-6">
               <div className="flex items-center gap-2 mb-3">
                 <Lightbulb className="w-5 h-5" />
@@ -282,7 +282,7 @@ export default function WattCalculatorPage() {
               <Button
                 as={Link}
                 href={`/product/${recommendation.handle}`}
-                className="bg-white text-hithium-primary font-semibold w-full"
+                className="bg-hithium-primary text-white font-semibold w-full hover:bg-hithium-accent"
                 endContent={<ArrowRight className="w-4 h-4" />}
               >
                 View {recommendation.model}

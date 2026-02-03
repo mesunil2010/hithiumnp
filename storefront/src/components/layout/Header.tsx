@@ -22,10 +22,9 @@ import {
   User,
   Phone,
   ChevronDown,
-  Zap,
   Battery,
   Sun,
-  Menu,
+  Zap,
 } from "lucide-react";
 
 const productCategories = [
@@ -33,7 +32,7 @@ const productCategories = [
     name: "Energy Storage Systems",
     href: "/products?category=energy-storage-systems",
     icon: <Battery className="w-4 h-4" />,
-    description: "8kWh & 16kWh LiFePO₄ systems",
+    description: "8kWh & 16kWh LiFePO\u2084 systems",
   },
   {
     name: "Portable Power Stations",
@@ -64,15 +63,15 @@ export function Header() {
   return (
     <>
       {/* Top bar */}
-      <div className="bg-hithium-secondary text-white text-xs py-1.5 hidden sm:block">
+      <div className="bg-hithium-dark text-white text-xs py-2 hidden sm:block">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <p>
+          <p className="text-gray-400">
             Exclusive Distributor of HiTHIUM & HiTHIUM HeroEE in Nepal
           </p>
           <div className="flex items-center gap-4">
             <a
               href="tel:+8801XXXXXXXXX"
-              className="flex items-center gap-1 hover:text-hithium-accent transition-colors"
+              className="flex items-center gap-1 text-gray-400 hover:text-hithium-accent transition-colors"
             >
               <Phone className="w-3 h-3" />
               <span>+880 1XXX-XXXXXX</span>
@@ -86,8 +85,8 @@ export function Header() {
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
         maxWidth="xl"
-        className="bg-white/95 backdrop-blur-md border-b border-gray-100"
-        height="4rem"
+        className="bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm"
+        height="4.5rem"
       >
         <NavbarContent>
           <NavbarMenuToggle
@@ -95,15 +94,36 @@ export function Header() {
             className="sm:hidden"
           />
           <NavbarBrand>
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg green-gradient flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
+            <Link href="/" className="flex items-center gap-2.5">
+              {/* HiTHIUM Logo Mark */}
+              <div className="relative w-9 h-9">
+                <div className="absolute inset-0 rounded-lg green-gradient" />
+                <svg
+                  viewBox="0 0 36 36"
+                  className="relative w-9 h-9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <text
+                    x="50%"
+                    y="54%"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    fill="white"
+                    fontWeight="800"
+                    fontSize="15"
+                    fontFamily="Plus Jakarta Sans, system-ui, sans-serif"
+                  >
+                    H
+                  </text>
+                </svg>
               </div>
               <div className="flex flex-col">
-                <span className="font-display font-bold text-lg text-hithium-secondary leading-tight">
-                  HiTHIUM
+                <span className="font-display font-extrabold text-xl tracking-tight leading-tight">
+                  <span className="text-hithium-primary">Hi</span>
+                  <span className="text-hithium-dark">THIUM</span>
                 </span>
-                <span className="text-[10px] text-gray-500 leading-tight -mt-0.5">
+                <span className="text-[10px] font-medium text-gray-400 leading-tight tracking-widest uppercase">
                   Nepal
                 </span>
               </div>
@@ -116,7 +136,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/"
-              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
             >
               Home
             </Link>
@@ -127,7 +147,7 @@ export function Header() {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="bg-transparent text-sm font-medium text-gray-700 hover:text-hithium-primary data-[hover=true]:bg-gray-50 px-3"
+                  className="bg-transparent text-sm font-medium text-gray-700 hover:text-hithium-primary data-[hover=true]:bg-hithium-light px-3"
                   endContent={<ChevronDown className="w-3 h-3" />}
                   variant="light"
                 >
@@ -161,7 +181,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/about"
-              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
             >
               About
             </Link>
@@ -170,7 +190,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/support"
-              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
             >
               Support
             </Link>
@@ -179,7 +199,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/contact"
-              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              className="text-sm font-medium text-gray-700 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
             >
               Contact
             </Link>
@@ -212,7 +232,7 @@ export function Header() {
         </NavbarContent>
 
         {/* Mobile menu */}
-        <NavbarMenu className="pt-6">
+        <NavbarMenu className="pt-6 bg-white">
           {navLinks.map((link) => (
             <NavbarMenuItem key={link.name}>
               <Link

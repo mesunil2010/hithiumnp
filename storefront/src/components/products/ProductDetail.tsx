@@ -54,17 +54,18 @@ export function ProductDetail({ product }: ProductDetailProps) {
       <div className="grid lg:grid-cols-2 gap-10 mb-16">
         {/* Image */}
         <div className="relative">
-          <div className="aspect-square rounded-2xl bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center border border-gray-100">
+          <div className="aspect-square rounded-2xl bg-gradient-to-br from-gray-50 to-white flex items-center justify-center border border-gray-100">
             {product.badge && (
               <Chip
-                color="primary"
-                className="absolute top-4 left-4 z-10"
+                className="absolute top-4 left-4 z-10 bg-hithium-primary text-white font-medium"
               >
                 {product.badge}
               </Chip>
             )}
             <div className="text-center">
-              <Zap className="w-24 h-24 text-hithium-primary mx-auto mb-4" />
+              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mx-auto mb-4 shadow-xl">
+                <Zap className="w-12 h-12 text-hithium-accent" />
+              </div>
               <p className="text-xl text-gray-500 font-semibold">
                 {product.title}
               </p>
@@ -77,7 +78,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
 
         {/* Details */}
         <div>
-          <Chip size="sm" variant="flat" color="secondary" className="mb-3">
+          <Chip size="sm" variant="flat" className="mb-3 bg-hithium-dark/5 text-hithium-dark text-xs">
             {product.category}
           </Chip>
 
@@ -128,9 +129,8 @@ export function ProductDetail({ product }: ProductDetailProps) {
             </div>
 
             <Button
-              color="primary"
               size="lg"
-              className="flex-1 font-semibold"
+              className="flex-1 font-semibold bg-hithium-primary text-white hover:bg-hithium-accent"
               startContent={<ShoppingCart className="w-5 h-5" />}
             >
               Add to Cart
@@ -163,7 +163,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
             <ul className="space-y-2">
               {product.features.slice(0, 6).map((feature) => (
                 <li key={feature} className="flex items-start gap-2 text-sm text-gray-600">
-                  <Check className="w-4 h-4 text-hithium-accent mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-hithium-primary mt-0.5 shrink-0" />
                   <span>{feature}</span>
                 </li>
               ))}
@@ -196,7 +196,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
             <ul className="space-y-2 py-2">
               {product.features.map((feature) => (
                 <li key={feature} className="flex items-start gap-2 text-sm text-gray-600">
-                  <Check className="w-4 h-4 text-hithium-accent mt-0.5 shrink-0" />
+                  <Check className="w-4 h-4 text-hithium-primary mt-0.5 shrink-0" />
                   <span>{feature}</span>
                 </li>
               ))}

@@ -2,24 +2,24 @@
 
 import Link from "next/link";
 import { Card, CardBody, CardFooter, Button, Chip } from "@heroui/react";
-import { ShoppingCart, ArrowRight, Zap } from "lucide-react";
+import { ShoppingCart, ArrowRight, Battery } from "lucide-react";
 import { products } from "@/lib/data";
 
 export function FeaturedProducts() {
   return (
-    <section className="section-padding bg-gray-50">
+    <section className="section-padding bg-hithium-gray">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <div className="text-center mb-12">
-          <Chip color="primary" variant="flat" className="mb-4">
+          <div className="inline-flex items-center gap-2 bg-hithium-primary/10 text-hithium-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
             Our Products
-          </Chip>
+          </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            HiTHIUM HeroEE Series
+            HiTHIUM <span className="text-hithium-orange">HeroEE</span> Series
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-500 max-w-2xl mx-auto">
             From compact portable power stations to whole-home energy storage systems.
-            All powered by premium LiFePO₄ cells with industry-leading cycle life.
+            All powered by premium LiFePO&#x2084; cells with industry-leading cycle life.
           </p>
         </div>
 
@@ -28,24 +28,25 @@ export function FeaturedProducts() {
           {products.map((product) => (
             <Card
               key={product.id}
-              className="card-hover border border-gray-100"
+              className="card-hover bg-white border border-gray-100/80"
               shadow="sm"
             >
               <CardBody className="p-0">
                 {/* Image placeholder */}
-                <div className="relative h-56 bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center">
+                <div className="relative h-56 bg-gradient-to-br from-gray-50 to-white flex items-center justify-center">
                   {product.badge && (
                     <Chip
-                      color="primary"
                       size="sm"
-                      className="absolute top-3 left-3 z-10"
+                      className="absolute top-3 left-3 z-10 bg-hithium-primary text-white font-medium"
                     >
                       {product.badge}
                     </Chip>
                   )}
                   <div className="text-center">
-                    <Zap className="w-12 h-12 text-hithium-primary mx-auto mb-2" />
-                    <p className="text-sm text-gray-500 font-medium">
+                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mx-auto mb-3 shadow-lg">
+                      <Battery className="w-8 h-8 text-hithium-accent" />
+                    </div>
+                    <p className="text-sm text-gray-400 font-medium">
                       {product.specs.Capacity || product.specs.Power}
                     </p>
                   </div>
@@ -54,28 +55,28 @@ export function FeaturedProducts() {
                 {/* Content */}
                 <div className="p-5">
                   <div className="flex items-center gap-2 mb-2">
-                    <Chip size="sm" variant="flat" color="secondary">
+                    <Chip size="sm" variant="flat" className="bg-hithium-dark/5 text-hithium-dark text-xs">
                       {product.category}
                     </Chip>
                   </div>
                   <h3 className="font-display font-bold text-lg text-gray-900 mb-2">
                     {product.title}
                   </h3>
-                  <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                  <p className="text-sm text-gray-500 line-clamp-2 mb-4">
                     {product.description}
                   </p>
 
                   {/* Key specs */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {product.specs["Cycle Life"] && (
-                      <Chip size="sm" variant="dot" color="success">
+                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-hithium-light text-hithium-primary text-xs font-medium">
                         {product.specs["Cycle Life"]} cycles
-                      </Chip>
+                      </span>
                     )}
                     {product.specs.Warranty && (
-                      <Chip size="sm" variant="dot" color="warning">
+                      <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-hithium-orange/10 text-hithium-orange text-xs font-medium">
                         {product.specs.Warranty} warranty
-                      </Chip>
+                      </span>
                     )}
                   </div>
 
@@ -90,17 +91,15 @@ export function FeaturedProducts() {
                 <Button
                   as={Link}
                   href={`/product/${product.handle}`}
-                  color="primary"
                   variant="flat"
-                  className="flex-1 font-semibold"
+                  className="flex-1 font-semibold bg-hithium-primary/10 text-hithium-primary hover:bg-hithium-primary/20"
                   endContent={<ArrowRight className="w-4 h-4" />}
                 >
                   View Details
                 </Button>
                 <Button
                   isIconOnly
-                  color="primary"
-                  variant="solid"
+                  className="bg-hithium-primary text-white"
                   aria-label="Add to cart"
                 >
                   <ShoppingCart className="w-4 h-4" />
@@ -115,10 +114,9 @@ export function FeaturedProducts() {
           <Button
             as={Link}
             href="/products"
-            color="primary"
             variant="bordered"
             size="lg"
-            className="font-semibold px-8"
+            className="font-semibold px-8 border-hithium-primary text-hithium-primary hover:bg-hithium-primary hover:text-white"
             endContent={<ArrowRight className="w-4 h-4" />}
           >
             View All Products

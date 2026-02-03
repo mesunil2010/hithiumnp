@@ -62,7 +62,7 @@ export default function ContactPage() {
           ].map((item) => (
             <Card key={item.title} className="border border-gray-100" shadow="sm">
               <CardBody className="p-4 flex flex-row items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-hithium-light flex items-center justify-center text-hithium-primary shrink-0">
+                <div className="w-10 h-10 rounded-lg bg-hithium-primary/10 flex items-center justify-center text-hithium-primary shrink-0">
                   {item.icon}
                 </div>
                 <div>

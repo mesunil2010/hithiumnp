@@ -48,9 +48,9 @@ export default function AboutPage() {
 
       {/* Hero */}
       <div className="text-center mb-16">
-        <Chip color="primary" variant="flat" className="mb-4">
+        <div className="inline-flex items-center gap-2 bg-hithium-primary/10 text-hithium-primary rounded-full px-4 py-1.5 text-sm font-medium mb-4">
           About HiTHIUM Nepal
-        </Chip>
+        </div>
         <h1 className="font-display text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
           Powering Nepal&apos;s Energy Future
         </h1>
@@ -67,7 +67,7 @@ export default function AboutPage() {
         {stats.map((stat) => (
           <Card key={stat.label} className="text-center border border-gray-100" shadow="sm">
             <CardBody className="p-6">
-              <div className="w-10 h-10 rounded-lg bg-hithium-light flex items-center justify-center text-hithium-primary mx-auto mb-3">
+              <div className="w-10 h-10 rounded-lg bg-hithium-primary/10 flex items-center justify-center text-hithium-primary mx-auto mb-3">
                 {stat.icon}
               </div>
               <p className="font-display text-3xl font-bold text-hithium-primary">
@@ -170,7 +170,7 @@ export default function AboutPage() {
         ].map((v) => (
           <Card key={v.title} className="border border-gray-100" shadow="sm">
             <CardBody className="p-6 text-center">
-              <div className="w-12 h-12 rounded-xl bg-hithium-light flex items-center justify-center text-hithium-primary mx-auto mb-3">
+              <div className="w-12 h-12 rounded-xl bg-hithium-primary/10 flex items-center justify-center text-hithium-primary mx-auto mb-3">
                 {v.icon}
               </div>
               <h3 className="font-display font-bold text-gray-900 mb-1">{v.title}</h3>

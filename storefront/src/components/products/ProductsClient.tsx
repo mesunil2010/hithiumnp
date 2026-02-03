@@ -138,18 +138,19 @@ export default function ProductsClient() {
               shadow="sm"
             >
               <CardBody className="p-0">
-                <div className="relative h-56 bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center">
+                <div className="relative h-56 bg-gradient-to-br from-gray-50 to-white flex items-center justify-center">
                   {product.badge && (
                     <Chip
-                      color="primary"
                       size="sm"
-                      className="absolute top-3 left-3 z-10"
+                      className="absolute top-3 left-3 z-10 bg-hithium-primary text-white font-medium"
                     >
                       {product.badge}
                     </Chip>
                   )}
                   <div className="text-center">
-                    <Zap className="w-12 h-12 text-hithium-primary mx-auto mb-2" />
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mx-auto mb-2 shadow-lg">
+                      <Zap className="w-7 h-7 text-hithium-accent" />
+                    </div>
                     <p className="text-sm text-gray-500 font-medium">
                       {product.specs.Capacity || product.specs.Power}
                     </p>
@@ -157,7 +158,7 @@ export default function ProductsClient() {
                 </div>
 
                 <div className="p-5">
-                  <Chip size="sm" variant="flat" color="secondary" className="mb-2">
+                  <Chip size="sm" variant="flat" className="mb-2 bg-hithium-dark/5 text-hithium-dark text-xs">
                     {product.category}
                   </Chip>
                   <h3 className="font-display font-bold text-lg text-gray-900 mb-2">
@@ -176,17 +177,15 @@ export default function ProductsClient() {
                 <Button
                   as={Link}
                   href={`/product/${product.handle}`}
-                  color="primary"
                   variant="flat"
-                  className="flex-1 font-semibold"
+                  className="flex-1 font-semibold bg-hithium-primary/10 text-hithium-primary hover:bg-hithium-primary/20"
                   endContent={<ArrowRight className="w-4 h-4" />}
                 >
                   View Details
                 </Button>
                 <Button
                   isIconOnly
-                  color="primary"
-                  variant="solid"
+                  className="bg-hithium-primary text-white"
                   aria-label="Add to cart"
                 >
                   <ShoppingCart className="w-4 h-4" />

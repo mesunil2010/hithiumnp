@@ -105,7 +105,7 @@ export default function SupportClient() {
         ].map((card) => (
           <Card key={card.title} className="card-hover border border-gray-100" shadow="sm">
             <CardBody className="p-6 text-center">
-              <div className="w-12 h-12 rounded-xl bg-hithium-light flex items-center justify-center text-hithium-primary mx-auto mb-4">
+              <div className="w-12 h-12 rounded-xl bg-hithium-primary/10 flex items-center justify-center text-hithium-primary mx-auto mb-4">
                 {card.icon}
               </div>
               <h3 className="font-display font-bold text-gray-900 mb-2">
@@ -187,7 +187,7 @@ export default function SupportClient() {
       </div>
 
       {/* Contact CTA */}
-      <Card className="green-gradient text-white" shadow="lg">
+      <Card className="bg-hithium-dark text-white" shadow="lg">
         <CardBody className="p-8 sm:p-12 text-center">
           <h2 className="font-display text-2xl font-bold mb-4">
             Still need help?
@@ -199,7 +199,7 @@ export default function SupportClient() {
             <Button
               as="a"
               href="mailto:support@hithiumbd.com"
-              className="bg-white text-hithium-primary font-semibold"
+              className="bg-hithium-primary text-white font-semibold hover:bg-hithium-accent"
               startContent={<Mail className="w-4 h-4" />}
             >
               Email Support
@@ -208,7 +208,7 @@ export default function SupportClient() {
               as="a"
               href="tel:+8801XXXXXXXXX"
               variant="bordered"
-              className="border-white/30 text-white font-semibold hover:bg-white/10"
+              className="border-white/20 text-white font-semibold hover:bg-white/5"
               startContent={<Phone className="w-4 h-4" />}
             >
               Call Us

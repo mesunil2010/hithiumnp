@@ -69,7 +69,7 @@ export default function BecomeDealerPage() {
         {benefits.map((b) => (
           <Card key={b.title} className="border border-gray-100" shadow="sm">
             <CardBody className="p-6 text-center">
-              <div className="w-12 h-12 rounded-xl bg-hithium-light flex items-center justify-center text-hithium-primary mx-auto mb-3">
+              <div className="w-12 h-12 rounded-xl bg-hithium-primary/10 flex items-center justify-center text-hithium-primary mx-auto mb-3">
                 {b.icon}
               </div>
               <h3 className="font-display font-bold text-gray-900 mb-1">

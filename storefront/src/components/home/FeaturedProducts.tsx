@@ -3,9 +3,13 @@
 import Link from "next/link";
 import { Card, CardBody, CardFooter, Button, Chip } from "@heroui/react";
 import { ShoppingCart, ArrowRight, Battery } from "lucide-react";
-import { products } from "@/lib/data";
+import type { Product } from "@/lib/api";
 
-export function FeaturedProducts() {
+interface FeaturedProductsProps {
+  products: Product[];
+}
+
+export function FeaturedProducts({ products }: FeaturedProductsProps) {
   return (
     <section className="section-padding bg-hithium-gray">
       <div className="max-w-7xl mx-auto">

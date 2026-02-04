@@ -17,22 +17,79 @@ import {
   ArrowRight,
   ShoppingBag,
 } from "lucide-react";
-import { useState } from "react";
-import { products } from "@/lib/data";
+import { useState, useEffect } from "react";
+import type { Product } from "@/lib/api";
 
 interface CartItem {
   productId: string;
   quantity: number;
 }
 
-export default function CartPage() {
-  // Demo cart with first two products
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    { productId: "heroee-1", quantity: 1 },
-    { productId: "hithium-solar-200w", quantity: 2 },
-  ]);
+// Cart storage key
+const CART_STORAGE_KEY = "hithium_cart";
 
-  const getProduct = (id: string) => products.find((p) => p.handle === id);
+// Get cart from localStorage
+function getStoredCart(): CartItem[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const stored = localStorage.getItem(CART_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+}
+
+// Save cart to localStorage
+function saveCart(items: CartItem[]) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+}
+
+export default function CartPage() {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Load cart from localStorage and fetch products on mount
+  useEffect(() => {
+    const loadData = async () => {
+      setIsLoading(true);
+
+      // Load cart from localStorage
+      const storedCart = getStoredCart();
+      setCartItems(storedCart);
+
+      // Fetch products from API
+      try {
+        const response = await fetch("/api/products");
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data.products || []);
+        } else {
+          // Fallback to fetching from static data
+          const { products: staticProducts } = await import("@/lib/data");
+          setProducts(staticProducts);
+        }
+      } catch {
+        // Fallback to static data
+        const { products: staticProducts } = await import("@/lib/data");
+        setProducts(staticProducts);
+      }
+
+      setIsLoading(false);
+    };
+
+    loadData();
+  }, []);
+
+  // Save cart whenever it changes
+  useEffect(() => {
+    if (!isLoading) {
+      saveCart(cartItems);
+    }
+  }, [cartItems, isLoading]);
+
+  const getProduct = (id: string) => products.find((p) => p.handle === id || p.id === id);
 
   const updateQuantity = (productId: string, delta: number) => {
     setCartItems((items) =>
@@ -57,6 +114,17 @@ export default function CartPage() {
 
   const shipping = subtotal > 100000 ? 0 : 500;
   const total = subtotal + shipping;
+
+  if (isLoading) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 rounded w-48 mx-auto mb-4"></div>
+          <div className="h-4 bg-gray-200 rounded w-64 mx-auto"></div>
+        </div>
+      </div>
+    );
+  }
 
   if (cartItems.length === 0) {
     return (
@@ -89,7 +157,7 @@ export default function CartPage() {
       </Breadcrumbs>
 
       <h1 className="font-display text-3xl font-bold text-gray-900 mb-8">
-        Shopping Cart ({cartItems.length} items)
+        Shopping Cart ({cartItems.length} {cartItems.length === 1 ? 'item' : 'items'})
       </h1>
 
       <div className="grid lg:grid-cols-3 gap-8">

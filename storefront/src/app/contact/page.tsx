@@ -47,12 +47,12 @@ export default function ContactPage() {
             {
               icon: <Mail className="w-5 h-5" />,
               title: "Email",
-              details: ["info@hithiumbd.com", "sales@hithiumbd.com"],
+              details: ["info@hithiumnp.com", "sales@hithiumnp.com"],
             },
             {
               icon: <MapPin className="w-5 h-5" />,
               title: "Address",
-              details: ["Dhaka, Nepal"],
+              details: ["Kathmandu, Nepal"],
             },
             {
               icon: <Clock className="w-5 h-5" />,

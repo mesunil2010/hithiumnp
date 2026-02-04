@@ -144,7 +144,7 @@ function AccountDashboard() {
               <h2 className="font-display font-bold text-gray-900">
                 Demo User
               </h2>
-              <p className="text-sm text-gray-600">demo@hithiumbd.com</p>
+              <p className="text-sm text-gray-600">demo@hithiumnp.com</p>
             </div>
           </div>
           <Divider className="mb-4" />
@@ -161,7 +161,7 @@ function AccountDashboard() {
             />
             <Input
               label="Email"
-              defaultValue="demo@hithiumbd.com"
+              defaultValue="demo@hithiumnp.com"
               variant="bordered"
             />
             <Input
@@ -193,7 +193,7 @@ function AccountDashboard() {
                 <Chip color="success" size="sm" variant="flat">
                   Delivered
                 </Chip>
-                <p className="text-sm text-gray-500 mt-1">৳78,800</p>
+                <p className="text-sm text-gray-500 mt-1">NPR 78,800</p>
               </div>
             </div>
             <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
@@ -207,7 +207,7 @@ function AccountDashboard() {
                 <Chip color="warning" size="sm" variant="flat">
                   In Transit
                 </Chip>
-                <p className="text-sm text-gray-500 mt-1">৳188,950</p>
+                <p className="text-sm text-gray-500 mt-1">NPR 188,950</p>
               </div>
             </div>
           </div>
@@ -224,7 +224,7 @@ function AccountDashboard() {
           <div className="p-3 rounded-lg border border-gray-200">
             <p className="font-semibold text-gray-900">Home</p>
             <p className="text-sm text-gray-600">
-              House 12, Road 5, Dhanmondi, Dhaka 1205
+              House 12, Road 5, Dhanmondi, Kathmandu 1205
             </p>
           </div>
           <Button

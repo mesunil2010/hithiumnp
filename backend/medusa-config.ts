@@ -19,12 +19,7 @@ export default defineConfig({
     {
       resolve: "@medusajs/medusa/payment",
       options: {
-        providers: [
-          {
-            resolve: "@medusajs/medusa/payment-manual",
-            id: "manual",
-          },
-        ],
+        providers: [],
       },
     },
     {

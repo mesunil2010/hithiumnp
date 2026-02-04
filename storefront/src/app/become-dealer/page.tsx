@@ -34,7 +34,7 @@ const benefits = [
   {
     icon: <Users className="w-6 h-6" />,
     title: "Full Support",
-    desc: "Receive marketing materials, technical training, and dedicated account management from HiTHIUM BD.",
+    desc: "Receive marketing materials, technical training, and dedicated account management from HiTHIUM NP.",
   },
   {
     icon: <Handshake className="w-6 h-6" />,
@@ -135,7 +135,7 @@ export default function BecomeDealerPage() {
                 placeholder="Select division"
                 variant="bordered"
               >
-                <SelectItem key="dhaka">Dhaka</SelectItem>
+                <SelectItem key="Kathmandu">Kathmandu</SelectItem>
                 <SelectItem key="chittagong">Chittagong</SelectItem>
                 <SelectItem key="rajshahi">Rajshahi</SelectItem>
                 <SelectItem key="khulna">Khulna</SelectItem>

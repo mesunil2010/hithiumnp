@@ -90,10 +90,10 @@ export default function WattCalculatorPage() {
   const totalKwh = totalWh / 1000;
 
   const recommendation = useMemo(() => {
-    if (totalKwh <= 1) return { model: "HeroEE 1", capacity: "1kWh", handle: "heroee-1", price: "৳29,900" };
-    if (totalKwh <= 2) return { model: "HeroEE 2", capacity: "2kWh", handle: "heroee-2", price: "৳78,800" };
-    if (totalKwh <= 8) return { model: "HeroEE 8", capacity: "8kWh", handle: "heroee-8", price: "৳165,000" };
-    return { model: "HeroEE 16", capacity: "16kWh", handle: "heroee-16", price: "৳306,000" };
+    if (totalKwh <= 1) return { model: "HeroEE 1", capacity: "1kWh", handle: "heroee-1", price: "NPR 29,900" };
+    if (totalKwh <= 2) return { model: "HeroEE 2", capacity: "2kWh", handle: "heroee-2", price: "NPR 78,800" };
+    if (totalKwh <= 8) return { model: "HeroEE 8", capacity: "8kWh", handle: "heroee-8", price: "NPR 165,000" };
+    return { model: "HeroEE 16", capacity: "16kWh", handle: "heroee-16", price: "NPR 306,000" };
   }, [totalKwh]);
 
   return (

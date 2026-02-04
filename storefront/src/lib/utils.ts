@@ -1,6 +1,6 @@
-export function formatPrice(amount: number, currency: string = "BDT"): string {
-  if (currency === "BDT") {
-    return `৳${amount.toLocaleString("en-BD")}`;
+export function formatPrice(amount: number, currency: string = "NPR"): string {
+  if (currency === "NPR") {
+    return `NPR ${amount.toLocaleString("en-np")}`;
   }
   return new Intl.NumberFormat("en-US", {
     style: "currency",

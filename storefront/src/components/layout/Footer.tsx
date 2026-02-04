@@ -70,7 +70,7 @@ export function Footer() {
             <div className="space-y-2.5 text-sm">
               <div className="flex items-center gap-2.5">
                 <MapPin className="w-4 h-4 text-hithium-primary shrink-0" />
-                <span>Dhaka, Nepal</span>
+                <span>Kathmandu, Nepal</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-hithium-primary shrink-0" />
@@ -80,8 +80,8 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-hithium-primary shrink-0" />
-                <a href="mailto:info@hithiumbd.com" className="hover:text-white transition-colors">
-                  info@hithiumbd.com
+                <a href="mailto:info@hithiumnp.com" className="hover:text-white transition-colors">
+                  info@hithiumnp.com
                 </a>
               </div>
             </div>
@@ -153,7 +153,7 @@ export function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-gray-600">
           <p>
             &copy; {new Date().getFullYear()} HiTHIUM Energy Storage Technology
-            BD Ltd. All rights reserved.
+            NP Ltd. All rights reserved.
           </p>
           <p>
             Powered by{" "}

@@ -25,7 +25,7 @@ export default async function seed({ container }: ExecArgs) {
     await storeModuleService.updateStores(store.id, {
       name: "HiTHIUM Nepal",
       supported_currencies: [
-        { currency_code: "bdt", is_default: true },
+        { currency_code: "npr", is_default: true },
         { currency_code: "usd" },
       ],
     });
@@ -37,7 +37,7 @@ export default async function seed({ container }: ExecArgs) {
       input: {
         salesChannelsData: [
           {
-            name: "HiTHIUM BD Online Store",
+            name: "HiTHIUM NP Online Store",
             description: "HiTHIUM Nepal official online storefront",
           },
         ],
@@ -46,19 +46,31 @@ export default async function seed({ container }: ExecArgs) {
   const defaultSalesChannel = salesChannelsResult[0];
 
   logger.info("Creating regions...");
-  const { result: regionsResult } = await createRegionsWorkflow(container).run({
-    input: {
-      regions: [
-        {
-          name: "Nepal",
-          currency_code: "bdt",
-          countries: ["bd"],
-          payment_providers: ["pp_manual_manual"],
-        },
-      ],
-    },
-  });
-  const NepalRegion = regionsResult[0];
+  // Avoid creating a region if the country is already assigned to one
+  const regionModuleService = container.resolve(Modules.REGION);
+  const existingRegions = await regionModuleService.listRegions({}, { relations: ["countries"] });
+  const countryCode = "NP";
+  const found = existingRegions.find((r) => r.countries?.some((c) => (c.iso_2 ?? '').toUpperCase() === countryCode));
+  let NepalRegion;
+
+  if (!found) {
+    const { result: regionsResult } = await createRegionsWorkflow(container).run({
+      input: {
+        regions: [
+          {
+            name: "Nepal",
+            currency_code: "npr",
+            countries: ["NP"],
+            payment_providers: [],
+          },
+        ],
+      },
+    });
+    NepalRegion = regionsResult[0];
+  } else {
+    logger.info(`Region containing country ${countryCode} already exists, skipping creation`);
+    NepalRegion = found;
+  }
 
   logger.info("Creating stock location...");
   const { result: stockLocationResult } =
@@ -66,11 +78,11 @@ export default async function seed({ container }: ExecArgs) {
       input: {
         locations: [
           {
-            name: "HiTHIUM BD Warehouse",
+            name: "HiTHIUM NP Warehouse",
             address: {
-              city: "Dhaka",
-              country_code: "BD",
-              address_1: "Dhaka, Nepal",
+              city: "Kathmandu",
+              country_code: "NP",
+              address_1: "Kathmandu, Nepal",
             },
           },
         ],
@@ -85,58 +97,65 @@ export default async function seed({ container }: ExecArgs) {
   });
 
   logger.info("Creating fulfillment provider...");
-  const fulfillmentSet = await fulfillmentModuleService.createFulfillmentSets({
-    name: "HiTHIUM BD Fulfillment",
-    type: "shipping",
-    service_zones: [
-      {
-        name: "Nepal",
-        geo_zones: [{ country_code: "bd", type: "country" }],
-      },
-    ],
-  });
-
-  logger.info("Creating shipping options...");
-  await createShippingOptionsWorkflow(container).run({
-    input: {
-      options: [
+  // Avoid creating duplicate fulfillment sets
+  let fulfillmentSet;
+  const existingSets = await fulfillmentModuleService.listFulfillmentSets({ name: "HiTHIUM NP Fulfillment" }, { relations: ["service_zones"] });
+  if (existingSets.length > 0) {
+    fulfillmentSet = existingSets[0];
+    logger.info("Fulfillment set exists, skipping creation");
+  } else {
+    const createdSet = await fulfillmentModuleService.createFulfillmentSets({
+      name: "HiTHIUM NP Fulfillment",
+      type: "shipping",
+      service_zones: [
         {
-          name: "Standard Delivery (Dhaka)",
-          price_type: "flat",
-          service_zone_id: fulfillmentSet.service_zones[0].id,
-          shipping_profile_id: (
-            await fulfillmentModuleService.listShippingProfiles()
-          )[0].id,
-          provider_id: "manual_manual",
-          type: {
-            code: "standard",
-            label: "Standard Delivery",
-            description: "Delivery within Dhaka - 2-3 business days",
-          },
-          prices: [
-            { region_id: NepalRegion.id, amount: 500 },
-          ],
-        },
-        {
-          name: "Nationwide Delivery",
-          price_type: "flat",
-          service_zone_id: fulfillmentSet.service_zones[0].id,
-          shipping_profile_id: (
-            await fulfillmentModuleService.listShippingProfiles()
-          )[0].id,
-          provider_id: "manual_manual",
-          type: {
-            code: "nationwide",
-            label: "Nationwide Delivery",
-            description: "Delivery across Nepal - 5-7 business days",
-          },
-          prices: [
-            { region_id: NepalRegion.id, amount: 1500 },
-          ],
+          name: "Nepal",
+          geo_zones: [{ country_code: "NP", type: "country" }],
         },
       ],
-    },
-  });
+    });
+    fulfillmentSet = createdSet;
+  }
+
+  // logger.info("Creating shipping options...");
+  // await createShippingOptionsWorkflow(container).run({
+  //   input: [
+  //     {
+  //       name: "Standard Delivery (Kathmandu)",
+  //       price_type: "flat",
+  //       service_zone_id: fulfillmentSet.service_zones[0].id,
+  //       shipping_profile_id: (
+  //         await fulfillmentModuleService.listShippingProfiles()
+  //       )[0].id,
+  //       provider_id: "manual_local",
+  //       type: {
+  //         code: "standard",
+  //         label: "Standard Delivery",
+  //         description: "Delivery within Kathmandu - 2-3 business days",
+  //       },
+  //       prices: [
+  //         { region_id: NepalRegion.id, amount: 500 },
+  //       ],
+  //     },
+  //     {
+  //       name: "Nationwide Delivery",
+  //       price_type: "flat",
+  //       service_zone_id: fulfillmentSet.service_zones[0].id,
+  //       shipping_profile_id: (
+  //         await fulfillmentModuleService.listShippingProfiles()
+  //       )[0].id,
+  //       provider_id: "manual_national",
+  //       type: {
+  //         code: "nationwide",
+  //         label: "Nationwide Delivery",
+  //         description: "Delivery across Nepal - 5-7 business days",
+  //       },
+  //       prices: [
+  //         { region_id: NepalRegion.id, amount: 1500 },
+  //       ],
+  //     },
+  //   ],
+  // });
 
   logger.info("Creating product categories...");
   const { result: categoriesResult } =
@@ -188,7 +207,7 @@ export default async function seed({ container }: ExecArgs) {
               sku: "HEROEE-1-STD",
               manage_inventory: true,
               prices: [
-                { amount: 29900, currency_code: "bdt" },
+                { amount: 29900, currency_code: "npr" },
                 { amount: 280, currency_code: "usd" },
               ],
               options: { Variant: "Standard" },
@@ -222,7 +241,7 @@ export default async function seed({ container }: ExecArgs) {
               sku: "HEROEE-2-STD",
               manage_inventory: true,
               prices: [
-                { amount: 78800, currency_code: "bdt" },
+                { amount: 78800, currency_code: "npr" },
                 { amount: 720, currency_code: "usd" },
               ],
               options: { Variant: "Standard" },
@@ -255,7 +274,7 @@ export default async function seed({ container }: ExecArgs) {
               sku: "HEROEE-8-STD",
               manage_inventory: true,
               prices: [
-                { amount: 165000, currency_code: "bdt" },
+                { amount: 165000, currency_code: "npr" },
                 { amount: 1500, currency_code: "usd" },
               ],
               options: { Variant: "Standard" },
@@ -289,7 +308,7 @@ export default async function seed({ container }: ExecArgs) {
               sku: "HEROEE-16-STD",
               manage_inventory: true,
               prices: [
-                { amount: 306000, currency_code: "bdt" },
+                { amount: 306000, currency_code: "npr" },
                 { amount: 2800, currency_code: "usd" },
               ],
               options: { Variant: "Standard" },
@@ -323,7 +342,7 @@ export default async function seed({ container }: ExecArgs) {
               sku: "HEROEE-MP8-AIO-STD",
               manage_inventory: true,
               prices: [
-                { amount: 245000, currency_code: "bdt" },
+                { amount: 245000, currency_code: "npr" },
                 { amount: 2250, currency_code: "usd" },
               ],
               options: { Variant: "Standard" },
@@ -360,7 +379,7 @@ export default async function seed({ container }: ExecArgs) {
               sku: "SOLAR-200W-STD",
               manage_inventory: true,
               prices: [
-                { amount: 23950, currency_code: "bdt" },
+                { amount: 23950, currency_code: "npr" },
                 { amount: 220, currency_code: "usd" },
               ],
               options: { Variant: "Standard" },

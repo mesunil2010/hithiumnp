@@ -55,7 +55,7 @@ export default function AboutPage() {
           Powering Nepal&apos;s Energy Future
         </h1>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-          HiTHIUM Energy Storage Technology BD Ltd. is the exclusive distributor
+          HiTHIUM Energy Storage Technology NP Ltd. is the exclusive distributor
           of HiTHIUM and HiTHIUM HeroEE energy storage products in Nepal.
           We are committed to providing clean, reliable, and affordable energy
           solutions to homes and businesses across the country.

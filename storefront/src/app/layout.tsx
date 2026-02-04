@@ -28,9 +28,9 @@ export const metadata: Metadata = {
     title: "HiTHIUM Nepal — Energy Storage Solutions",
     description:
       "Official distributor of HiTHIUM and HiTHIUM HeroEE energy storage products in Nepal.",
-    url: "https://hithiumbd.com",
+    url: "https://hithiumnp.com",
     siteName: "HiTHIUM Nepal",
-    locale: "en_BD",
+    locale: "en_np",
     type: "website",
   },
 };

@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "HiTHIUM Nepal E-Commerce Platform - Powered by MedusaJS & HeroUI",
   "private": true,
-  "workspaces": [
-    "backend",
-    "storefront"
-  ],
   "scripts": {
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:storefront\"",
     "dev:backend": "cd backend && npm run dev",

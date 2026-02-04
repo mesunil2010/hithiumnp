@@ -39,19 +39,19 @@ const faqs = [
   },
   {
     q: "Is installation included?",
-    a: "For the HeroEE 1 and 2, no installation is needed — they're plug-and-play. For the HeroEE 8 and 16 energy storage systems, we recommend professional installation. Contact us for installation service in Dhaka.",
+    a: "For the HeroEE 1 and 2, no installation is needed — they're plug-and-play. For the HeroEE 8 and 16 energy storage systems, we recommend professional installation. Contact us for installation service in Kathmandu.",
   },
   {
     q: "How do I claim warranty service?",
-    a: "Register your product on our website first. Then contact our support team via email (support@hithiumbd.com) or phone with your registration details and a description of the issue. We'll arrange service or replacement as per the warranty terms.",
+    a: "Register your product on our website first. Then contact our support team via email (support@hithiumnp.com) or phone with your registration details and a description of the issue. We'll arrange service or replacement as per the warranty terms.",
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept bKash, Nagad, bank transfer, cash on delivery (Dhaka only), and credit/debit cards. EMI options are available for select products.",
+    a: "We accept bKash, Nagad, bank transfer, cash on delivery (Kathmandu only), and credit/debit cards. EMI options are available for select products.",
   },
   {
-    q: "Do you deliver outside Dhaka?",
-    a: "Yes, we deliver nationwide. Delivery within Dhaka is free. Outside Dhaka, a flat shipping fee of ৳1,500 applies. Delivery typically takes 5-7 business days for areas outside Dhaka.",
+    q: "Do you deliver outside Kathmandu?",
+    a: "Yes, we deliver nationwide. Delivery within Kathmandu is free. Outside Kathmandu, a flat shipping fee of NPR 1,500 applies. Delivery typically takes 5-7 business days for areas outside Kathmandu.",
   },
 ];
 
@@ -161,7 +161,7 @@ export default function SupportClient() {
               <ul className="mt-4 space-y-1 text-sm text-gray-600">
                 <li>Covers manufacturing defects</li>
                 <li>Battery capacity guarantee (80%+ at rated cycles)</li>
-                <li>On-site service available in Dhaka</li>
+                <li>On-site service available in Kathmandu</li>
               </ul>
             </CardBody>
           </Card>
@@ -198,7 +198,7 @@ export default function SupportClient() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Button
               as="a"
-              href="mailto:support@hithiumbd.com"
+              href="mailto:support@hithiumnp.com"
               className="bg-hithium-primary text-white font-semibold hover:bg-hithium-accent"
               startContent={<Mail className="w-4 h-4" />}
             >

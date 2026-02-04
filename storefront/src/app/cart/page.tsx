@@ -175,18 +175,18 @@ export default function CartPage() {
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal</span>
                   <span className="font-semibold">
-                    ৳{subtotal.toLocaleString()}
+                    NPR {subtotal.toLocaleString()}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Shipping</span>
                   <span className="font-semibold">
-                    {shipping === 0 ? "Free" : `৳${shipping.toLocaleString()}`}
+                    {shipping === 0 ? "Free" : `NPR ${shipping.toLocaleString()}`}
                   </span>
                 </div>
                 {shipping === 0 && (
                   <p className="text-xs text-green-600">
-                    Free shipping on orders over ৳100,000
+                    Free shipping on orders over NPR 100,000
                   </p>
                 )}
               </div>
@@ -198,7 +198,7 @@ export default function CartPage() {
                   Total
                 </span>
                 <span className="font-display text-xl font-bold text-hithium-primary">
-                  ৳{total.toLocaleString()}
+                  NPR {total.toLocaleString()}
                 </span>
               </div>
 

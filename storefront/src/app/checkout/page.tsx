@@ -16,7 +16,7 @@ import {
 import { Lock, CreditCard, Truck } from "lucide-react";
 
 const divisions = [
-  "Dhaka",
+  "Kathmandu",
   "Chittagong",
   "Rajshahi",
   "Khulna",
@@ -130,18 +130,18 @@ export default function CheckoutPage() {
               <h2 className="font-display text-lg font-bold text-gray-900 mb-4">
                 Shipping Method
               </h2>
-              <RadioGroup defaultValue="standard-dhaka">
+              <RadioGroup defaultValue="standard-Kathmandu">
                 <Radio
-                  value="standard-dhaka"
-                  description="2-3 business days within Dhaka"
+                  value="standard-Kathmandu"
+                  description="2-3 business days within Kathmandu"
                 >
-                  Standard Delivery (Dhaka) — ৳500
+                  Standard Delivery (Kathmandu) — NPR 500
                 </Radio>
                 <Radio
                   value="nationwide"
                   description="5-7 business days across Nepal"
                 >
-                  Nationwide Delivery — ৳1,500
+                  Nationwide Delivery — NPR 1,500
                 </Radio>
               </RadioGroup>
             </CardBody>
@@ -195,11 +195,11 @@ export default function CheckoutPage() {
               <div className="space-y-3 text-sm mb-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600">HeroEE 1 (1kWh) x 1</span>
-                  <span>৳29,900</span>
+                  <span>NPR 29,900</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">200W Solar Panel x 2</span>
-                  <span>৳47,900</span>
+                  <span>NPR 47,900</span>
                 </div>
               </div>
 
@@ -208,11 +208,11 @@ export default function CheckoutPage() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal</span>
-                  <span>৳77,800</span>
+                  <span>NPR 77,800</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Shipping</span>
-                  <span>৳500</span>
+                  <span>NPR 500</span>
                 </div>
               </div>
 
@@ -221,7 +221,7 @@ export default function CheckoutPage() {
               <div className="flex justify-between mb-6">
                 <span className="font-display font-bold">Total</span>
                 <span className="font-display text-xl font-bold text-hithium-primary">
-                  ৳78,300
+                  NPR 78,300
                 </span>
               </div>
 

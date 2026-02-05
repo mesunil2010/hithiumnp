@@ -26,6 +26,7 @@ import {
   Sun,
   Zap,
 } from "lucide-react";
+import { useCart } from "@/lib/cart-context";
 
 const productCategories = [
   {
@@ -59,6 +60,7 @@ const navLinks = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { totalItems } = useCart();
 
   return (
     <>
@@ -217,7 +219,13 @@ export function Header() {
           </NavbarItem>
           <NavbarItem>
             <Link href="/cart">
-              <Badge content="0" color="primary" size="sm" shape="circle">
+              <Badge
+                content={totalItems > 0 ? totalItems : undefined}
+                color="primary"
+                size="sm"
+                shape="circle"
+                isInvisible={totalItems === 0}
+              >
                 <Button
                   isIconOnly
                   variant="light"

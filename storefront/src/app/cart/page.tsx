@@ -19,45 +19,17 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import type { Product } from "@/lib/api";
-
-interface CartItem {
-  productId: string;
-  quantity: number;
-}
-
-// Cart storage key
-const CART_STORAGE_KEY = "hithium_cart";
-
-// Get cart from localStorage
-function getStoredCart(): CartItem[] {
-  if (typeof window === "undefined") return [];
-  try {
-    const stored = localStorage.getItem(CART_STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
-  } catch {
-    return [];
-  }
-}
-
-// Save cart to localStorage
-function saveCart(items: CartItem[]) {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
-}
+import { useCart } from "@/lib/cart-context";
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const { items: cartItems, updateQuantity, removeFromCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load cart from localStorage and fetch products on mount
+  // Fetch products on mount
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
-
-      // Load cart from localStorage
-      const storedCart = getStoredCart();
-      setCartItems(storedCart);
 
       // Fetch products from API
       try {
@@ -66,7 +38,7 @@ export default function CartPage() {
           const data = await response.json();
           setProducts(data.products || []);
         } else {
-          // Fallback to fetching from static data
+          // Fallback to static data
           const { products: staticProducts } = await import("@/lib/data");
           setProducts(staticProducts);
         }
@@ -82,30 +54,7 @@ export default function CartPage() {
     loadData();
   }, []);
 
-  // Save cart whenever it changes
-  useEffect(() => {
-    if (!isLoading) {
-      saveCart(cartItems);
-    }
-  }, [cartItems, isLoading]);
-
   const getProduct = (id: string) => products.find((p) => p.handle === id || p.id === id);
-
-  const updateQuantity = (productId: string, delta: number) => {
-    setCartItems((items) =>
-      items
-        .map((item) =>
-          item.productId === productId
-            ? { ...item, quantity: Math.max(0, item.quantity + delta) }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
-  };
-
-  const removeItem = (productId: string) => {
-    setCartItems((items) => items.filter((i) => i.productId !== productId));
-  };
 
   const subtotal = cartItems.reduce((sum, item) => {
     const product = getProduct(item.productId);
@@ -194,7 +143,7 @@ export default function CartPage() {
                             isIconOnly
                             variant="light"
                             size="sm"
-                            onClick={() => updateQuantity(item.productId, -1)}
+                            onClick={() => updateQuantity(item.productId, item.quantity - 1)}
                             aria-label="Decrease"
                           >
                             <Minus className="w-3 h-3" />
@@ -206,7 +155,7 @@ export default function CartPage() {
                             isIconOnly
                             variant="light"
                             size="sm"
-                            onClick={() => updateQuantity(item.productId, 1)}
+                            onClick={() => updateQuantity(item.productId, item.quantity + 1)}
                             aria-label="Increase"
                           >
                             <Plus className="w-3 h-3" />
@@ -217,7 +166,7 @@ export default function CartPage() {
                           variant="light"
                           color="danger"
                           size="sm"
-                          onClick={() => removeItem(item.productId)}
+                          onClick={() => removeFromCart(item.productId)}
                           aria-label="Remove"
                         >
                           <Trash2 className="w-4 h-4" />

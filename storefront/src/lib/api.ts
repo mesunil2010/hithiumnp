@@ -7,7 +7,7 @@
  * The app should handle these errors with appropriate error boundaries.
  */
 
-import { MEDUSA_BACKEND_URL } from "./medusa";
+import { MEDUSA_BACKEND_URL, PUBLISHABLE_KEY } from "./medusa";
 
 export interface Product {
   id: string;
@@ -136,6 +136,7 @@ export async function fetchProducts(): Promise<Product[]> {
     const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?limit=100`, {
       headers: {
         "Content-Type": "application/json",
+        "x-publishable-api-key": PUBLISHABLE_KEY,
       },
       next: { revalidate: 60 }, // Cache for 60 seconds
     });
@@ -170,6 +171,7 @@ export async function fetchProductByHandle(handle: string): Promise<Product | un
   try {
     const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?handle=${handle}`, {
       headers: {
+        "x-publishable-api-key": PUBLISHABLE_KEY,
         "Content-Type": "application/json",
       },
       next: { revalidate: 60 },
@@ -214,6 +216,7 @@ export async function fetchCategories(): Promise<Category[]> {
   try {
     const response = await fetch(`${MEDUSA_BACKEND_URL}/store/product-categories`, {
       headers: {
+        "x-publishable-api-key": PUBLISHABLE_KEY,
         "Content-Type": "application/json",
       },
       next: { revalidate: 300 }, // Cache for 5 minutes

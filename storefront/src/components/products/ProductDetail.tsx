@@ -27,19 +27,15 @@ import {
   Plus,
 } from "lucide-react";
 import { useState } from "react";
-import type { Product } from "@/lib/data";
-import { products } from "@/lib/data";
+import type { Product } from "@/lib/api";
 
 interface ProductDetailProps {
   product: Product;
+  relatedProducts: Product[];
 }
 
-export function ProductDetail({ product }: ProductDetailProps) {
+export function ProductDetail({ product, relatedProducts }: ProductDetailProps) {
   const [quantity, setQuantity] = useState(1);
-
-  const relatedProducts = products.filter(
-    (p) => p.categorySlug === product.categorySlug && p.id !== product.id
-  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -100,8 +96,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
 
           {/* Stock */}
           <div className="flex items-center gap-2 mb-6">
-            <div className="w-2 h-2 rounded-full bg-green-500" />
-            <span className="text-sm text-green-600 font-medium">In Stock</span>
+            <div className={`w-2 h-2 rounded-full ${product.inStock ? 'bg-green-500' : 'bg-red-500'}`} />
+            <span className={`text-sm font-medium ${product.inStock ? 'text-green-600' : 'text-red-600'}`}>
+              {product.inStock ? 'In Stock' : 'Out of Stock'}
+            </span>
           </div>
 
           {/* Quantity + Add to cart */}
@@ -132,6 +130,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
               size="lg"
               className="flex-1 font-semibold bg-hithium-primary text-white hover:bg-hithium-accent"
               startContent={<ShoppingCart className="w-5 h-5" />}
+              isDisabled={!product.inStock}
             >
               Add to Cart
             </Button>
@@ -141,7 +140,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
           <div className="grid grid-cols-3 gap-4 mb-8">
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <Shield className="w-5 h-5 text-hithium-primary" />
-              <span>{product.specs.Warranty} Warranty</span>
+              <span>{product.specs.Warranty || 'Warranty'}</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <Truck className="w-5 h-5 text-hithium-primary" />
@@ -149,26 +148,28 @@ export function ProductDetail({ product }: ProductDetailProps) {
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <RotateCcw className="w-5 h-5 text-hithium-primary" />
-              <span>{product.specs["Cycle Life"]} Cycles</span>
+              <span>{product.specs["Cycle Life"] ? `${product.specs["Cycle Life"]} Cycles` : 'Long Life'}</span>
             </div>
           </div>
 
           <Divider className="mb-6" />
 
           {/* Key features */}
-          <div className="mb-6">
-            <h3 className="font-display font-bold text-gray-900 mb-3">
-              Key Features
-            </h3>
-            <ul className="space-y-2">
-              {product.features.slice(0, 6).map((feature) => (
-                <li key={feature} className="flex items-start gap-2 text-sm text-gray-600">
-                  <Check className="w-4 h-4 text-hithium-primary mt-0.5 shrink-0" />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {product.features.length > 0 && (
+            <div className="mb-6">
+              <h3 className="font-display font-bold text-gray-900 mb-3">
+                Key Features
+              </h3>
+              <ul className="space-y-2">
+                {product.features.slice(0, 6).map((feature) => (
+                  <li key={feature} className="flex items-start gap-2 text-sm text-gray-600">
+                    <Check className="w-4 h-4 text-hithium-primary mt-0.5 shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
@@ -193,21 +194,25 @@ export function ProductDetail({ product }: ProductDetailProps) {
           </AccordionItem>
 
           <AccordionItem key="features" title="All Features" className="font-display">
-            <ul className="space-y-2 py-2">
-              {product.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2 text-sm text-gray-600">
-                  <Check className="w-4 h-4 text-hithium-primary mt-0.5 shrink-0" />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
+            {product.features.length > 0 ? (
+              <ul className="space-y-2 py-2">
+                {product.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2 text-sm text-gray-600">
+                    <Check className="w-4 h-4 text-hithium-primary mt-0.5 shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-gray-500 py-2">No additional features listed.</p>
+            )}
           </AccordionItem>
 
           <AccordionItem key="shipping" title="Shipping & Warranty" className="font-display">
             <div className="space-y-3 py-2 text-sm text-gray-600">
               <p><strong>Kathmandu:</strong> Free delivery, 2-3 business days</p>
               <p><strong>Outside Kathmandu:</strong> NPR 1,500 flat rate, 5-7 business days</p>
-              <p><strong>Warranty:</strong> {product.specs.Warranty} manufacturer warranty through HiTHIUM Nepal</p>
+              <p><strong>Warranty:</strong> {product.specs.Warranty || 'Standard'} manufacturer warranty through HiTHIUM Nepal</p>
               <p><strong>After-Sales:</strong> Local service & support available</p>
             </div>
           </AccordionItem>

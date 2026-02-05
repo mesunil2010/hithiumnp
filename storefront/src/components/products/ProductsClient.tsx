@@ -15,10 +15,22 @@ import {
   BreadcrumbItem,
 } from "@heroui/react";
 import { ShoppingCart, ArrowRight, Zap, Search } from "lucide-react";
-import { products, categories } from "@/lib/data";
 import { useSearchParams } from "next/navigation";
+import type { Product } from "@/lib/api";
 
-export default function ProductsClient() {
+interface Category {
+  name: string;
+  slug: string;
+  description: string;
+  productCount: number;
+}
+
+interface ProductsClientProps {
+  products: Product[];
+  categories: Category[];
+}
+
+export default function ProductsClient({ products, categories }: ProductsClientProps) {
   const searchParams = useSearchParams();
   const initialCategory = searchParams?.get("category") || "all";
 
@@ -49,7 +61,7 @@ export default function ProductsClient() {
     }
 
     return filtered;
-  }, [selectedCategory, searchQuery, sortBy]);
+  }, [products, selectedCategory, searchQuery, sortBy]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

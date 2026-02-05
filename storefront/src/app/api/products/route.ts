@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchProducts, fetchCategories } from "@/lib/api";
+import { fetchProducts, fetchCategories, BackendUnavailableError } from "@/lib/api";
 
 export async function GET() {
   try {
@@ -14,9 +14,18 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Error fetching products:", error);
+
+    const isBackendError = error instanceof BackendUnavailableError;
+    const message = error instanceof Error ? error.message : "Unknown error";
+
     return NextResponse.json(
-      { error: "Failed to fetch products" },
-      { status: 500 }
+      {
+        error: isBackendError
+          ? "Backend service is unavailable. Please try again later."
+          : "Failed to fetch products",
+        details: message,
+      },
+      { status: isBackendError ? 503 : 500 }
     );
   }
 }

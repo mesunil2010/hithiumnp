@@ -16,6 +16,8 @@ import {
   Trash2,
   ArrowRight,
   ShoppingBag,
+  AlertTriangle,
+  RefreshCw,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import type { Product } from "@/lib/api";
@@ -25,33 +27,30 @@ export default function CartPage() {
   const { items: cartItems, updateQuantity, removeFromCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Fetch products on mount
-  useEffect(() => {
-    const loadData = async () => {
-      setIsLoading(true);
+  const loadProducts = async () => {
+    setIsLoading(true);
+    setError(null);
 
-      // Fetch products from API
-      try {
-        const response = await fetch("/api/products");
-        if (response.ok) {
-          const data = await response.json();
-          setProducts(data.products || []);
-        } else {
-          // Fallback to static data
-          const { products: staticProducts } = await import("@/lib/data");
-          setProducts(staticProducts);
-        }
-      } catch {
-        // Fallback to static data
-        const { products: staticProducts } = await import("@/lib/data");
-        setProducts(staticProducts);
+    try {
+      const response = await fetch("/api/products");
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to load products");
       }
 
+      setProducts(data.products || []);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to connect to server");
+    } finally {
       setIsLoading(false);
-    };
+    }
+  };
 
-    loadData();
+  useEffect(() => {
+    loadProducts();
   }, []);
 
   const getProduct = (id: string) => products.find((p) => p.handle === id || p.id === id);
@@ -70,6 +69,49 @@ export default function CartPage() {
         <div className="animate-pulse">
           <div className="h-8 bg-gray-200 rounded w-48 mx-auto mb-4"></div>
           <div className="h-4 bg-gray-200 rounded w-64 mx-auto"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-md mx-auto text-center">
+          <div className="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-6">
+            <AlertTriangle className="w-10 h-10 text-red-500" />
+          </div>
+          <h1 className="font-display text-2xl font-bold text-gray-900 mb-2">
+            Service Unavailable
+          </h1>
+          <p className="text-gray-600 mb-6">
+            {error}. Your cart items are saved and will be available once the service is restored.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button
+              color="primary"
+              size="lg"
+              className="font-semibold"
+              startContent={<RefreshCw className="w-4 h-4" />}
+              onClick={loadProducts}
+            >
+              Try Again
+            </Button>
+            <Button
+              as={Link}
+              href="/"
+              variant="bordered"
+              size="lg"
+              className="font-semibold"
+            >
+              Back to Home
+            </Button>
+          </div>
+          {cartItems.length > 0 && (
+            <p className="mt-6 text-sm text-gray-500">
+              You have {cartItems.length} {cartItems.length === 1 ? "item" : "items"} in your cart
+            </p>
+          )}
         </div>
       </div>
     );

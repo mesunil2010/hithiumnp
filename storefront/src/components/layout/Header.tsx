@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Navbar,
@@ -25,6 +25,7 @@ import {
   Battery,
   Sun,
   Zap,
+  Mail,
 } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 
@@ -60,23 +61,42 @@ const navLinks = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { totalItems } = useCart();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
       {/* Top bar */}
-      <div className="bg-hithium-primary text-white text-xs py-2 hidden sm:block">
+      <div className="bg-gradient-to-r from-hithium-dark via-hithium-primary to-hithium-dark text-white text-xs py-2.5 hidden sm:block">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <p className="text-blue-100">
-            Exclusive Distributor of HiTHIUM & HiTHIUM HeroEE in Nepal
-          </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <Zap className="w-3.5 h-3.5 text-hithium-cyan" />
+            <p className="text-blue-100">
+              <span className="text-white font-semibold">Exclusive Distributor</span> of HiTHIUM & HiTHIUM HeroEE in Nepal
+            </p>
+          </div>
+          <div className="flex items-center gap-6">
             <a
-              href="tel:+8801XXXXXXXXX"
-              className="flex items-center gap-1 text-blue-100 hover:text-white transition-colors"
+              href="mailto:info@hithiumnp.com"
+              className="flex items-center gap-1.5 text-blue-100 hover:text-white transition-colors"
             >
-              <Phone className="w-3 h-3" />
-              <span>+880 1XXX-XXXXXX</span>
+              <Mail className="w-3.5 h-3.5" />
+              <span>info@hithiumnp.com</span>
+            </a>
+            <a
+              href="tel:+9771XXXXXXXX"
+              className="flex items-center gap-1.5 text-blue-100 hover:text-white transition-colors"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span>+977 1XXX-XXXXXX</span>
             </a>
           </div>
         </div>
@@ -87,8 +107,12 @@ export function Header() {
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
         maxWidth="xl"
-        className="bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm"
-        height="4.5rem"
+        className={`transition-all duration-300 ${
+          scrolled
+            ? 'bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-lg'
+            : 'bg-white/90 backdrop-blur-md border-b border-gray-50'
+        }`}
+        height="5rem"
       >
         <NavbarContent>
           <NavbarMenuToggle
@@ -96,36 +120,40 @@ export function Header() {
             className="sm:hidden"
           />
           <NavbarBrand>
-            <Link href="/" className="flex items-center gap-2.5">
+            <Link href="/" className="flex items-center gap-3 group">
               {/* HiTHIUM Logo Mark */}
-              <div className="relative w-9 h-9">
-                <div className="absolute inset-0 rounded-lg blue-gradient" />
-                <svg
-                  viewBox="0 0 36 36"
-                  className="relative w-9 h-9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <text
-                    x="50%"
-                    y="54%"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    fill="white"
-                    fontWeight="800"
-                    fontSize="15"
-                    fontFamily="Plus Jakarta Sans, system-ui, sans-serif"
+              <div className="relative w-11 h-11 rounded-xl overflow-hidden shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-hithium-primary via-hithium-accent to-hithium-cyan" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <svg
+                    viewBox="0 0 36 36"
+                    className="w-11 h-11"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    H
-                  </text>
-                </svg>
+                    <text
+                      x="50%"
+                      y="54%"
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      fill="white"
+                      fontWeight="900"
+                      fontSize="16"
+                      fontFamily="Plus Jakarta Sans, system-ui, sans-serif"
+                    >
+                      H
+                    </text>
+                  </svg>
+                </div>
+                {/* Animated shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               </div>
               <div className="flex flex-col">
-                <span className="font-display font-extrabold text-xl tracking-tight leading-tight">
+                <span className="font-display font-black text-xl tracking-tight leading-tight">
                   <span className="text-hithium-primary">Hi</span>
                   <span className="text-gray-800">THIUM</span>
                 </span>
-                <span className="text-[10px] font-medium text-gray-400 leading-tight tracking-widest uppercase">
+                <span className="text-[10px] font-bold text-hithium-orange leading-tight tracking-[0.2em] uppercase">
                   Nepal
                 </span>
               </div>
@@ -138,7 +166,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/"
-              className="text-sm font-medium text-gray-600 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
+              className="text-sm font-semibold text-gray-600 hover:text-hithium-primary px-4 py-2 rounded-xl hover:bg-hithium-light transition-all duration-200"
             >
               Home
             </Link>
@@ -149,31 +177,48 @@ export function Header() {
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="bg-transparent text-sm font-medium text-gray-600 hover:text-hithium-primary data-[hover=true]:bg-hithium-light px-3"
-                  endContent={<ChevronDown className="w-3 h-3" />}
+                  className="bg-transparent text-sm font-semibold text-gray-600 hover:text-hithium-primary data-[hover=true]:bg-hithium-light px-4 rounded-xl"
+                  endContent={<ChevronDown className="w-3.5 h-3.5" />}
                   variant="light"
                 >
                   Products
                 </Button>
               </DropdownTrigger>
             </NavbarItem>
-            <DropdownMenu aria-label="Product categories" className="w-64">
+            <DropdownMenu
+              aria-label="Product categories"
+              className="w-72"
+              itemClasses={{
+                base: "gap-4 rounded-xl",
+              }}
+            >
               <>
                 <DropdownItem
                   key="all"
                   href="/products"
                   description="Browse all HiTHIUM products"
+                  startContent={
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-hithium-primary to-hithium-cyan flex items-center justify-center">
+                      <Zap className="w-5 h-5 text-white" />
+                    </div>
+                  }
+                  className="py-3"
                 >
-                  All Products
+                  <span className="font-semibold">All Products</span>
                 </DropdownItem>
                 {productCategories.map((cat) => (
                   <DropdownItem
                     key={cat.name}
                     href={cat.href}
                     description={cat.description}
-                    startContent={cat.icon}
+                    startContent={
+                      <div className="w-10 h-10 rounded-xl bg-hithium-light flex items-center justify-center text-hithium-primary">
+                        {cat.icon}
+                      </div>
+                    }
+                    className="py-3"
                   >
-                    {cat.name}
+                    <span className="font-semibold">{cat.name}</span>
                   </DropdownItem>
                 ))}
               </>
@@ -183,7 +228,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/about"
-              className="text-sm font-medium text-gray-600 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
+              className="text-sm font-semibold text-gray-600 hover:text-hithium-primary px-4 py-2 rounded-xl hover:bg-hithium-light transition-all duration-200"
             >
               About
             </Link>
@@ -192,7 +237,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/support"
-              className="text-sm font-medium text-gray-600 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
+              className="text-sm font-semibold text-gray-600 hover:text-hithium-primary px-4 py-2 rounded-xl hover:bg-hithium-light transition-all duration-200"
             >
               Support
             </Link>
@@ -201,7 +246,7 @@ export function Header() {
           <NavbarItem>
             <Link
               href="/contact"
-              className="text-sm font-medium text-gray-600 hover:text-hithium-primary px-3 py-2 rounded-lg hover:bg-hithium-light transition-colors"
+              className="text-sm font-semibold text-gray-600 hover:text-hithium-primary px-4 py-2 rounded-xl hover:bg-hithium-light transition-all duration-200"
             >
               Contact
             </Link>
@@ -210,9 +255,26 @@ export function Header() {
 
         {/* Right side actions */}
         <NavbarContent justify="end" className="gap-2">
+          <NavbarItem className="hidden sm:flex">
+            <Button
+              as={Link}
+              href="/watt-calculator"
+              size="sm"
+              className="font-semibold bg-gradient-to-r from-hithium-orange to-yellow-500 text-white shadow-md shadow-hithium-orange/20 hover:shadow-lg hover:shadow-hithium-orange/30 transition-all duration-300"
+              startContent={<Zap className="w-3.5 h-3.5" />}
+            >
+              Calculator
+            </Button>
+          </NavbarItem>
           <NavbarItem>
             <Link href="/account">
-              <Button isIconOnly variant="light" aria-label="Account" size="sm">
+              <Button
+                isIconOnly
+                variant="light"
+                aria-label="Account"
+                size="sm"
+                className="hover:bg-hithium-light"
+              >
                 <User className="w-5 h-5 text-gray-500" />
               </Button>
             </Link>
@@ -225,12 +287,16 @@ export function Header() {
                 size="sm"
                 shape="circle"
                 isInvisible={totalItems === 0}
+                classNames={{
+                  badge: "bg-gradient-to-r from-hithium-primary to-hithium-cyan font-bold"
+                }}
               >
                 <Button
                   isIconOnly
                   variant="light"
                   aria-label="Shopping cart"
                   size="sm"
+                  className="hover:bg-hithium-light"
                 >
                   <ShoppingCart className="w-5 h-5 text-gray-500" />
                 </Button>
@@ -240,12 +306,12 @@ export function Header() {
         </NavbarContent>
 
         {/* Mobile menu */}
-        <NavbarMenu className="pt-6 bg-white">
+        <NavbarMenu className="pt-8 bg-white/95 backdrop-blur-xl">
           {navLinks.map((link) => (
             <NavbarMenuItem key={link.name}>
               <Link
                 href={link.href}
-                className="w-full text-lg text-gray-600 hover:text-hithium-primary py-2 block"
+                className="w-full text-lg font-semibold text-gray-600 hover:text-hithium-primary py-3 block transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
@@ -255,7 +321,7 @@ export function Header() {
           <NavbarMenuItem>
             <Link
               href="/products"
-              className="w-full text-lg font-semibold text-hithium-primary py-2 block"
+              className="w-full text-lg font-bold text-white bg-gradient-to-r from-hithium-primary to-hithium-cyan py-4 px-6 rounded-xl block text-center mt-4 shadow-lg"
               onClick={() => setIsMenuOpen(false)}
             >
               Shop All Products

@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import type { Product } from "@/lib/api";
+import { useCart } from "@/lib/cart-context";
 
 interface ProductDetailProps {
   product: Product;
@@ -36,6 +37,18 @@ interface ProductDetailProps {
 
 export function ProductDetail({ product, relatedProducts }: ProductDetailProps) {
   const [quantity, setQuantity] = useState(1);
+  const [isAdding, setIsAdding] = useState(false);
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    setIsAdding(true);
+    addToCart(product.handle, quantity);
+    // Reset quantity and show feedback
+    setTimeout(() => {
+      setIsAdding(false);
+      setQuantity(1);
+    }, 500);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -131,8 +144,10 @@ export function ProductDetail({ product, relatedProducts }: ProductDetailProps) 
               className="flex-1 font-semibold bg-hithium-primary text-white hover:bg-hithium-accent"
               startContent={<ShoppingCart className="w-5 h-5" />}
               isDisabled={!product.inStock}
+              isLoading={isAdding}
+              onClick={handleAddToCart}
             >
-              Add to Cart
+              {isAdding ? "Added!" : "Add to Cart"}
             </Button>
           </div>
 

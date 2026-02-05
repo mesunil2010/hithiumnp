@@ -2,13 +2,44 @@
  * API functions to fetch data from the Medusa backend.
  * These functions handle the connection to the backend and transform
  * the Medusa data format to our frontend Product interface.
+ *
+ * NOTE: These functions will throw errors if the backend is unavailable.
+ * The app should handle these errors with appropriate error boundaries.
  */
 
-import { medusa, MEDUSA_BACKEND_URL } from "./medusa";
-import { Product, products as staticProducts, categories as staticCategories } from "./data";
+import { MEDUSA_BACKEND_URL } from "./medusa";
 
-// Re-export types
-export type { Product };
+export interface Product {
+  id: string;
+  handle: string;
+  title: string;
+  description: string;
+  price: number;
+  currency: string;
+  priceFormatted: string;
+  category: string;
+  categorySlug: string;
+  image: string;
+  badge?: string;
+  specs: Record<string, string>;
+  features: string[];
+  inStock: boolean;
+}
+
+export interface Category {
+  name: string;
+  slug: string;
+  description: string;
+  productCount: number;
+}
+
+// Custom error for backend unavailability
+export class BackendUnavailableError extends Error {
+  constructor(message: string = "Backend service is unavailable") {
+    super(message);
+    this.name = "BackendUnavailableError";
+  }
+}
 
 /**
  * Transform Medusa product data to our frontend Product format
@@ -98,6 +129,7 @@ function transformMedusaProduct(medusaProduct: any): Product {
 
 /**
  * Fetch all products from the Medusa backend
+ * @throws {BackendUnavailableError} When the backend is unavailable
  */
 export async function fetchProducts(): Promise<Product[]> {
   try {
@@ -109,27 +141,30 @@ export async function fetchProducts(): Promise<Product[]> {
     });
 
     if (!response.ok) {
-      console.warn("Failed to fetch products from backend, using static data");
-      return staticProducts;
+      throw new BackendUnavailableError(`Backend returned status ${response.status}`);
     }
 
     const data = await response.json();
     const medusaProducts = data.products || [];
 
     if (medusaProducts.length === 0) {
-      console.warn("No products returned from backend, using static data");
-      return staticProducts;
+      throw new BackendUnavailableError("No products found in the backend database");
     }
 
     return medusaProducts.map(transformMedusaProduct);
   } catch (error) {
-    console.warn("Error fetching products from backend:", error);
-    return staticProducts;
+    if (error instanceof BackendUnavailableError) {
+      throw error;
+    }
+    throw new BackendUnavailableError(
+      error instanceof Error ? error.message : "Failed to connect to backend"
+    );
   }
 }
 
 /**
  * Fetch a single product by handle from the Medusa backend
+ * @throws {BackendUnavailableError} When the backend is unavailable
  */
 export async function fetchProductByHandle(handle: string): Promise<Product | undefined> {
   try {
@@ -141,27 +176,30 @@ export async function fetchProductByHandle(handle: string): Promise<Product | un
     });
 
     if (!response.ok) {
-      console.warn(`Failed to fetch product ${handle} from backend, using static data`);
-      return staticProducts.find((p) => p.handle === handle);
+      throw new BackendUnavailableError(`Backend returned status ${response.status}`);
     }
 
     const data = await response.json();
     const medusaProduct = data.products?.[0];
 
     if (!medusaProduct) {
-      console.warn(`Product ${handle} not found in backend, checking static data`);
-      return staticProducts.find((p) => p.handle === handle);
+      return undefined; // Product not found is not a backend error
     }
 
     return transformMedusaProduct(medusaProduct);
   } catch (error) {
-    console.warn(`Error fetching product ${handle}:`, error);
-    return staticProducts.find((p) => p.handle === handle);
+    if (error instanceof BackendUnavailableError) {
+      throw error;
+    }
+    throw new BackendUnavailableError(
+      error instanceof Error ? error.message : "Failed to connect to backend"
+    );
   }
 }
 
 /**
  * Fetch products by category
+ * @throws {BackendUnavailableError} When the backend is unavailable
  */
 export async function fetchProductsByCategory(categorySlug: string): Promise<Product[]> {
   const products = await fetchProducts();
@@ -170,8 +208,9 @@ export async function fetchProductsByCategory(categorySlug: string): Promise<Pro
 
 /**
  * Fetch all product categories from the Medusa backend
+ * @throws {BackendUnavailableError} When the backend is unavailable
  */
-export async function fetchCategories() {
+export async function fetchCategories(): Promise<Category[]> {
   try {
     const response = await fetch(`${MEDUSA_BACKEND_URL}/store/product-categories`, {
       headers: {
@@ -181,16 +220,11 @@ export async function fetchCategories() {
     });
 
     if (!response.ok) {
-      console.warn("Failed to fetch categories from backend, using static data");
-      return staticCategories;
+      throw new BackendUnavailableError(`Backend returned status ${response.status}`);
     }
 
     const data = await response.json();
     const medusaCategories = data.product_categories || [];
-
-    if (medusaCategories.length === 0) {
-      return staticCategories;
-    }
 
     // Fetch all products to count per category
     const products = await fetchProducts();
@@ -207,29 +241,19 @@ export async function fetchCategories() {
       };
     });
   } catch (error) {
-    console.warn("Error fetching categories from backend:", error);
-    return staticCategories;
+    if (error instanceof BackendUnavailableError) {
+      throw error;
+    }
+    throw new BackendUnavailableError(
+      error instanceof Error ? error.message : "Failed to connect to backend"
+    );
   }
 }
 
 /**
  * Get product handles for static generation
- * Uses static data to ensure all product pages are generated
+ * Returns empty array - pages will be generated on-demand
  */
 export function getStaticProductHandles(): string[] {
-  return staticProducts.map((p) => p.handle);
-}
-
-/**
- * Get static product data - useful for fallback and SSG
- */
-export function getStaticProducts(): Product[] {
-  return staticProducts;
-}
-
-/**
- * Get static categories
- */
-export function getStaticCategories() {
-  return staticCategories;
+  return [];
 }

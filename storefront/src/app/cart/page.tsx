@@ -16,96 +16,44 @@ import {
   Trash2,
   ArrowRight,
   ShoppingBag,
+  AlertTriangle,
+  RefreshCw,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import type { Product } from "@/lib/api";
-
-interface CartItem {
-  productId: string;
-  quantity: number;
-}
-
-// Cart storage key
-const CART_STORAGE_KEY = "hithium_cart";
-
-// Get cart from localStorage
-function getStoredCart(): CartItem[] {
-  if (typeof window === "undefined") return [];
-  try {
-    const stored = localStorage.getItem(CART_STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
-  } catch {
-    return [];
-  }
-}
-
-// Save cart to localStorage
-function saveCart(items: CartItem[]) {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
-}
+import { useCart } from "@/lib/cart-context";
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const { items: cartItems, updateQuantity, removeFromCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Load cart from localStorage and fetch products on mount
-  useEffect(() => {
-    const loadData = async () => {
-      setIsLoading(true);
+  const loadProducts = async () => {
+    setIsLoading(true);
+    setError(null);
 
-      // Load cart from localStorage
-      const storedCart = getStoredCart();
-      setCartItems(storedCart);
+    try {
+      const response = await fetch("/api/products");
+      const data = await response.json();
 
-      // Fetch products from API
-      try {
-        const response = await fetch("/api/products");
-        if (response.ok) {
-          const data = await response.json();
-          setProducts(data.products || []);
-        } else {
-          // Fallback to fetching from static data
-          const { products: staticProducts } = await import("@/lib/data");
-          setProducts(staticProducts);
-        }
-      } catch {
-        // Fallback to static data
-        const { products: staticProducts } = await import("@/lib/data");
-        setProducts(staticProducts);
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to load products");
       }
 
+      setProducts(data.products || []);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to connect to server");
+    } finally {
       setIsLoading(false);
-    };
+    }
+  };
 
-    loadData();
+  useEffect(() => {
+    loadProducts();
   }, []);
 
-  // Save cart whenever it changes
-  useEffect(() => {
-    if (!isLoading) {
-      saveCart(cartItems);
-    }
-  }, [cartItems, isLoading]);
-
   const getProduct = (id: string) => products.find((p) => p.handle === id || p.id === id);
-
-  const updateQuantity = (productId: string, delta: number) => {
-    setCartItems((items) =>
-      items
-        .map((item) =>
-          item.productId === productId
-            ? { ...item, quantity: Math.max(0, item.quantity + delta) }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
-  };
-
-  const removeItem = (productId: string) => {
-    setCartItems((items) => items.filter((i) => i.productId !== productId));
-  };
 
   const subtotal = cartItems.reduce((sum, item) => {
     const product = getProduct(item.productId);
@@ -121,6 +69,49 @@ export default function CartPage() {
         <div className="animate-pulse">
           <div className="h-8 bg-gray-200 rounded w-48 mx-auto mb-4"></div>
           <div className="h-4 bg-gray-200 rounded w-64 mx-auto"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-md mx-auto text-center">
+          <div className="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-6">
+            <AlertTriangle className="w-10 h-10 text-red-500" />
+          </div>
+          <h1 className="font-display text-2xl font-bold text-gray-900 mb-2">
+            Service Unavailable
+          </h1>
+          <p className="text-gray-600 mb-6">
+            {error}. Your cart items are saved and will be available once the service is restored.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button
+              color="primary"
+              size="lg"
+              className="font-semibold"
+              startContent={<RefreshCw className="w-4 h-4" />}
+              onClick={loadProducts}
+            >
+              Try Again
+            </Button>
+            <Button
+              as={Link}
+              href="/"
+              variant="bordered"
+              size="lg"
+              className="font-semibold"
+            >
+              Back to Home
+            </Button>
+          </div>
+          {cartItems.length > 0 && (
+            <p className="mt-6 text-sm text-gray-500">
+              You have {cartItems.length} {cartItems.length === 1 ? "item" : "items"} in your cart
+            </p>
+          )}
         </div>
       </div>
     );
@@ -194,7 +185,7 @@ export default function CartPage() {
                             isIconOnly
                             variant="light"
                             size="sm"
-                            onClick={() => updateQuantity(item.productId, -1)}
+                            onClick={() => updateQuantity(item.productId, item.quantity - 1)}
                             aria-label="Decrease"
                           >
                             <Minus className="w-3 h-3" />
@@ -206,7 +197,7 @@ export default function CartPage() {
                             isIconOnly
                             variant="light"
                             size="sm"
-                            onClick={() => updateQuantity(item.productId, 1)}
+                            onClick={() => updateQuantity(item.productId, item.quantity + 1)}
                             aria-label="Increase"
                           >
                             <Plus className="w-3 h-3" />
@@ -217,7 +208,7 @@ export default function CartPage() {
                           variant="light"
                           color="danger"
                           size="sm"
-                          onClick={() => removeItem(item.productId)}
+                          onClick={() => removeFromCart(item.productId)}
                           aria-label="Remove"
                         >
                           <Trash2 className="w-4 h-4" />

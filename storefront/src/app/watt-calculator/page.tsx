@@ -17,6 +17,8 @@ import {
   Calculator,
   ArrowRight,
   Lightbulb,
+  AlertTriangle,
+  RefreshCw,
 } from "lucide-react";
 import Link from "next/link";
 import type { Product } from "@/lib/api";
@@ -56,32 +58,30 @@ export default function WattCalculatorPage() {
   const [appliances, setAppliances] = useState<Appliance[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Fetch products on mount
-  useEffect(() => {
-    const loadData = async () => {
-      setIsLoading(true);
+  const loadProducts = async () => {
+    setIsLoading(true);
+    setError(null);
 
-      try {
-        const response = await fetch("/api/products");
-        if (response.ok) {
-          const data = await response.json();
-          setProducts(data.products || []);
-        } else {
-          // Fallback to static data
-          const { products: staticProducts } = await import("@/lib/data");
-          setProducts(staticProducts);
-        }
-      } catch {
-        // Fallback to static data
-        const { products: staticProducts } = await import("@/lib/data");
-        setProducts(staticProducts);
+    try {
+      const response = await fetch("/api/products");
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to load products");
       }
 
+      setProducts(data.products || []);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to connect to server");
+    } finally {
       setIsLoading(false);
-    };
+    }
+  };
 
-    loadData();
+  useEffect(() => {
+    loadProducts();
   }, []);
 
   const addAppliance = (preset?: { name: string; watts: number }) => {
@@ -141,7 +141,8 @@ export default function WattCalculatorPage() {
       model: recommendedCapacity.model,
       capacity: `${recommendedCapacity.capacity}kWh`,
       handle: recommendedCapacity.handle,
-      price: product?.priceFormatted || `NPR ${recommendedCapacity.capacity * 30000}`,
+      price: product?.priceFormatted || null,
+      hasPrice: !!product,
     };
   }, [totalKwh, products]);
 
@@ -334,6 +335,22 @@ export default function WattCalculatorPage() {
                   <div className="h-4 bg-white/20 rounded w-32 mb-4"></div>
                   <div className="h-6 bg-white/20 rounded w-24"></div>
                 </div>
+              ) : error ? (
+                <div className="text-center py-4">
+                  <AlertTriangle className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
+                  <p className="text-white/80 text-sm mb-3">
+                    Unable to load pricing. Please try again.
+                  </p>
+                  <Button
+                    size="sm"
+                    variant="bordered"
+                    className="border-white/50 text-white"
+                    startContent={<RefreshCw className="w-3 h-3" />}
+                    onClick={loadProducts}
+                  >
+                    Retry
+                  </Button>
+                </div>
               ) : (
                 <>
                   <h3 className="font-display text-2xl font-bold mb-1">
@@ -342,7 +359,9 @@ export default function WattCalculatorPage() {
                   <p className="text-white/80 mb-1">
                     {recommendation.capacity} Capacity
                   </p>
-                  <p className="text-xl font-bold mb-4">{recommendation.price}</p>
+                  {recommendation.price && (
+                    <p className="text-xl font-bold mb-4">{recommendation.price}</p>
+                  )}
                   <Button
                     as={Link}
                     href={`/product/${recommendation.handle}`}

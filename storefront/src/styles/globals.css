@@ -229,6 +229,58 @@
     @apply bg-white/80 backdrop-blur-xl;
   }
 
+  /* ===== HeroUI Form Component Fixes ===== */
+
+  /* Input/Select Label Background Fix */
+  [data-slot="label"] {
+    @apply bg-white px-1;
+  }
+
+  /* Input wrapper background */
+  [data-slot="input-wrapper"] {
+    @apply bg-white;
+  }
+
+  /* Select/Dropdown trigger background */
+  [data-slot="trigger"] {
+    @apply bg-white;
+  }
+
+  /* Popover/Dropdown content background */
+  [data-slot="content"] {
+    @apply bg-white shadow-xl border border-gray-200;
+  }
+
+  /* Listbox (dropdown items) background */
+  [data-slot="listbox"] {
+    @apply bg-white;
+  }
+
+  /* Select item hover state */
+  [data-slot="listboxItem"]:hover {
+    @apply bg-hithium-light;
+  }
+
+  /* Radio/Checkbox wrapper */
+  [data-slot="wrapper"] {
+    @apply bg-white;
+  }
+
+  /* Main wrapper for inputs */
+  [data-slot="main-wrapper"] {
+    @apply bg-transparent;
+  }
+
+  /* Inner wrapper */
+  [data-slot="inner-wrapper"] {
+    @apply bg-white;
+  }
+
+  /* Base input styling */
+  [data-slot="base"] {
+    @apply bg-white;
+  }
+
   .glass-dark {
     @apply bg-gray-900/80 backdrop-blur-xl;
   }

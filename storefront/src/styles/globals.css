@@ -231,54 +231,72 @@
 
   /* ===== HeroUI Form Component Fixes ===== */
 
-  /* Input/Select Label Background Fix */
+  /* Input/Select Label Background Fix - data-slot selectors */
   [data-slot="label"] {
     @apply bg-white px-1;
   }
 
-  /* Input wrapper background */
   [data-slot="input-wrapper"] {
-    @apply bg-white;
+    @apply bg-white !important;
   }
 
-  /* Select/Dropdown trigger background */
   [data-slot="trigger"] {
-    @apply bg-white;
+    @apply bg-white !important;
+  }
+
+  [data-slot="innerWrapper"] {
+    @apply bg-white !important;
   }
 
   /* Popover/Dropdown content background */
-  [data-slot="content"] {
-    @apply bg-white shadow-xl border border-gray-200;
+  [data-slot="content"],
+  [role="listbox"] {
+    @apply bg-white shadow-xl border border-gray-200 !important;
   }
 
   /* Listbox (dropdown items) background */
   [data-slot="listbox"] {
-    @apply bg-white;
+    @apply bg-white !important;
   }
 
-  /* Select item hover state */
-  [data-slot="listboxItem"]:hover {
-    @apply bg-hithium-light;
+  /* HeroUI Input - Bordered variant fix */
+  .group[data-filled-within="true"] [data-slot="input-wrapper"],
+  .group[data-focus-within="true"] [data-slot="input-wrapper"] {
+    @apply bg-white !important;
   }
 
-  /* Radio/Checkbox wrapper */
-  [data-slot="wrapper"] {
-    @apply bg-white;
+  /* HeroUI Select trigger */
+  button[data-slot="trigger"] {
+    @apply bg-white !important;
   }
 
-  /* Main wrapper for inputs */
-  [data-slot="main-wrapper"] {
+  /* Dropdown/Popover menu */
+  [data-slot="popover"] > [data-slot="content"],
+  div[role="listbox"],
+  ul[role="listbox"] {
+    @apply bg-white shadow-xl rounded-xl !important;
+  }
+
+  /* Select/Autocomplete dropdown items */
+  [data-slot="listboxItem"],
+  li[role="option"] {
+    @apply bg-white hover:bg-hithium-light !important;
+  }
+
+  /* Input base and wrapper */
+  [data-slot="base"],
+  [data-slot="mainWrapper"] {
     @apply bg-transparent;
   }
 
-  /* Inner wrapper */
-  [data-slot="inner-wrapper"] {
-    @apply bg-white;
+  /* Textarea wrapper */
+  [data-slot="input-wrapper"]:has(textarea) {
+    @apply bg-white !important;
   }
 
-  /* Base input styling */
-  [data-slot="base"] {
-    @apply bg-white;
+  /* General form input backgrounds */
+  .group[data-slot="base"] [data-slot="input-wrapper"] {
+    @apply bg-white !important;
   }
 
   .glass-dark {

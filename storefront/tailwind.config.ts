@@ -1,10 +1,8 @@
 import type { Config } from "tailwindcss";
-import { heroui } from "@heroui/react";
 
 const config: Config = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -15,7 +13,7 @@ const config: Config = {
           light: "#EDF5FF",      // Very light blue tint
           dark: "#0a0f1a",       // Dark for footers/contrast sections
           orange: "#F26522",     // HeroEE product accent orange
-          gray: "#F4F4F4",       // Light gray sections
+          gray: "#F9FAFB",       // Premium light gray
           cyan: "#00D4FF",       // Electric cyan
           glow: "#78A9FF",       // Glow effect color
         },
@@ -23,6 +21,20 @@ const config: Config = {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
         display: ["Plus Jakarta Sans", "system-ui", "sans-serif"],
+      },
+      fontSize: {
+        'xs': ['0.75rem', { lineHeight: '1rem' }],
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+        'base': ['1rem', { lineHeight: '1.5rem' }],
+        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+      },
+      spacing: {
+        'safe-x': 'max(1rem, env(safe-area-inset-left))',
+        'safe-r': 'max(1rem, env(safe-area-inset-right))',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
@@ -74,62 +86,6 @@ const config: Config = {
     },
   },
   darkMode: "class",
-  plugins: [
-    heroui({
-      themes: {
-        light: {
-          colors: {
-            primary: {
-              50: "#EDF5FF",
-              100: "#D0E2FF",
-              200: "#A6C8FF",
-              300: "#78A9FF",
-              400: "#4589FF",
-              500: "#0F62FE",
-              600: "#0043CE",
-              700: "#002D9C",
-              800: "#001D6C",
-              900: "#001141",
-              DEFAULT: "#0F62FE",
-              foreground: "#FFFFFF",
-            },
-            secondary: {
-              50: "#FFF4ED",
-              100: "#FFE4D6",
-              200: "#FFCCB3",
-              300: "#FFAA80",
-              400: "#FF8A50",
-              500: "#F26522",
-              600: "#D94D0D",
-              700: "#B53D0A",
-              800: "#8C3008",
-              900: "#662306",
-              DEFAULT: "#F26522",
-              foreground: "#FFFFFF",
-            },
-          },
-        },
-        dark: {
-          colors: {
-            primary: {
-              50: "#001141",
-              100: "#001D6C",
-              200: "#002D9C",
-              300: "#0043CE",
-              400: "#0F62FE",
-              500: "#4589FF",
-              600: "#78A9FF",
-              700: "#A6C8FF",
-              800: "#D0E2FF",
-              900: "#EDF5FF",
-              DEFAULT: "#4589FF",
-              foreground: "#FFFFFF",
-            },
-          },
-        },
-      },
-    }),
-  ],
 };
 
 export default config;

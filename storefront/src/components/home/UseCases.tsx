@@ -16,7 +16,7 @@ const useCases = [
     products: "HeroEE 2 / 8 / 16",
     features: ["24/7 Power Supply", "Solar Integration", "Silent Operation"],
     gradient: "from-hithium-primary to-hithium-cyan",
-    image: "/images/use-cases/home.jpg",
+    image: "/images/use-cases/home.png",
     stats: { value: "8-16", label: "Hours Backup" },
   },
   {
@@ -28,7 +28,7 @@ const useCases = [
     products: "HeroEE 8 / 16 (expandable)",
     features: ["Peak Shaving", "Demand Management", "Grid Independence"],
     gradient: "from-purple-500 to-pink-500",
-    image: "/images/use-cases/commercial.jpg",
+    image: "/images/use-cases/commercial.png",
     stats: { value: "40%", label: "Cost Savings" },
   },
   {
@@ -52,7 +52,7 @@ const useCases = [
     products: "HeroEE 8 / 16 + Solar",
     features: ["Complete Independence", "Solar Powered", "Low Maintenance"],
     gradient: "from-hithium-orange to-yellow-500",
-    image: "/images/use-cases/offgrid.jpg",
+    image: "/images/use-cases/offgrid.png",
     stats: { value: "100%", label: "Off-Grid" },
   },
 ];

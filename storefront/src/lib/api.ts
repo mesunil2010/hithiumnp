@@ -8,6 +8,7 @@
  */
 
 import { MEDUSA_BACKEND_URL, PUBLISHABLE_KEY } from "./medusa";
+import { products as staticProducts } from "./data";
 
 export interface Product {
   id: string;
@@ -24,6 +25,34 @@ export interface Product {
   specs: Record<string, string>;
   features: string[];
   inStock: boolean;
+}
+
+/**
+ * Merge API product with static pricing data as fallback
+ */
+function enrichProductWithPricing(apiProduct: Product): Product {
+  // If the API product has a price of 0 or empty, try to get it from static data
+  if (apiProduct.price === 0 || !apiProduct.price) {
+    const staticProduct = staticProducts.find(p => p.handle === apiProduct.handle);
+    if (staticProduct) {
+      return {
+        ...apiProduct,
+        price: staticProduct.price,
+        priceFormatted: staticProduct.priceFormatted,
+        currency: staticProduct.currency,
+        badge: apiProduct.badge || staticProduct.badge,
+        specs: apiProduct.specs || staticProduct.specs,
+        features: apiProduct.features || staticProduct.features,
+      };
+    }
+  }
+
+  // Ensure price formatting is correct
+  if (apiProduct.price > 0 && !apiProduct.priceFormatted) {
+    apiProduct.priceFormatted = `${apiProduct.currency} ${apiProduct.price.toLocaleString()}`;
+  }
+
+  return apiProduct;
 }
 
 export interface Category {
@@ -136,12 +165,14 @@ export async function fetchProducts(): Promise<Product[]> {
     const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?limit=100`, {
       headers: {
         "Content-Type": "application/json",
-        "x-publishable-api-key": PUBLISHABLE_KEY,
+        "x-publishable-api-key": PUBLISHABLE_KEY || "",
       },
       next: { revalidate: 60 }, // Cache for 60 seconds
     });
 
+    console.log("Fetching products from backend:", response.url, "Status:", response.status, "PUBLISHABLE_KEY:", PUBLISHABLE_KEY);
     if (!response.ok) {
+      console.error("Failed to fetch products from backend:", response.status, response.statusText);
       throw new BackendUnavailableError(`Backend returned status ${response.status}`);
     }
 
@@ -152,7 +183,7 @@ export async function fetchProducts(): Promise<Product[]> {
       throw new BackendUnavailableError("No products found in the backend database");
     }
 
-    return medusaProducts.map(transformMedusaProduct);
+    return medusaProducts.map(transformMedusaProduct).map(enrichProductWithPricing);
   } catch (error) {
     if (error instanceof BackendUnavailableError) {
       throw error;
@@ -171,7 +202,7 @@ export async function fetchProductByHandle(handle: string): Promise<Product | un
   try {
     const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?handle=${handle}`, {
       headers: {
-        "x-publishable-api-key": PUBLISHABLE_KEY,
+        "x-publishable-api-key": PUBLISHABLE_KEY || "",
         "Content-Type": "application/json",
       },
       next: { revalidate: 60 },
@@ -188,7 +219,7 @@ export async function fetchProductByHandle(handle: string): Promise<Product | un
       return undefined; // Product not found is not a backend error
     }
 
-    return transformMedusaProduct(medusaProduct);
+    return enrichProductWithPricing(transformMedusaProduct(medusaProduct));
   } catch (error) {
     if (error instanceof BackendUnavailableError) {
       throw error;
@@ -216,7 +247,7 @@ export async function fetchCategories(): Promise<Category[]> {
   try {
     const response = await fetch(`${MEDUSA_BACKEND_URL}/store/product-categories`, {
       headers: {
-        "x-publishable-api-key": PUBLISHABLE_KEY,
+        "x-publishable-api-key": PUBLISHABLE_KEY || "",
         "Content-Type": "application/json",
       },
       next: { revalidate: 300 }, // Cache for 5 minutes

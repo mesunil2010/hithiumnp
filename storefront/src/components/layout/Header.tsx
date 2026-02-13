@@ -191,37 +191,32 @@ export function Header() {
               itemClasses={{
                 base: "gap-4 rounded-xl",
               }}
+              items={[
+                { key: "all", name: "All Products", href: "/products", description: "Browse all HiTHIUM products", isAll: true },
+                ...productCategories.map((cat) => ({ key: cat.name, name: cat.name, href: cat.href, description: cat.description, icon: cat.icon, isAll: false })),
+              ]}
             >
-              <>
+              {(item: any) => (
                 <DropdownItem
-                  key="all"
-                  href="/products"
-                  description="Browse all HiTHIUM products"
+                  key={item.key}
+                  href={item.href}
+                  description={item.description}
                   startContent={
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-hithium-primary to-hithium-cyan flex items-center justify-center">
-                      <Zap className="w-5 h-5 text-white" />
-                    </div>
+                    item.isAll ? (
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-hithium-primary to-hithium-cyan flex items-center justify-center">
+                        <Zap className="w-5 h-5 text-white" />
+                      </div>
+                    ) : (
+                      <div className="w-10 h-10 rounded-xl bg-hithium-light flex items-center justify-center text-hithium-primary">
+                        {item.icon}
+                      </div>
+                    )
                   }
                   className="py-3"
                 >
-                  <span className="font-semibold">All Products</span>
+                  <span className="font-semibold">{item.name}</span>
                 </DropdownItem>
-                {productCategories.map((cat) => (
-                  <DropdownItem
-                    key={cat.name}
-                    href={cat.href}
-                    description={cat.description}
-                    startContent={
-                      <div className="w-10 h-10 rounded-xl bg-hithium-light flex items-center justify-center text-hithium-primary">
-                        {cat.icon}
-                      </div>
-                    }
-                    className="py-3"
-                  >
-                    <span className="font-semibold">{cat.name}</span>
-                  </DropdownItem>
-                ))}
-              </>
+              )}
             </DropdownMenu>
           </Dropdown>
 

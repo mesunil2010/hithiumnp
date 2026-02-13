@@ -75,8 +75,12 @@ export class BackendUnavailableError extends Error {
  */
 function transformMedusaProduct(medusaProduct: any): Product {
   const variant = medusaProduct.variants?.[0];
-  const price = variant?.prices?.find((p: any) => p.currency_code === "npr") || variant?.prices?.[0];
-  const priceAmount = price?.amount || 0;
+  // Medusa v2: calculated_price is returned when currency_code/region_id is passed
+  // Fall back to raw prices array if calculated_price is not present
+  const calculatedPrice = variant?.calculated_price?.calculated_amount;
+  const rawPrice = variant?.prices?.find((p: any) => p.currency_code === "npr")?.amount
+    || variant?.prices?.[0]?.amount;
+  const priceAmount = calculatedPrice ?? rawPrice ?? 0;
 
   // Get category from the product's categories
   const category = medusaProduct.categories?.[0];
@@ -162,7 +166,7 @@ function transformMedusaProduct(medusaProduct: any): Product {
  */
 export async function fetchProducts(): Promise<Product[]> {
   try {
-    const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?limit=100`, {
+    const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?limit=100&currency_code=npr`, {
       headers: {
         "Content-Type": "application/json",
         "x-publishable-api-key": PUBLISHABLE_KEY || "",
@@ -200,7 +204,7 @@ export async function fetchProducts(): Promise<Product[]> {
  */
 export async function fetchProductByHandle(handle: string): Promise<Product | undefined> {
   try {
-    const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?handle=${handle}`, {
+    const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?handle=${handle}&currency_code=npr`, {
       headers: {
         "x-publishable-api-key": PUBLISHABLE_KEY || "",
         "Content-Type": "application/json",

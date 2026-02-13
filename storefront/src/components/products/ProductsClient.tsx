@@ -187,12 +187,13 @@ export default function ProductsClient({ products, categories }: ProductsClientP
         </div>
 
         <Select
-          label="Sort by"
+          placeholder="Sort by"
           selectedKeys={[sortBy]}
           onChange={(e) => setSortBy(e.target.value)}
           className="sm:max-w-[180px] ml-auto"
           variant="bordered"
-          size="sm"
+          size="md"
+          aria-label="Sort products"
         >
           <SelectItem key="default">Default</SelectItem>
           <SelectItem key="price-low">Price: Low to High</SelectItem>

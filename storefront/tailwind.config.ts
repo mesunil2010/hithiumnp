@@ -8,14 +8,16 @@ const config: Config = {
     extend: {
       colors: {
         hithium: {
-          primary: "#0F62FE",    // HiTHIUM brand blue
-          accent: "#4589FF",     // Lighter blue accent
-          light: "#EDF5FF",      // Very light blue tint
-          dark: "#0a0f1a",       // Dark for footers/contrast sections
-          orange: "#F26522",     // HeroEE product accent orange
-          gray: "#F9FAFB",       // Premium light gray
-          cyan: "#00D4FF",       // Electric cyan
-          glow: "#78A9FF",       // Glow effect color
+          primary: "#1d4ed8",    // Warmer, deeper blue (blue-700)
+          accent: "#3b82f6",     // Warm medium blue (blue-500)
+          light: "#EFF6FF",      // Warm light blue tint
+          dark: "#0f172a",       // Warm slate-900 (not cold near-black)
+          navy: "#1e293b",       // Slate-800 for secondary dark sections
+          orange: "#ea580c",     // Warm orange (orange-600)
+          amber: "#f59e0b",      // Warm amber accent
+          gray: "#F8F7F4",       // Warm off-white sections
+          cyan: "#38bdf8",       // Softer sky blue
+          glow: "#93c5fd",       // Warm glow blue
         },
       },
       fontFamily: {
@@ -86,6 +88,88 @@ const config: Config = {
     },
   },
   darkMode: "class",
+  plugins: [
+    heroui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              50: "#EFF6FF",
+              100: "#DBEAFE",
+              200: "#BFDBFE",
+              300: "#93C5FD",
+              400: "#60A5FA",
+              500: "#3B82F6",
+              600: "#2563EB",
+              700: "#1D4ED8",
+              800: "#1E40AF",
+              900: "#1E3A8A",
+              DEFAULT: "#1d4ed8",
+              foreground: "#FFFFFF",
+            },
+            secondary: {
+              50: "#FFF7ED",
+              100: "#FFEDD5",
+              200: "#FED7AA",
+              300: "#FDBA74",
+              400: "#FB923C",
+              500: "#F97316",
+              600: "#EA580C",
+              700: "#C2410C",
+              800: "#9A3412",
+              900: "#7C2D12",
+              DEFAULT: "#ea580c",
+              foreground: "#FFFFFF",
+            },
+            default: {
+              50: "#FAFAFA",
+              100: "#F4F4F5",
+              200: "#E4E4E7",
+              300: "#D4D4D8",
+              400: "#A1A1AA",
+              500: "#71717A",
+              600: "#52525B",
+              700: "#3F3F46",
+              800: "#27272A",
+              900: "#18181B",
+              DEFAULT: "#E4E4E7",
+              foreground: "#18181B",
+            },
+            background: "#FFFFFF",
+            foreground: "#18181B",
+            content1: "#FFFFFF",
+            content2: "#F4F4F5",
+            content3: "#E4E4E7",
+            content4: "#D4D4D8",
+          },
+        },
+        dark: {
+          colors: {
+            primary: {
+              50: "#001141",
+              100: "#001D6C",
+              200: "#002D9C",
+              300: "#0043CE",
+              400: "#0F62FE",
+              500: "#4589FF",
+              600: "#78A9FF",
+              700: "#A6C8FF",
+              800: "#D0E2FF",
+              900: "#EDF5FF",
+              DEFAULT: "#4589FF",
+              foreground: "#FFFFFF",
+            },
+            background: "#0a0f1a",
+            foreground: "#ECEDEE",
+            content1: "#18181B",
+            content2: "#27272A",
+            content3: "#3F3F46",
+            content4: "#52525B",
+          },
+        },
+      },
+    }),
+  ],
 };
 
 export default config;

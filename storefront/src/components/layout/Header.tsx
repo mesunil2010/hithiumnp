@@ -75,7 +75,7 @@ export function Header() {
   return (
     <>
       {/* Top bar */}
-      <div className="bg-gradient-to-r from-hithium-dark via-hithium-primary to-hithium-dark text-white text-xs py-2.5 hidden sm:block">
+      <div className="bg-hithium-dark text-white text-xs py-2.5 hidden sm:block border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Zap className="w-3.5 h-3.5 text-hithium-cyan" />
@@ -255,7 +255,7 @@ export function Header() {
               as={Link}
               href="/watt-calculator"
               size="sm"
-              className="font-semibold bg-gradient-to-r from-hithium-orange to-yellow-500 text-white shadow-md shadow-hithium-orange/20 hover:shadow-lg hover:shadow-hithium-orange/30 transition-all duration-300"
+              className="font-semibold bg-hithium-orange text-white shadow-md shadow-hithium-orange/20 hover:bg-orange-500 hover:shadow-hithium-orange/30 transition-all duration-300"
               startContent={<Zap className="w-3.5 h-3.5" />}
             >
               Calculator

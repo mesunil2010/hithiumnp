@@ -25,10 +25,10 @@ function HeroProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className="relative group h-full min-h-[600px] rounded-3xl overflow-hidden bg-gradient-to-br from-hithium-dark via-[#0d1829] to-[#1a2744]">
-      {/* Animated Background */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-hithium-primary/30 rounded-full blur-[100px] animate-pulse" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-hithium-orange/20 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '1s' }} />
+    <div className="relative group h-full min-h-[600px] rounded-3xl overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-[#0f172a]">
+      {/* Warm ambient glows */}
+      <div className="absolute top-0 right-0 w-72 h-72 bg-hithium-primary/20 rounded-full blur-[90px]" />
+      <div className="absolute bottom-0 left-0 w-56 h-56 bg-hithium-orange/15 rounded-full blur-[70px]" />
 
       {/* Grid Pattern */}
       <div
@@ -45,7 +45,7 @@ function HeroProductCard({ product }: { product: Product }) {
         <div className="flex items-center justify-between mb-6">
           <Chip
             size="lg"
-            className="bg-gradient-to-r from-hithium-orange to-yellow-500 text-white font-bold shadow-lg"
+            className="bg-hithium-orange text-white font-bold shadow-lg shadow-hithium-orange/25"
           >
             Featured Product
           </Chip>
@@ -116,7 +116,7 @@ function HeroProductCard({ product }: { product: Product }) {
           <div className="flex items-center justify-between pt-4 border-t border-white/10">
             <div>
               <p className="text-sm text-gray-500">Starting from</p>
-              <p className="font-display text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-hithium-cyan to-white">
+              <p className="font-display text-4xl font-black text-white">
                 {product.priceFormatted}
               </p>
             </div>
@@ -125,7 +125,7 @@ function HeroProductCard({ product }: { product: Product }) {
                 as={Link}
                 href={`/product/${product.handle}`}
                 size="lg"
-                className="font-bold px-6 bg-white text-hithium-dark hover:bg-gray-100 transition-colors"
+                className="font-bold px-6 bg-white text-hithium-dark hover:bg-gray-50 transition-colors shadow-md"
                 endContent={<ArrowRight className="w-4 h-4" />}
               >
                 View Details
@@ -135,9 +135,9 @@ function HeroProductCard({ product }: { product: Product }) {
                 size="lg"
                 className={`transition-all duration-300 ${
                   isAdding
-                    ? "bg-gradient-to-r from-green-500 to-emerald-500"
-                    : "bg-gradient-to-r from-hithium-orange to-yellow-500 hover:scale-105"
-                } text-white shadow-lg`}
+                    ? "bg-green-500"
+                    : "bg-hithium-orange hover:bg-orange-500 hover:scale-105"
+                } text-white shadow-lg shadow-hithium-orange/25`}
                 onClick={handleAddToCart}
               >
                 {isAdding ? <Check className="w-5 h-5" /> : <ShoppingCart className="w-5 h-5" />}
@@ -277,12 +277,12 @@ function CompactProductCard({ product, variant = "default" }: { product: Product
         </p>
 
         <div className="flex items-center justify-between">
-          <p className="font-display text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-hithium-primary to-hithium-cyan">
+          <p className="font-display text-2xl font-black text-hithium-primary">
             {product.priceFormatted}
           </p>
           <Button
             isIconOnly
-            className={`${isAdding ? "bg-green-500" : "bg-gradient-to-r from-hithium-primary to-hithium-cyan"} text-white shadow-lg hover:scale-105 transition-transform`}
+            className={`${isAdding ? "bg-green-500" : "bg-hithium-primary hover:bg-hithium-accent"} text-white shadow-md hover:scale-105 transition-transform`}
             onClick={handleAddToCart}
           >
             {isAdding ? <Check className="w-4 h-4" /> : <ShoppingCart className="w-4 h-4" />}
@@ -368,7 +368,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
             ))}
 
             {/* Quick Stats Banner */}
-            <div className="bg-gradient-to-r from-hithium-primary to-hithium-cyan rounded-2xl p-6 text-white">
+            <div className="bg-hithium-primary rounded-2xl p-6 text-white shadow-lg shadow-hithium-primary/20">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">

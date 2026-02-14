@@ -70,7 +70,7 @@ function UseCaseCard({ useCase, isActive, onHover }: { useCase: typeof useCases[
       <div
         className={`h-full rounded-3xl overflow-hidden transition-all duration-500 ${
           isActive
-            ? 'bg-gradient-to-br from-hithium-dark to-gray-900'
+            ? 'bg-gradient-to-br from-slate-800 to-slate-900'
             : 'bg-white border border-gray-100 hover:border-gray-200 hover:shadow-xl'
         }`}
       >
@@ -128,7 +128,7 @@ function UseCaseCard({ useCase, isActive, onHover }: { useCase: typeof useCases[
                 <Button
                   as={Link}
                   href="/products"
-                  className={`font-bold bg-gradient-to-r ${useCase.gradient} text-white shadow-lg hover:scale-105 transition-transform`}
+                  className={`font-bold bg-gradient-to-r ${useCase.gradient} text-white shadow-md hover:scale-105 transition-transform`}
                   endContent={<ArrowRight className="w-4 h-4" />}
                 >
                   View Products
@@ -251,7 +251,7 @@ export function UseCases() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-12 p-8 rounded-3xl bg-gradient-to-r from-hithium-dark to-gray-900 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="mt-12 p-8 rounded-3xl bg-gradient-to-r from-slate-800 to-slate-900 flex flex-col lg:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-6">
             <div className="hidden sm:flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-hithium-primary to-hithium-cyan flex items-center justify-center text-white">
@@ -273,7 +273,7 @@ export function UseCases() {
             as={Link}
             href="/watt-calculator"
             size="lg"
-            className="font-bold px-8 bg-gradient-to-r from-hithium-orange to-yellow-500 text-white shadow-lg hover:scale-105 transition-transform"
+            className="font-bold px-8 bg-hithium-orange text-white shadow-md shadow-hithium-orange/20 hover:bg-orange-500 hover:scale-105 transition-transform"
             startContent={<Battery className="w-5 h-5" />}
           >
             Calculate Your Needs

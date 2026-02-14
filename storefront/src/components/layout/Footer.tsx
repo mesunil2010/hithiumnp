@@ -79,7 +79,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-3 mb-6 group">
               {/* Logo */}
               <div className="relative w-12 h-12 rounded-xl overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-hithium-primary via-hithium-accent to-hithium-cyan" />
+                <div className="absolute inset-0 bg-gradient-to-br from-hithium-primary via-hithium-accent to-hithium-light" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <svg viewBox="0 0 32 32" className="w-12 h-12" fill="none">
                     <text
@@ -99,7 +99,7 @@ export function Footer() {
               </div>
               <div>
                 <span className="font-display font-black text-xl leading-tight block">
-                  <span className="text-hithium-cyan">Hi</span>
+                  <span className="text-hithium-light">Hi</span>
                   <span className="text-white">THIUM</span>
                 </span>
                 <span className="text-xs font-bold text-hithium-orange tracking-[0.2em] uppercase block">
@@ -110,28 +110,28 @@ export function Footer() {
 
             <p className="text-gray-400 mb-6 max-w-sm leading-relaxed">
               Exclusive distributor of HiTHIUM and HiTHIUM HeroEE energy storage
-              products in Nepal. Powering a <span className="text-hithium-cyan">cleaner</span>, <span className="text-hithium-orange">greener</span> future.
+              products in Nepal. Powering a <span className="text-hithium-light">cleaner</span>, <span className="text-hithium-orange">greener</span> future.
             </p>
 
             {/* Contact Info */}
             <div className="space-y-3 mb-8">
               <div className="flex items-center gap-3 group">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-hithium-primary/20 to-hithium-cyan/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <MapPin className="w-5 h-5 text-hithium-cyan" />
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-hithium-primary/20 to-hithium-light/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <MapPin className="w-5 h-5 text-hithium-light" />
                 </div>
                 <span className="text-gray-300">Kathmandu, Nepal</span>
               </div>
               <div className="flex items-center gap-3 group">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-hithium-primary/20 to-hithium-cyan/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Phone className="w-5 h-5 text-hithium-cyan" />
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-hithium-primary/20 to-hithium-light/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Phone className="w-5 h-5 text-hithium-light" />
                 </div>
                 <a href="tel:+9771XXXXXXXX" className="text-gray-300 hover:text-white transition-colors">
                   +977 1XXX-XXXXXX
                 </a>
               </div>
               <div className="flex items-center gap-3 group">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-hithium-primary/20 to-hithium-cyan/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Mail className="w-5 h-5 text-hithium-cyan" />
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-hithium-primary/20 to-hithium-light/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Mail className="w-5 h-5 text-hithium-light" />
                 </div>
                 <a href="mailto:info@hithiumnp.com" className="text-gray-300 hover:text-white transition-colors">
                   info@hithiumnp.com
@@ -145,7 +145,7 @@ export function Footer() {
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gradient-to-br hover:from-hithium-primary hover:to-hithium-cyan hover:border-transparent transition-all duration-300"
+                  className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-gradient-to-br hover:from-hithium-primary hover:to-hithium-light hover:border-transparent transition-all duration-300"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -165,9 +165,9 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-hithium-cyan transition-colors flex items-center gap-2 group"
+                    className="text-sm text-gray-400 hover:text-hithium-light transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-hithium-cyan transition-colors" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-hithium-light transition-colors" />
                     {link.name}
                   </Link>
                 </li>
@@ -186,9 +186,9 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-hithium-cyan transition-colors flex items-center gap-2 group"
+                    className="text-sm text-gray-400 hover:text-hithium-light transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-hithium-cyan transition-colors" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-hithium-light transition-colors" />
                     {link.name}
                   </Link>
                 </li>
@@ -207,9 +207,9 @@ export function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-hithium-cyan transition-colors flex items-center gap-2 group"
+                    className="text-sm text-gray-400 hover:text-hithium-light transition-colors flex items-center gap-2 group"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-hithium-cyan transition-colors" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-hithium-light transition-colors" />
                     {link.name}
                   </Link>
                 </li>
@@ -233,7 +233,7 @@ export function Footer() {
               href="https://www.hithium.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-hithium-primary to-hithium-cyan hover:from-hithium-cyan hover:to-hithium-primary transition-all"
+              className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-hithium-primary to-hithium-light hover:from-hithium-light hover:to-hithium-primary transition-all"
             >
               HiTHIUM
             </a>

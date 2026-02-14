@@ -5,8 +5,8 @@ import { Button } from "@heroui/react";
 import { Phone, Calculator, Zap, TrendingUp, Clock, Leaf, Headphones } from "lucide-react";
 
 const stats = [
-  { icon: <TrendingUp className="w-5 h-5" />, value: "~2.5", label: "Years", sublabel: "ROI" },
-  { icon: <Clock className="w-5 h-5" />, value: "10+", label: "Years", sublabel: "Lifespan" },
+  { icon: <TrendingUp className="w-5 h-5" />, value: "~2.5", label: "Years", sublabel: "ROI Payback" },
+  { icon: <Clock className="w-5 h-5" />, value: "10+", label: "Years", sublabel: "Product Lifespan" },
   { icon: <Leaf className="w-5 h-5" />, value: "0", label: "Emissions", sublabel: "Clean Energy" },
   { icon: <Headphones className="w-5 h-5" />, value: "24/7", label: "Support", sublabel: "Local Team" },
 ];
@@ -15,18 +15,17 @@ export function CTASection() {
   return (
     <section className="section-padding bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-[#1e3a5f] to-[#1e293b] p-10 sm:p-14 lg:p-20">
-          {/* Warm ambient glows — static, not pulsing */}
-          <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-hithium-primary/15 rounded-full -translate-y-1/2 translate-x-1/2 blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-hithium-orange/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-[100px]" />
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-hithium-navy p-10 sm:p-14 lg:p-20">
+          {/* Subtle background accents */}
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-hithium-primary/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-[100px]" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-hithium-green/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-[80px]" />
 
-          {/* Grid Pattern */}
+          {/* Dot pattern */}
           <div
-            className="absolute inset-0 opacity-[0.03]"
+            className="absolute inset-0 opacity-[0.04]"
             style={{
-              backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
-                               linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px)`,
-              backgroundSize: '40px 40px',
+              backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 1px)`,
+              backgroundSize: '32px 32px',
             }}
           />
 
@@ -34,16 +33,16 @@ export function CTASection() {
             {/* Content */}
             <div className="text-white">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 mb-8">
-                <Zap className="w-4 h-4 text-hithium-cyan" />
-                <span className="text-sm font-semibold text-white/90">Find Your Perfect System</span>
+              <div className="inline-flex items-center gap-2 bg-hithium-primary/20 border border-hithium-primary/30 rounded-full px-4 py-2 mb-8">
+                <Zap className="w-4 h-4 text-hithium-light" />
+                <span className="text-sm font-semibold text-hithium-light">Find Your Perfect System</span>
               </div>
 
               {/* Heading */}
               <h2 className="font-display text-4xl sm:text-5xl font-black mb-6 leading-tight">
                 Not sure which
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-hithium-cyan to-hithium-primary">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-hithium-light to-hithium-accent">
                   system
                 </span>{" "}
                 is right
@@ -64,7 +63,7 @@ export function CTASection() {
                   as={Link}
                   href="/watt-calculator"
                   size="lg"
-                  className="font-bold px-8 py-6 bg-hithium-orange text-white shadow-lg shadow-hithium-orange/25 hover:bg-orange-500 hover:scale-105 transition-all duration-300"
+                  className="font-bold px-8 bg-hithium-orange text-white shadow-lg shadow-hithium-orange/20 hover:bg-orange-500 transition-all duration-200"
                   startContent={<Calculator className="w-5 h-5" />}
                 >
                   Watt Calculator
@@ -74,7 +73,7 @@ export function CTASection() {
                   href="/contact"
                   variant="bordered"
                   size="lg"
-                  className="font-bold px-8 py-6 border border-white/25 text-white hover:bg-white/8 hover:border-white/40 transition-all duration-300"
+                  className="font-bold px-8 border border-white/25 text-white hover:bg-white/8 hover:border-white/40 transition-all duration-200"
                   startContent={<Phone className="w-5 h-5" />}
                 >
                   Talk to an Expert
@@ -85,35 +84,28 @@ export function CTASection() {
             {/* Stats Grid */}
             <div className="hidden lg:block">
               <div className="grid grid-cols-2 gap-5">
-                {stats.map((stat, index) => (
+                {stats.map((stat) => (
                   <div
                     key={stat.label}
                     className="stat-card group text-center"
-                    style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    {/* Icon */}
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <div className="text-hithium-cyan group-hover:text-hithium-orange transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <div className="text-hithium-light">
                         {stat.icon}
                       </div>
                     </div>
-
-                    {/* Value */}
-                    <p className="text-4xl font-black font-display text-white mb-1 group-hover:text-hithium-cyan transition-colors">
+                    <p className="text-4xl font-black font-display text-white mb-1">
                       {stat.value}
                     </p>
-
-                    {/* Labels */}
                     <p className="text-sm font-semibold text-white/90">{stat.label}</p>
                     <p className="text-xs text-white/50">{stat.sublabel}</p>
                   </div>
                 ))}
               </div>
 
-              {/* Additional Trust Element */}
-              <div className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-white/5 to-white/10 border border-white/10">
+              <div className="mt-8 p-6 rounded-2xl bg-hithium-primary/20 border border-hithium-primary/30">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-hithium-primary to-hithium-cyan flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-2xl bg-hithium-primary flex items-center justify-center">
                     <Zap className="w-7 h-7 text-white" />
                   </div>
                   <div>

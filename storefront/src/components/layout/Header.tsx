@@ -78,7 +78,7 @@ export function Header() {
       <div className="bg-hithium-dark text-white text-xs py-2.5 hidden sm:block border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <Zap className="w-3.5 h-3.5 text-hithium-cyan" />
+            <Zap className="w-3.5 h-3.5 text-hithium-light" />
             <p className="text-blue-100">
               <span className="text-white font-semibold">Exclusive Distributor</span> of HiTHIUM & HiTHIUM HeroEE in Nepal
             </p>
@@ -203,7 +203,7 @@ export function Header() {
                   description={item.description}
                   startContent={
                     item.isAll ? (
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-hithium-primary to-hithium-cyan flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-hithium-primary to-hithium-accent flex items-center justify-center">
                         <Zap className="w-5 h-5 text-white" />
                       </div>
                     ) : (
@@ -283,7 +283,7 @@ export function Header() {
                 shape="circle"
                 isInvisible={totalItems === 0}
                 classNames={{
-                  badge: "bg-gradient-to-r from-hithium-primary to-hithium-cyan font-bold"
+                  badge: "bg-gradient-to-r from-hithium-primary to-hithium-accent font-bold"
                 }}
               >
                 <Button
@@ -316,7 +316,7 @@ export function Header() {
           <NavbarMenuItem>
             <Link
               href="/products"
-              className="w-full text-lg font-bold text-white bg-gradient-to-r from-hithium-primary to-hithium-cyan py-4 px-6 rounded-xl block text-center mt-4 shadow-lg"
+              className="w-full text-lg font-bold text-white bg-gradient-to-r from-hithium-primary to-hithium-accent py-4 px-6 rounded-xl block text-center mt-4 shadow-lg"
               onClick={() => setIsMenuOpen(false)}
             >
               Shop All Products

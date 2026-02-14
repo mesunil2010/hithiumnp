@@ -8,16 +8,18 @@ const config: Config = {
     extend: {
       colors: {
         hithium: {
-          primary: "#1d4ed8",    // Warmer, deeper blue (blue-700)
-          accent: "#3b82f6",     // Warm medium blue (blue-500)
-          light: "#EFF6FF",      // Warm light blue tint
-          dark: "#0f172a",       // Warm slate-900 (not cold near-black)
-          navy: "#1e293b",       // Slate-800 for secondary dark sections
-          orange: "#ea580c",     // Warm orange (orange-600)
-          amber: "#f59e0b",      // Warm amber accent
-          gray: "#F8F7F4",       // Warm off-white sections
-          cyan: "#38bdf8",       // Softer sky blue
-          glow: "#93c5fd",       // Warm glow blue
+          primary: "#0047AB",    // Deep cobalt blue — brand primary
+          accent: "#0066CC",     // Medium cobalt for hover states
+          light: "#E8F0FE",      // Very light blue tint for backgrounds
+          dark: "#0A1628",       // Near-black navy for footer/text
+          navy: "#0D2347",       // Deep navy for headings
+          green: "#00A651",      // HiTHIUM brand green (eco/energy)
+          lime: "#52C41A",       // Light green for success/highlights
+          orange: "#FF6B00",     // Warm orange accent for CTAs
+          gray: "#F5F6F8",       // Light cool-gray section backgrounds
+          muted: "#6B7280",      // Muted text color
+          border: "#E5E7EB",     // Border color
+          surface: "#FFFFFF",    // Card/surface white
         },
       },
       fontFamily: {
@@ -94,31 +96,31 @@ const config: Config = {
         light: {
           colors: {
             primary: {
-              50: "#EFF6FF",
-              100: "#DBEAFE",
-              200: "#BFDBFE",
-              300: "#93C5FD",
-              400: "#60A5FA",
-              500: "#3B82F6",
-              600: "#2563EB",
-              700: "#1D4ED8",
-              800: "#1E40AF",
-              900: "#1E3A8A",
-              DEFAULT: "#1d4ed8",
+              50: "#E8F0FE",
+              100: "#C5D8FC",
+              200: "#9BBEF9",
+              300: "#6FA3F7",
+              400: "#4589F5",
+              500: "#0066CC",
+              600: "#0052A3",
+              700: "#0047AB",
+              800: "#003D8F",
+              900: "#0D2347",
+              DEFAULT: "#0047AB",
               foreground: "#FFFFFF",
             },
             secondary: {
-              50: "#FFF7ED",
-              100: "#FFEDD5",
-              200: "#FED7AA",
-              300: "#FDBA74",
-              400: "#FB923C",
-              500: "#F97316",
-              600: "#EA580C",
-              700: "#C2410C",
-              800: "#9A3412",
-              900: "#7C2D12",
-              DEFAULT: "#ea580c",
+              50: "#F0FFF4",
+              100: "#C6F6D5",
+              200: "#9AE6B4",
+              300: "#68D391",
+              400: "#48BB78",
+              500: "#38A169",
+              600: "#00A651",
+              700: "#276749",
+              800: "#1C4532",
+              900: "#1A3328",
+              DEFAULT: "#00A651",
               foreground: "#FFFFFF",
             },
             default: {

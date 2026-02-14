@@ -25,18 +25,17 @@ function HeroProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className="relative group h-full min-h-[600px] rounded-3xl overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-[#0f172a]">
-      {/* Warm ambient glows */}
+    <div className="relative group h-full min-h-[600px] rounded-3xl overflow-hidden bg-hithium-navy">
+      {/* Subtle glows */}
       <div className="absolute top-0 right-0 w-72 h-72 bg-hithium-primary/20 rounded-full blur-[90px]" />
-      <div className="absolute bottom-0 left-0 w-56 h-56 bg-hithium-orange/15 rounded-full blur-[70px]" />
+      <div className="absolute bottom-0 left-0 w-56 h-56 bg-hithium-green/10 rounded-full blur-[70px]" />
 
-      {/* Grid Pattern */}
+      {/* Dot Pattern */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px)`,
-          backgroundSize: '30px 30px',
+          backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 1px)`,
+          backgroundSize: '28px 28px',
         }}
       />
 
@@ -73,7 +72,7 @@ function HeroProductCard({ product }: { product: Product }) {
             ) : (
               <div className="w-full h-full rounded-3xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center">
                 <div className="text-center">
-                  <Battery className="w-24 h-24 text-hithium-cyan mx-auto mb-4" />
+                  <Battery className="w-24 h-24 text-hithium-light mx-auto mb-4" />
                   <Zap className="w-8 h-8 text-hithium-orange mx-auto animate-pulse" />
                 </div>
               </div>
@@ -87,7 +86,7 @@ function HeroProductCard({ product }: { product: Product }) {
             <Chip
               size="sm"
               variant="flat"
-              className="bg-white/10 text-hithium-cyan text-xs font-semibold mb-3"
+              className="bg-white/10 text-hithium-light text-xs font-semibold mb-3"
               startContent={<Zap className="w-3 h-3" />}
             >
               {product.category}
@@ -311,16 +310,15 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
   if (!featuredProduct) return null;
 
   return (
-    <section className="section-padding bg-hithium-gray relative overflow-hidden">
+    <section className="section-padding bg-white relative overflow-hidden">
       {/* Background Decoration */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-hithium-primary/5 rounded-full blur-[150px]" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-hithium-orange/5 rounded-full blur-[120px]" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-hithium-light/50 rounded-full blur-[150px]" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Section Header - Left aligned */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-hithium-primary/10 to-hithium-cyan/10 border border-hithium-primary/20 text-hithium-primary rounded-full px-5 py-2 text-sm font-bold mb-4">
+            <div className="inline-flex items-center gap-2 bg-hithium-primary/8 border border-hithium-primary/15 text-hithium-primary rounded-full px-5 py-2 text-sm font-bold mb-4">
               <Zap className="w-4 h-4" />
               Our Products
             </div>

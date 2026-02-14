@@ -87,14 +87,14 @@ function ProductCard({ product }: { product: Product }) {
           as={Link}
           href={`/product/${product.handle}`}
           variant="flat"
-          className="flex-1 font-semibold bg-hithium-primary/10 text-hithium-primary hover:bg-hithium-primary/20"
+          className="flex-1 font-semibold bg-hithium-primary/10 text-hithium-primary hover:bg-hithium-primary/15"
           endContent={<ArrowRight className="w-4 h-4" />}
         >
           View Details
         </Button>
         <Button
           isIconOnly
-          className={isAdding ? "bg-green-500 text-white" : "bg-hithium-primary text-white"}
+          className={isAdding ? "bg-green-500 text-white" : "bg-hithium-orange text-white hover:bg-orange-500"}
           aria-label="Add to cart"
           onClick={handleAddToCart}
         >

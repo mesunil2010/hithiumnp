@@ -10,14 +10,16 @@ const config: Config = {
     extend: {
       colors: {
         hithium: {
-          primary: "#0F62FE",    // HiTHIUM brand blue
-          accent: "#4589FF",     // Lighter blue accent
-          light: "#EDF5FF",      // Very light blue tint
-          dark: "#0a0f1a",       // Dark for footers/contrast sections
-          orange: "#F26522",     // HeroEE product accent orange
-          gray: "#F4F4F4",       // Light gray sections
-          cyan: "#00D4FF",       // Electric cyan
-          glow: "#78A9FF",       // Glow effect color
+          primary: "#1d4ed8",    // Warmer, deeper blue (blue-700)
+          accent: "#3b82f6",     // Warm medium blue (blue-500)
+          light: "#EFF6FF",      // Warm light blue tint
+          dark: "#0f172a",       // Warm slate-900 (not cold near-black)
+          navy: "#1e293b",       // Slate-800 for secondary dark sections
+          orange: "#ea580c",     // Warm orange (orange-600)
+          amber: "#f59e0b",      // Warm amber accent
+          gray: "#F8F7F4",       // Warm off-white sections
+          cyan: "#38bdf8",       // Softer sky blue
+          glow: "#93c5fd",       // Warm glow blue
         },
       },
       fontFamily: {
@@ -80,31 +82,31 @@ const config: Config = {
         light: {
           colors: {
             primary: {
-              50: "#EDF5FF",
-              100: "#D0E2FF",
-              200: "#A6C8FF",
-              300: "#78A9FF",
-              400: "#4589FF",
-              500: "#0F62FE",
-              600: "#0043CE",
-              700: "#002D9C",
-              800: "#001D6C",
-              900: "#001141",
-              DEFAULT: "#0F62FE",
+              50: "#EFF6FF",
+              100: "#DBEAFE",
+              200: "#BFDBFE",
+              300: "#93C5FD",
+              400: "#60A5FA",
+              500: "#3B82F6",
+              600: "#2563EB",
+              700: "#1D4ED8",
+              800: "#1E40AF",
+              900: "#1E3A8A",
+              DEFAULT: "#1d4ed8",
               foreground: "#FFFFFF",
             },
             secondary: {
-              50: "#FFF4ED",
-              100: "#FFE4D6",
-              200: "#FFCCB3",
-              300: "#FFAA80",
-              400: "#FF8A50",
-              500: "#F26522",
-              600: "#D94D0D",
-              700: "#B53D0A",
-              800: "#8C3008",
-              900: "#662306",
-              DEFAULT: "#F26522",
+              50: "#FFF7ED",
+              100: "#FFEDD5",
+              200: "#FED7AA",
+              300: "#FDBA74",
+              400: "#FB923C",
+              500: "#F97316",
+              600: "#EA580C",
+              700: "#C2410C",
+              800: "#9A3412",
+              900: "#7C2D12",
+              DEFAULT: "#ea580c",
               foreground: "#FFFFFF",
             },
             default: {

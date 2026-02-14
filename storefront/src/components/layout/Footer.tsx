@@ -61,7 +61,7 @@ export function Footer() {
                 className="flex-1 lg:w-72 px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-gray-500 focus:outline-none focus:border-hithium-primary/50 focus:ring-2 focus:ring-hithium-primary/20 transition-all"
               />
               <Button
-                className="font-bold px-6 bg-gradient-to-r from-hithium-primary to-hithium-cyan text-white shadow-lg shadow-hithium-primary/20"
+                className="font-bold px-6 bg-hithium-primary text-white shadow-md shadow-hithium-primary/20 hover:bg-hithium-accent transition-colors"
                 endContent={<ArrowRight className="w-4 h-4" />}
               >
                 Subscribe

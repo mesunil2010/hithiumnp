@@ -43,10 +43,10 @@ export function WhyHithium() {
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-[180px]">
           {/* Large Featured Card - Cycle Life */}
-          <div className="group md:col-span-2 md:row-span-2 relative rounded-3xl overflow-hidden bg-gradient-to-br from-hithium-dark via-[#0d1829] to-[#1a2744] p-8 flex flex-col justify-between">
-            {/* Animated Background */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-hithium-cyan/30 rounded-full blur-[80px] animate-pulse" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-hithium-primary/20 rounded-full blur-[60px]" />
+          <div className="group md:col-span-2 md:row-span-2 relative rounded-3xl overflow-hidden bg-gradient-to-br from-slate-800 via-[#1e3a5f] to-slate-900 p-8 flex flex-col justify-between">
+            {/* Warm ambient glows */}
+            <div className="absolute top-0 right-0 w-56 h-56 bg-hithium-primary/20 rounded-full blur-[80px]" />
+            <div className="absolute bottom-0 left-0 w-44 h-44 bg-hithium-orange/12 rounded-full blur-[60px]" />
 
             <div className="relative">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-hithium-cyan to-hithium-primary flex items-center justify-center text-white mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -55,7 +55,7 @@ export function WhyHithium() {
               <h3 className="font-display font-black text-4xl lg:text-5xl text-white mb-3">
                 11,000+
               </h3>
-              <p className="text-2xl text-hithium-cyan font-bold mb-4">Cycle Life</p>
+              <p className="text-2xl text-sky-300 font-bold mb-4">Cycle Life</p>
             </div>
             <p className="relative text-gray-400 leading-relaxed">
               Industry-leading LiFePO₄ cells deliver over 11,000 charge cycles — more than 10-15 years of daily use.
@@ -85,7 +85,7 @@ export function WhyHithium() {
           </div>
 
           {/* Wide Card - In-House Manufacturing */}
-          <div className="group md:col-span-2 relative rounded-3xl overflow-hidden bg-gradient-to-r from-hithium-orange to-yellow-500 p-6 flex items-center">
+          <div className="group md:col-span-2 relative rounded-3xl overflow-hidden bg-gradient-to-r from-hithium-orange to-amber-500 p-6 flex items-center">
             <div className="flex-1">
               <div className="flex items-center gap-4 mb-3">
                 <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
@@ -127,7 +127,7 @@ export function WhyHithium() {
           </div>
 
           {/* Tall Card - Global Presence */}
-          <div className="group md:row-span-2 relative rounded-3xl overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800 p-6 flex flex-col">
+          <div className="group md:row-span-2 relative rounded-3xl overflow-hidden bg-gradient-to-b from-slate-800 to-slate-900 p-6 flex flex-col">
             {/* Globe animation would go here */}
             <div className="absolute inset-0 opacity-10">
               <div
@@ -146,7 +146,7 @@ export function WhyHithium() {
 
               <div className="flex-1 flex flex-col justify-center">
                 <p className="font-display font-black text-6xl text-white mb-2">#2</p>
-                <p className="text-xl text-hithium-cyan font-bold mb-1">Global Ranking</p>
+                <p className="text-xl text-sky-300 font-bold mb-1">Global Ranking</p>
                 <p className="text-gray-400 text-sm">In energy storage shipments</p>
               </div>
 

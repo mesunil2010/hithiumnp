@@ -15,11 +15,10 @@ export function CTASection() {
   return (
     <section className="section-padding bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-hithium-dark via-[#0d1829] to-[#1a2744] p-10 sm:p-14 lg:p-20">
-          {/* Animated Background Elements */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-hithium-primary/20 rounded-full -translate-y-1/2 translate-x-1/2 blur-[100px] animate-pulse" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-hithium-orange/15 rounded-full translate-y-1/2 -translate-x-1/2 blur-[80px] animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/2 w-[300px] h-[300px] bg-hithium-cyan/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-[60px] animate-pulse" style={{ animationDelay: '0.5s' }} />
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-[#1e3a5f] to-[#1e293b] p-10 sm:p-14 lg:p-20">
+          {/* Warm ambient glows — static, not pulsing */}
+          <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-hithium-primary/15 rounded-full -translate-y-1/2 translate-x-1/2 blur-[120px]" />
+          <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-hithium-orange/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-[100px]" />
 
           {/* Grid Pattern */}
           <div
@@ -65,7 +64,7 @@ export function CTASection() {
                   as={Link}
                   href="/watt-calculator"
                   size="lg"
-                  className="font-bold px-8 py-6 bg-gradient-to-r from-hithium-orange to-yellow-500 text-white shadow-xl shadow-hithium-orange/30 hover:shadow-2xl hover:shadow-hithium-orange/40 hover:scale-105 transition-all duration-300"
+                  className="font-bold px-8 py-6 bg-hithium-orange text-white shadow-lg shadow-hithium-orange/25 hover:bg-orange-500 hover:scale-105 transition-all duration-300"
                   startContent={<Calculator className="w-5 h-5" />}
                 >
                   Watt Calculator
@@ -75,7 +74,7 @@ export function CTASection() {
                   href="/contact"
                   variant="bordered"
                   size="lg"
-                  className="font-bold px-8 py-6 border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300"
+                  className="font-bold px-8 py-6 border border-white/25 text-white hover:bg-white/8 hover:border-white/40 transition-all duration-300"
                   startContent={<Phone className="w-5 h-5" />}
                 >
                   Talk to an Expert

@@ -398,5 +398,26 @@ export default async function seed({ container }: ExecArgs) {
     },
   });
 
+  // Create a publishable API key for the storefront
+  logger.info("Creating publishable API key...");
+  const apiKeyModuleService = container.resolve(Modules.API_KEY);
+  try {
+    const existingKeys = await apiKeyModuleService.listApiKeys();
+
+    if (existingKeys.length === 0) {
+      const createdKey = await apiKeyModuleService.createApiKeys({
+        type: "publishable",
+        title: "HiTHIUM Storefront",
+        created_by: "system",
+      });
+      logger.info(`Created publishable key`);
+      logger.info(`Key: ${createdKey}`);
+    } else {
+      logger.info(`Existing publishable key found`);
+    }
+  } catch (error) {
+    logger.info("Could not create API key (may require setup in admin panel)");
+  }
+
   logger.info("Seed completed successfully!");
 }

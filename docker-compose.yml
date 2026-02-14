@@ -1,0 +1,105 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: hithium-postgres
+    env_file:
+      - .env.docker
+    environment:
+      POSTGRES_USER: ${DB_USER:-hithium}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-hithium_password}
+      POSTGRES_DB: ${DB_NAME:-hithium_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-hithium}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hithium-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: hithium-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hithium-network
+
+  # Medusa Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hithium-backend
+    env_file:
+      - .env.docker
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      DATABASE_URL: postgresql://${DB_USER:-hithium}:${DB_PASSWORD:-hithium_password}@postgres:5432/${DB_NAME:-hithium_db}?sslmode=disable
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key}
+      COOKIE_SECRET: ${COOKIE_SECRET:-your-cookie-secret-key}
+      MEDUSA_ADMIN_ONBOARDING_TYPE: ${MEDUSA_ADMIN_ONBOARDING_TYPE:-default}
+      STORE_CORS: ${STORE_CORS:-http://localhost:8000,http://storefront:8000}
+      ADMIN_CORS: ${ADMIN_CORS:-http://localhost:9000,http://backend:9000}
+      AUTH_CORS: ${AUTH_CORS:-http://localhost:8000,http://localhost:9000,http://storefront:8000,http://backend:9000}
+      MEDUSA_BACKEND_URL: ${MEDUSA_BACKEND_URL:-http://localhost:9000}
+    ports:
+      - "9000:9000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - hithium-network
+    command: npm run dev
+
+  # Next.js Storefront
+  storefront:
+    build:
+      context: ./storefront
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_MEDUSA_BACKEND_URL: ${NEXT_PUBLIC_MEDUSA_BACKEND_URL:-http://backend:9000}
+        NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: ${NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY:-pk_52b3e25513a0e1d6b0a0ef24e6cd8431e41314616b9c2d837bd1722b5ee6e10b}
+    container_name: hithium-storefront
+    env_file:
+      - .env.docker
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      NEXT_PUBLIC_MEDUSA_BACKEND_URL: ${NEXT_PUBLIC_MEDUSA_BACKEND_URL:-http://backend:9000}
+      NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: ${NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY:-pk_52b3e25513a0e1d6b0a0ef24e6cd8431e41314616b9c2d837bd1722b5ee6e10b}
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:8000}
+    ports:
+      - "8000:8000"
+    depends_on:
+      - backend
+    volumes:
+      - ./storefront:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - hithium-network
+    command: npm run dev
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  hithium-network:
+    driver: bridge

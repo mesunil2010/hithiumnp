@@ -64,7 +64,7 @@ function HeroProductCard({ product }: { product: Product }) {
           <div className="relative w-64 h-64 lg:w-80 lg:h-80 float-animation">
             {!imageError ? (
               <Image
-                src={`/images/products/${product.handle}.png`}
+                src={`/images/products/${product.handle}.jpg`}
                 alt={product.title}
                 fill
                 className="object-contain drop-shadow-2xl"
@@ -191,7 +191,7 @@ function CompactProductCard({ product, variant = "default" }: { product: Product
             <div className="relative w-20 h-20 group-hover:scale-110 transition-transform duration-500">
               {!imageError ? (
                 <Image
-                  src={`/images/products/${product.handle}.png`}
+                  src={`/images/products/${product.handle}.jpg`}
                   alt={product.title}
                   fill
                   className="object-contain"
@@ -246,7 +246,7 @@ function CompactProductCard({ product, variant = "default" }: { product: Product
         <div className="relative w-28 h-28 group-hover:scale-110 transition-transform duration-500">
           {!imageError ? (
             <Image
-              src={`/images/products/${product.handle}.png`}
+              src={`/images/products/${product.handle}.jpg`}
               alt={product.title}
               fill
               className="object-contain drop-shadow-lg"

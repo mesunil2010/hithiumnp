@@ -128,7 +128,7 @@ export function HeroSection() {
                 <div className="relative z-10 w-48 h-48 mb-6 float-animation">
                   {!imageError ? (
                     <Image
-                      src="/images/products/heroee-main.png"
+                      src="/images/products/heroee-main.jpg"
                       alt="HeroEE Energy Storage System"
                       fill
                       className="object-contain drop-shadow-2xl"

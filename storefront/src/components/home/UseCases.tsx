@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@heroui/react";
-import { Home, Building2, Tent, Palmtree, ArrowRight, Zap, Battery, Sun, Wifi, Lightbulb } from "lucide-react";
+import { Home, Building2, Tent, Palmtree, ArrowRight, Zap, Battery, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
@@ -9,179 +9,189 @@ import { useState } from "react";
 const useCases = [
   {
     id: "home",
-    icon: <Home className="w-8 h-8" />,
+    icon: <Home className="w-6 h-6" />,
     title: "Home Backup",
     subtitle: "Never lose power again",
-    description: "Keep lights, fans, internet, and essential appliances running during load shedding. Solar + battery for maximum savings.",
+    description:
+      "Keep lights, fans, internet, and essential appliances running during load shedding. Pair with solar for maximum savings and independence.",
     products: "HeroEE 2 / 8 / 16",
     features: ["24/7 Power Supply", "Solar Integration", "Silent Operation"],
-    gradient: "from-hithium-primary to-hithium-cyan",
     image: "/images/use-cases/home.png",
-    stats: { value: "8-16", label: "Hours Backup" },
+    stat: { value: "8–16 hrs", label: "Average backup duration" },
   },
   {
     id: "commercial",
-    icon: <Building2 className="w-8 h-8" />,
+    icon: <Building2 className="w-6 h-6" />,
     title: "Commercial & Industrial",
-    subtitle: "Optimize your energy costs",
-    description: "Optimize energy costs for shops, offices, and factories. Peak shaving, demand management, and solar integration.",
+    subtitle: "Optimize energy costs",
+    description:
+      "Peak shaving, demand management, and solar integration for shops, offices, and factories. Reduce your electricity bill significantly.",
     products: "HeroEE 8 / 16 (expandable)",
     features: ["Peak Shaving", "Demand Management", "Grid Independence"],
-    gradient: "from-purple-500 to-pink-500",
     image: "/images/use-cases/commercial.png",
-    stats: { value: "40%", label: "Cost Savings" },
+    stat: { value: "Up to 40%", label: "Electricity cost reduction" },
   },
   {
     id: "outdoor",
-    icon: <Tent className="w-8 h-8" />,
+    icon: <Tent className="w-6 h-6" />,
     title: "Outdoor & Events",
-    subtitle: "Portable power anywhere",
-    description: "Portable, silent power for camping, outdoor events, and remote work sites. No generators, no noise, no fumes.",
+    subtitle: "Power anywhere, silently",
+    description:
+      "Portable, silent power for camping, outdoor events, and remote work sites. No generators, no noise, no fumes — just clean energy.",
     products: "HeroEE 1 / 2",
     features: ["Ultra Portable", "Zero Noise", "Multiple Outlets"],
-    gradient: "from-emerald-500 to-teal-500",
     image: "/images/use-cases/outdoor.jpg",
-    stats: { value: "1-2", label: "kWh Capacity" },
+    stat: { value: "1–2 kWh", label: "Portable capacity" },
   },
   {
     id: "offgrid",
-    icon: <Palmtree className="w-8 h-8" />,
+    icon: <Palmtree className="w-6 h-6" />,
     title: "Off-Grid & Rural",
     subtitle: "Power remote locations",
-    description: "Reliable energy for areas with limited grid access. Solar-powered systems for remote homes, schools, and communities.",
+    description:
+      "Complete energy independence for areas with limited grid access. Solar-powered systems for remote homes, schools, and communities.",
     products: "HeroEE 8 / 16 + Solar",
     features: ["Complete Independence", "Solar Powered", "Low Maintenance"],
-    gradient: "from-hithium-orange to-yellow-500",
     image: "/images/use-cases/offgrid.png",
-    stats: { value: "100%", label: "Off-Grid" },
+    stat: { value: "100%", label: "Off-grid capable" },
   },
 ];
 
-function UseCaseCard({ useCase, isActive, onHover }: { useCase: typeof useCases[0]; isActive: boolean; onHover: () => void }) {
+function UseCaseCard({
+  useCase,
+  isActive,
+  onActivate,
+}: {
+  useCase: (typeof useCases)[0];
+  isActive: boolean;
+  onActivate: () => void;
+}) {
   const [imageError, setImageError] = useState(false);
 
-  return (
-    <div
-      className={`group relative cursor-pointer transition-all duration-500 ${
-        isActive ? 'lg:col-span-2' : 'lg:col-span-1'
-      }`}
-      onMouseEnter={onHover}
-    >
-      <div
-        className={`h-full rounded-3xl overflow-hidden transition-all duration-500 ${
-          isActive
-            ? 'bg-gradient-to-br from-slate-800 to-slate-900'
-            : 'bg-white border border-gray-100 hover:border-gray-200 hover:shadow-xl'
-        }`}
-      >
-        {isActive ? (
-          // Expanded Active Card
-          <div className="relative h-full min-h-[450px] p-8 flex flex-col lg:flex-row gap-8">
-            {/* Background Effects */}
-            <div className={`absolute top-0 right-0 w-80 h-80 bg-gradient-to-br ${useCase.gradient} opacity-20 rounded-full blur-[100px]`} />
+  if (isActive) {
+    return (
+      <div className="lg:col-span-2">
+        <div className="h-full min-h-[440px] rounded-3xl bg-hithium-dark border border-white/[0.07] overflow-hidden relative">
+          {/* Top accent line */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-hithium-primary/60 to-transparent" />
+          {/* Subtle grid */}
+          <div
+            className="absolute inset-0 opacity-[0.025]"
+            style={{
+              backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+              backgroundSize: "32px 32px",
+            }}
+          />
+          {/* Ambient glow */}
+          <div className="absolute top-0 right-0 w-72 h-72 bg-hithium-primary/8 rounded-full blur-[120px]" />
 
-            {/* Left Content */}
-            <div className="relative flex-1 flex flex-col justify-between">
+          <div className="relative p-8 lg:p-10 flex flex-col lg:flex-row gap-8 h-full">
+            {/* Left content */}
+            <div className="flex-1 flex flex-col justify-between">
               <div>
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${useCase.gradient} flex items-center justify-center text-white mb-6 shadow-lg`}>
+                <div className="w-12 h-12 rounded-2xl bg-hithium-primary/20 flex items-center justify-center text-hithium-primary mb-5 border border-hithium-primary/20">
                   {useCase.icon}
                 </div>
-                <h3 className="font-display font-black text-3xl lg:text-4xl text-white mb-2">
+                <h3 className="font-display font-black text-3xl lg:text-4xl text-white mb-1.5">
                   {useCase.title}
                 </h3>
-                <p className={`text-transparent bg-clip-text bg-gradient-to-r ${useCase.gradient} font-semibold text-lg mb-4`}>
-                  {useCase.subtitle}
-                </p>
-                <p className="text-gray-400 leading-relaxed mb-6 max-w-md">
+                <p className="text-hithium-cyan font-semibold mb-4">{useCase.subtitle}</p>
+                <p className="text-slate-400 leading-relaxed mb-6 max-w-md text-sm">
                   {useCase.description}
                 </p>
 
                 {/* Features */}
-                <div className="flex flex-wrap gap-3 mb-6">
+                <div className="flex flex-wrap gap-2 mb-6">
                   {useCase.features.map((feature) => (
                     <span
                       key={feature}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white/80 text-sm font-medium"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.06] text-slate-300 text-xs font-medium border border-white/[0.08]"
                     >
-                      <Zap className="w-3.5 h-3.5 text-hithium-cyan" />
+                      <Check className="w-3 h-3 text-hithium-primary" />
                       {feature}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Bottom */}
+              {/* Bottom row */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div>
-                    <p className={`font-display font-black text-4xl text-transparent bg-clip-text bg-gradient-to-r ${useCase.gradient}`}>
-                      {useCase.stats.value}
-                    </p>
-                    <p className="text-gray-500 text-sm">{useCase.stats.label}</p>
+                    <p className="font-display font-black text-2xl text-white">{useCase.stat.value}</p>
+                    <p className="text-slate-500 text-xs">{useCase.stat.label}</p>
                   </div>
-                  <div className="h-12 w-px bg-white/10" />
+                  <div className="h-10 w-px bg-white/10" />
                   <div>
-                    <p className="text-white font-bold">{useCase.products}</p>
-                    <p className="text-gray-500 text-sm">Recommended</p>
+                    <p className="text-white font-semibold text-sm">{useCase.products}</p>
+                    <p className="text-slate-500 text-xs">Recommended</p>
                   </div>
                 </div>
                 <Button
                   as={Link}
                   href="/products"
-                  className={`font-bold bg-gradient-to-r ${useCase.gradient} text-white shadow-md hover:scale-105 transition-transform`}
-                  endContent={<ArrowRight className="w-4 h-4" />}
+                  size="sm"
+                  className="font-semibold bg-hithium-primary text-white hover:bg-hithium-accent transition-colors"
+                  endContent={<ArrowRight className="w-3.5 h-3.5" />}
                 >
                   View Products
                 </Button>
               </div>
             </div>
 
-            {/* Right Image/Visual */}
+            {/* Right image */}
             <div className="hidden lg:flex flex-1 items-center justify-center">
-              <div className="relative w-full h-80">
+              <div className="relative w-full h-72 rounded-2xl overflow-hidden bg-slate-800/50 border border-white/[0.06]">
                 {!imageError ? (
                   <Image
                     src={useCase.image}
                     alt={useCase.title}
                     fill
-                    className="object-cover rounded-2xl"
+                    className="object-cover opacity-80"
                     onError={() => setImageError(true)}
                   />
                 ) : (
-                  <div className={`w-full h-full rounded-2xl bg-gradient-to-br ${useCase.gradient} opacity-20 flex items-center justify-center`}>
-                    <div className="text-center">
-                      <div className="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
-                        {useCase.icon}
-                      </div>
-                      <p className="text-white/60 font-medium">{useCase.title}</p>
+                  <div className="w-full h-full flex flex-col items-center justify-center gap-3">
+                    <div className="w-16 h-16 rounded-2xl bg-hithium-primary/10 border border-hithium-primary/20 flex items-center justify-center text-hithium-primary">
+                      {useCase.icon}
                     </div>
+                    <p className="text-slate-500 text-sm font-medium">{useCase.title}</p>
                   </div>
                 )}
+                <div className="absolute inset-0 bg-gradient-to-t from-hithium-dark/40 to-transparent" />
               </div>
             </div>
           </div>
-        ) : (
-          // Collapsed Card
-          <div className="p-6 h-full min-h-[200px] flex flex-col justify-between">
-            <div>
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${useCase.gradient} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                {useCase.icon}
-              </div>
-              <h3 className="font-display font-bold text-xl text-gray-900 mb-2 group-hover:text-hithium-primary transition-colors">
-                {useCase.title}
-              </h3>
-              <p className="text-sm text-gray-500 line-clamp-2">
-                {useCase.subtitle}
-              </p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="group cursor-pointer"
+      onMouseEnter={onActivate}
+      onClick={onActivate}
+    >
+      <div className="h-full min-h-[180px] rounded-3xl bg-white border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all duration-300 overflow-hidden">
+        <div className="p-6 h-full flex flex-col justify-between">
+          <div>
+            <div className="w-11 h-11 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-600 group-hover:bg-hithium-light group-hover:border-hithium-primary/20 group-hover:text-hithium-primary mb-4 transition-all duration-200">
+              {useCase.icon}
             </div>
-            <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-              <span className="text-sm font-semibold text-gray-400">{useCase.products}</span>
-              <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${useCase.gradient} flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity`}>
-                <ArrowRight className="w-4 h-4" />
-              </div>
+            <h3 className="font-display font-bold text-gray-900 text-lg mb-1 group-hover:text-hithium-primary transition-colors">
+              {useCase.title}
+            </h3>
+            <p className="text-gray-400 text-sm">{useCase.subtitle}</p>
+          </div>
+          <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-50">
+            <span className="text-xs text-gray-400 font-medium">{useCase.products}</span>
+            <div className="w-7 h-7 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-hithium-primary group-hover:border-hithium-primary group-hover:text-white transition-all duration-200">
+              <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
@@ -191,90 +201,70 @@ export function UseCases() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="section-padding bg-gradient-to-b from-hithium-light to-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #0F62FE 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-        }}
-      />
-
-      {/* Glow Effects */}
-      <div className="absolute top-1/2 left-0 w-80 h-80 bg-hithium-primary/10 rounded-full blur-[120px] -translate-y-1/2" />
-      <div className="absolute top-1/2 right-0 w-80 h-80 bg-hithium-orange/10 rounded-full blur-[120px] -translate-y-1/2" />
+    <section className="section-padding bg-white relative overflow-hidden">
+      {/* Very subtle background tint */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 to-white pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-hithium-orange/10 to-yellow-500/10 border border-hithium-orange/20 text-hithium-orange rounded-full px-5 py-2 text-sm font-bold mb-4">
-              <Zap className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 bg-gray-50 border border-gray-200 text-gray-600 rounded-full px-4 py-1.5 text-sm font-semibold mb-5">
+              <Zap className="w-4 h-4 text-hithium-primary" />
               Use Cases
             </div>
-            <h2 className="font-display text-4xl sm:text-5xl font-black text-gray-900">
+            <h2 className="font-display text-4xl sm:text-5xl font-black text-gray-900 leading-tight">
               Power for{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-hithium-primary to-hithium-cyan">
-                Every Scenario
-              </span>
+              <span className="text-hithium-primary">every scenario</span>
             </h2>
-            <p className="text-gray-500 max-w-xl mt-4 text-lg">
-              From home backup to industrial applications, HiTHIUM solutions adapt to your energy needs.
+            <p className="text-gray-500 max-w-lg mt-3 text-base leading-relaxed">
+              From home backup to industrial applications, HiTHIUM solutions adapt to your
+              energy needs across Nepal.
             </p>
           </div>
 
-          {/* Quick Stats */}
-          <div className="hidden lg:flex items-center gap-8 mt-6 lg:mt-0">
+          <div className="hidden lg:flex items-center gap-6 mt-6 lg:mt-0">
             <div className="text-center">
-              <p className="font-display font-black text-3xl text-hithium-primary">4</p>
-              <p className="text-gray-500 text-sm">Solutions</p>
+              <p className="font-display font-black text-2xl text-gray-900">1–16 kWh</p>
+              <p className="text-gray-400 text-sm">Capacity range</p>
             </div>
-            <div className="h-12 w-px bg-gray-200" />
+            <div className="h-10 w-px bg-gray-200" />
             <div className="text-center">
-              <p className="font-display font-black text-3xl text-hithium-orange">1-16</p>
-              <p className="text-gray-500 text-sm">kWh Range</p>
+              <p className="font-display font-black text-2xl text-gray-900">4</p>
+              <p className="text-gray-400 text-sm">Use cases</p>
             </div>
           </div>
         </div>
 
-        {/* Dynamic Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
+        {/* Interactive Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {useCases.map((useCase, index) => (
             <UseCaseCard
               key={useCase.id}
               useCase={useCase}
               isActive={index === activeIndex}
-              onHover={() => setActiveIndex(index)}
+              onActivate={() => setActiveIndex(index)}
             />
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-12 p-8 rounded-3xl bg-gradient-to-r from-slate-800 to-slate-900 flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-6">
-            <div className="hidden sm:flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-hithium-primary to-hithium-cyan flex items-center justify-center text-white">
-                <Lightbulb className="w-6 h-6" />
-              </div>
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-hithium-orange to-yellow-500 flex items-center justify-center text-white">
-                <Sun className="w-6 h-6" />
-              </div>
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white">
-                <Wifi className="w-6 h-6" />
-              </div>
+        {/* Bottom CTA strip */}
+        <div className="mt-8 p-6 rounded-2xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-hithium-primary/10 flex items-center justify-center text-hithium-primary">
+              <Battery className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-display font-bold text-xl text-white">Not sure which system fits your needs?</h3>
-              <p className="text-gray-400">Use our Watt Calculator to find the perfect match</p>
+              <p className="font-semibold text-gray-900">Not sure which system fits your needs?</p>
+              <p className="text-gray-400 text-sm">Use our Watt Calculator to find the right capacity</p>
             </div>
           </div>
           <Button
             as={Link}
             href="/watt-calculator"
-            size="lg"
-            className="font-bold px-8 bg-hithium-orange text-white shadow-md shadow-hithium-orange/20 hover:bg-orange-500 hover:scale-105 transition-transform"
-            startContent={<Battery className="w-5 h-5" />}
+            size="md"
+            className="font-semibold bg-hithium-dark text-white hover:bg-gray-800 transition-colors whitespace-nowrap"
+            startContent={<Zap className="w-4 h-4" />}
           >
             Calculate Your Needs
           </Button>

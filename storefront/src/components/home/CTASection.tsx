@@ -5,67 +5,63 @@ import { Button } from "@heroui/react";
 import { Phone, Calculator, Zap, TrendingUp, Clock, Leaf, Headphones } from "lucide-react";
 
 const stats = [
-  { icon: <TrendingUp className="w-5 h-5" />, value: "~2.5", label: "Years", sublabel: "ROI" },
-  { icon: <Clock className="w-5 h-5" />, value: "10+", label: "Years", sublabel: "Lifespan" },
-  { icon: <Leaf className="w-5 h-5" />, value: "0", label: "Emissions", sublabel: "Clean Energy" },
-  { icon: <Headphones className="w-5 h-5" />, value: "24/7", label: "Support", sublabel: "Local Team" },
+  { icon: <TrendingUp className="w-5 h-5" />, value: "~2.5 yrs", label: "Average ROI" },
+  { icon: <Clock className="w-5 h-5" />, value: "10+ yrs", label: "Product Lifespan" },
+  { icon: <Leaf className="w-5 h-5" />, value: "0", label: "Emissions" },
+  { icon: <Headphones className="w-5 h-5" />, value: "24/7", label: "Local Support" },
 ];
 
 export function CTASection() {
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-[#f8f7f4]">
       <div className="max-w-7xl mx-auto">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-slate-900 via-[#1e3a5f] to-[#1e293b] p-10 sm:p-14 lg:p-20">
-          {/* Warm ambient glows — static, not pulsing */}
-          <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-hithium-primary/15 rounded-full -translate-y-1/2 translate-x-1/2 blur-[120px]" />
-          <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-hithium-orange/10 rounded-full translate-y-1/2 -translate-x-1/2 blur-[100px]" />
+        <div className="relative overflow-hidden rounded-3xl bg-hithium-dark border border-white/[0.05]">
+          {/* Top accent line */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-hithium-primary/50 to-transparent" />
 
-          {/* Grid Pattern */}
+          {/* Subtle grid pattern */}
           <div
-            className="absolute inset-0 opacity-[0.03]"
+            className="absolute inset-0 opacity-[0.025]"
             style={{
               backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
                                linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px)`,
-              backgroundSize: '40px 40px',
+              backgroundSize: "40px 40px",
             }}
           />
 
-          <div className="relative grid lg:grid-cols-2 gap-12 items-center">
+          {/* Single ambient glow */}
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-hithium-primary/10 rounded-full -translate-y-1/3 translate-x-1/4 blur-[120px]" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-hithium-primary/5 rounded-full translate-y-1/3 -translate-x-1/4 blur-[100px]" />
+
+          <div className="relative grid lg:grid-cols-2 gap-12 p-10 sm:p-14 lg:p-16 items-center">
             {/* Content */}
-            <div className="text-white">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-2 mb-8">
-                <Zap className="w-4 h-4 text-hithium-cyan" />
-                <span className="text-sm font-semibold text-white/90">Find Your Perfect System</span>
+            <div>
+              <div className="inline-flex items-center gap-2 bg-white/[0.07] border border-white/[0.1] rounded-full px-4 py-1.5 mb-8">
+                <Zap className="w-3.5 h-3.5 text-hithium-cyan" />
+                <span className="text-sm font-semibold text-slate-300">Find Your Perfect System</span>
               </div>
 
-              {/* Heading */}
-              <h2 className="font-display text-4xl sm:text-5xl font-black mb-6 leading-tight">
+              <h2 className="font-display text-4xl sm:text-5xl font-black text-white mb-5 leading-tight">
                 Not sure which
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-hithium-cyan to-hithium-primary">
-                  system
-                </span>{" "}
-                is right
+                <span className="text-hithium-cyan">system</span> is right
                 <br />
                 for you?
               </h2>
 
-              {/* Description */}
-              <p className="text-lg text-gray-300 mb-10 max-w-lg leading-relaxed">
-                Use our <span className="text-hithium-orange font-semibold">Watt Calculator</span> to find the perfect energy storage
-                solution for your home or business. Or talk to our energy
-                experts for personalized recommendations.
+              <p className="text-slate-400 mb-10 max-w-md leading-relaxed">
+                Use our{" "}
+                <span className="text-slate-200 font-medium">Watt Calculator</span> to find the
+                right energy storage size for your home or business. Or talk directly to our local energy experts.
               </p>
 
-              {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   as={Link}
                   href="/watt-calculator"
                   size="lg"
-                  className="font-bold px-8 py-6 bg-hithium-orange text-white shadow-lg shadow-hithium-orange/25 hover:bg-orange-500 hover:scale-105 transition-all duration-300"
-                  startContent={<Calculator className="w-5 h-5" />}
+                  className="font-semibold px-7 bg-hithium-primary text-white hover:bg-hithium-accent transition-colors"
+                  startContent={<Calculator className="w-4 h-4" />}
                 >
                   Watt Calculator
                 </Button>
@@ -74,8 +70,8 @@ export function CTASection() {
                   href="/contact"
                   variant="bordered"
                   size="lg"
-                  className="font-bold px-8 py-6 border border-white/25 text-white hover:bg-white/8 hover:border-white/40 transition-all duration-300"
-                  startContent={<Phone className="w-5 h-5" />}
+                  className="font-semibold px-7 border-white/20 text-slate-300 hover:bg-white/[0.06] hover:border-white/30 transition-all"
+                  startContent={<Phone className="w-4 h-4" />}
                 >
                   Talk to an Expert
                 </Button>
@@ -84,42 +80,28 @@ export function CTASection() {
 
             {/* Stats Grid */}
             <div className="hidden lg:block">
-              <div className="grid grid-cols-2 gap-5">
-                {stats.map((stat, index) => (
+              <div className="grid grid-cols-2 gap-4">
+                {stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="stat-card group text-center"
-                    style={{ animationDelay: `${index * 0.1}s` }}
+                    className="p-6 rounded-2xl bg-white/[0.04] border border-white/[0.07] hover:bg-white/[0.07] hover:border-white/[0.1] transition-all duration-200 group"
                   >
-                    {/* Icon */}
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <div className="text-hithium-cyan group-hover:text-hithium-orange transition-colors">
-                        {stat.icon}
-                      </div>
+                    <div className="w-10 h-10 rounded-xl bg-hithium-primary/15 flex items-center justify-center text-hithium-primary mb-4 group-hover:bg-hithium-primary group-hover:text-white transition-all duration-200">
+                      {stat.icon}
                     </div>
-
-                    {/* Value */}
-                    <p className="text-4xl font-black font-display text-white mb-1 group-hover:text-hithium-cyan transition-colors">
-                      {stat.value}
-                    </p>
-
-                    {/* Labels */}
-                    <p className="text-sm font-semibold text-white/90">{stat.label}</p>
-                    <p className="text-xs text-white/50">{stat.sublabel}</p>
+                    <p className="font-display font-black text-3xl text-white mb-1">{stat.value}</p>
+                    <p className="text-slate-500 text-sm">{stat.label}</p>
                   </div>
                 ))}
               </div>
 
-              {/* Additional Trust Element */}
-              <div className="mt-8 p-6 rounded-2xl bg-gradient-to-r from-white/5 to-white/10 border border-white/10">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-hithium-primary to-hithium-cyan flex items-center justify-center">
-                    <Zap className="w-7 h-7 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-lg">Free Consultation</p>
-                    <p className="text-gray-400 text-sm">Our energy experts are here to help you choose</p>
-                  </div>
+              <div className="mt-4 p-5 rounded-2xl bg-white/[0.03] border border-white/[0.06] flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-hithium-primary/15 flex items-center justify-center text-hithium-primary flex-shrink-0">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold text-sm">Free Consultation Available</p>
+                  <p className="text-slate-500 text-xs">Our energy experts help you choose the right system</p>
                 </div>
               </div>
             </div>

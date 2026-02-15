@@ -300,9 +300,7 @@
   }
 
   /* ===== SMOOTH TRANSITIONS ===== */
-  * {
-    @apply transition-colors duration-200;
-  }
+  /* Note: only applied to interactive elements via component-level classes */
 
   /* ===== PRINT STYLES ===== */
   @media print {

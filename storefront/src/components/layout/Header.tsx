@@ -253,12 +253,11 @@ export function Header() {
           <NavbarItem className="hidden sm:flex">
             <Button
               as={Link}
-              href="/watt-calculator"
+              href="/products"
               size="sm"
-              className="font-semibold bg-hithium-orange text-white shadow-md shadow-hithium-orange/20 hover:bg-orange-500 hover:shadow-hithium-orange/30 transition-all duration-300"
-              startContent={<Zap className="w-3.5 h-3.5" />}
+              className="font-semibold bg-hithium-primary text-white hover:bg-hithium-accent transition-colors duration-200"
             >
-              Calculator
+              Shop Now
             </Button>
           </NavbarItem>
           <NavbarItem>

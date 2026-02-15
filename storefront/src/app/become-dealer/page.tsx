@@ -93,12 +93,14 @@ export default function BecomeDealerPage() {
                 label="Business Name"
                 placeholder="Your company name"
                 variant="bordered"
+                labelPlacement="outside"
                 isRequired
               />
               <Input
                 label="Contact Person"
                 placeholder="Full name"
                 variant="bordered"
+                labelPlacement="outside"
                 isRequired
               />
             </div>
@@ -108,12 +110,14 @@ export default function BecomeDealerPage() {
                 placeholder="business@email.com"
                 type="email"
                 variant="bordered"
+                labelPlacement="outside"
                 isRequired
               />
               <Input
                 label="Phone"
                 placeholder="+880 1XXX-XXXXXX"
                 variant="bordered"
+                labelPlacement="outside"
                 isRequired
               />
             </div>
@@ -122,6 +126,7 @@ export default function BecomeDealerPage() {
                 label="Business Type"
                 placeholder="Select type"
                 variant="bordered"
+                labelPlacement="outside"
               >
                 <SelectItem key="retail">Retail Store</SelectItem>
                 <SelectItem key="wholesale">Wholesale / Distributor</SelectItem>
@@ -134,6 +139,7 @@ export default function BecomeDealerPage() {
                 label="Location"
                 placeholder="Select division"
                 variant="bordered"
+                labelPlacement="outside"
               >
                 <SelectItem key="Kathmandu">Kathmandu</SelectItem>
                 <SelectItem key="chittagong">Chittagong</SelectItem>
@@ -149,11 +155,13 @@ export default function BecomeDealerPage() {
               label="Business Address"
               placeholder="Full address"
               variant="bordered"
+              labelPlacement="outside"
             />
             <Textarea
               label="Tell us about your business"
               placeholder="What products do you currently sell? Why are you interested in HiTHIUM?"
               variant="bordered"
+              labelPlacement="outside"
               minRows={4}
             />
             <Button

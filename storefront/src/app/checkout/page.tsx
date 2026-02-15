@@ -53,12 +53,14 @@ export default function CheckoutPage() {
                   label="First Name"
                   placeholder="Enter first name"
                   variant="bordered"
+                  labelPlacement="outside"
                   isRequired
                 />
                 <Input
                   label="Last Name"
                   placeholder="Enter last name"
                   variant="bordered"
+                  labelPlacement="outside"
                   isRequired
                 />
                 <Input
@@ -66,12 +68,14 @@ export default function CheckoutPage() {
                   placeholder="your@email.com"
                   type="email"
                   variant="bordered"
+                  labelPlacement="outside"
                   isRequired
                 />
                 <Input
                   label="Phone"
                   placeholder="+880 1XXX-XXXXXX"
                   variant="bordered"
+                  labelPlacement="outside"
                   isRequired
                 />
               </div>
@@ -90,24 +94,28 @@ export default function CheckoutPage() {
                   label="Address Line 1"
                   placeholder="House/Road/Block"
                   variant="bordered"
+                  labelPlacement="outside"
                   isRequired
                 />
                 <Input
                   label="Address Line 2"
                   placeholder="Area, Landmark (optional)"
                   variant="bordered"
+                  labelPlacement="outside"
                 />
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Input
                     label="City"
                     placeholder="City"
                     variant="bordered"
+                    labelPlacement="outside"
                     isRequired
                   />
                   <Select
                     label="Division"
                     placeholder="Select division"
                     variant="bordered"
+                    labelPlacement="outside"
                     isRequired
                   >
                     {divisions.map((d) => (
@@ -119,6 +127,7 @@ export default function CheckoutPage() {
                   label="Postal Code"
                   placeholder="1000"
                   variant="bordered"
+                  labelPlacement="outside"
                 />
               </div>
             </CardBody>

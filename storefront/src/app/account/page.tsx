@@ -36,6 +36,7 @@ function LoginForm() {
             placeholder="your@email.com"
             type="email"
             variant="bordered"
+            labelPlacement="outside"
             isRequired
           />
           <Input
@@ -43,6 +44,7 @@ function LoginForm() {
             placeholder="Enter your password"
             type="password"
             variant="bordered"
+            labelPlacement="outside"
             isRequired
           />
           <Button
@@ -75,17 +77,19 @@ function RegisterForm() {
           </p>
         </div>
         <form className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             <Input
               label="First Name"
               placeholder="First name"
               variant="bordered"
+              labelPlacement="outside"
               isRequired
             />
             <Input
               label="Last Name"
               placeholder="Last name"
               variant="bordered"
+              labelPlacement="outside"
               isRequired
             />
           </div>
@@ -94,12 +98,14 @@ function RegisterForm() {
             placeholder="your@email.com"
             type="email"
             variant="bordered"
+            labelPlacement="outside"
             isRequired
           />
           <Input
             label="Phone"
             placeholder="+880 1XXX-XXXXXX"
             variant="bordered"
+            labelPlacement="outside"
             isRequired
           />
           <Input
@@ -107,6 +113,7 @@ function RegisterForm() {
             placeholder="Create a password"
             type="password"
             variant="bordered"
+            labelPlacement="outside"
             isRequired
           />
           <Input
@@ -114,6 +121,7 @@ function RegisterForm() {
             placeholder="Confirm your password"
             type="password"
             variant="bordered"
+            labelPlacement="outside"
             isRequired
           />
           <Button
@@ -153,21 +161,25 @@ function AccountDashboard() {
               label="First Name"
               defaultValue="Demo"
               variant="bordered"
+              labelPlacement="outside"
             />
             <Input
               label="Last Name"
               defaultValue="User"
               variant="bordered"
+              labelPlacement="outside"
             />
             <Input
               label="Email"
               defaultValue="demo@hithiumnp.com"
               variant="bordered"
+              labelPlacement="outside"
             />
             <Input
               label="Phone"
               defaultValue="+880 1700-000000"
               variant="bordered"
+              labelPlacement="outside"
             />
           </div>
           <Button color="primary" className="mt-4 font-semibold">

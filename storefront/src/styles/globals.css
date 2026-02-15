@@ -340,18 +340,24 @@
   }
 
   /* ===== HITHIUM FORM FIXES ===== */
+  /* Floating label: must sit above the bordered input ring */
   [data-slot="label"] {
     @apply bg-white px-1;
+    z-index: 10;
   }
 
-  [data-slot="input-wrapper"] {
+  /* Keep input surfaces white so floating labels blend in */
+  [data-slot="input-wrapper"],
+  [data-slot="inner-wrapper"] {
     @apply bg-white;
   }
 
+  /* Select trigger */
   [data-slot="trigger"] {
     @apply bg-white;
   }
 
+  /* Dropdown content */
   [data-slot="content"] {
     @apply bg-white shadow-xl border border-gray-200;
   }
@@ -370,13 +376,5 @@
 
   [data-slot="main-wrapper"] {
     @apply bg-transparent;
-  }
-
-  [data-slot="inner-wrapper"] {
-    @apply bg-white;
-  }
-
-  [data-slot="base"] {
-    @apply bg-white;
   }
 }

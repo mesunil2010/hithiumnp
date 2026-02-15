@@ -52,6 +52,7 @@ const productCategories = [
 
 const navLinks = [
   { name: "Home", href: "/" },
+  { name: "Products", href: "/products" },
   { name: "About Us", href: "/about" },
   { name: "Support", href: "/support" },
   { name: "Watt Calculator", href: "/watt-calculator" },
@@ -112,6 +113,9 @@ export function Header() {
             ? 'bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-lg'
             : 'bg-white/90 backdrop-blur-md border-b border-gray-50'
         }`}
+        classNames={{
+          menu: "z-[9999] overflow-y-auto",
+        }}
         height="5rem"
       >
         <NavbarContent>
@@ -300,22 +304,22 @@ export function Header() {
         </NavbarContent>
 
         {/* Mobile menu */}
-        <NavbarMenu className="pt-8 bg-white/95 backdrop-blur-xl">
-          {navLinks.map((link) => (
+        <NavbarMenu className="pt-4 pb-8 bg-white overflow-y-auto">
+          {navLinks.map((link, index) => (
             <NavbarMenuItem key={link.name}>
               <Link
                 href={link.href}
-                className="w-full text-lg font-semibold text-gray-600 hover:text-hithium-primary py-3 block transition-colors"
+                className="w-full text-lg font-semibold text-gray-700 hover:text-hithium-primary py-3 border-b border-gray-100 flex items-center transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
               </Link>
             </NavbarMenuItem>
           ))}
-          <NavbarMenuItem>
+          <NavbarMenuItem className="mt-4">
             <Link
               href="/products"
-              className="w-full text-lg font-bold text-white bg-gradient-to-r from-hithium-primary to-hithium-cyan py-4 px-6 rounded-xl block text-center mt-4 shadow-lg"
+              className="w-full text-base font-bold text-white bg-gradient-to-r from-hithium-primary to-hithium-cyan py-4 px-6 rounded-xl block text-center shadow-lg"
               onClick={() => setIsMenuOpen(false)}
             >
               Shop All Products

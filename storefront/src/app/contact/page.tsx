@@ -92,6 +92,7 @@ export default function ContactPage() {
                   label="Full Name"
                   placeholder="Your full name"
                   variant="bordered"
+                  labelPlacement="outside"
                   isRequired
                 />
                 <Input
@@ -99,6 +100,7 @@ export default function ContactPage() {
                   placeholder="your@email.com"
                   type="email"
                   variant="bordered"
+                  labelPlacement="outside"
                   isRequired
                 />
               </div>
@@ -107,11 +109,13 @@ export default function ContactPage() {
                   label="Phone"
                   placeholder="+880 1XXX-XXXXXX"
                   variant="bordered"
+                  labelPlacement="outside"
                 />
                 <Select
                   label="Subject"
                   placeholder="Select a subject"
                   variant="bordered"
+                  labelPlacement="outside"
                 >
                   <SelectItem key="product">Product Inquiry</SelectItem>
                   <SelectItem key="purchase">Purchase / Order</SelectItem>
@@ -125,6 +129,7 @@ export default function ContactPage() {
                 label="Message"
                 placeholder="Tell us how we can help..."
                 variant="bordered"
+                labelPlacement="outside"
                 minRows={4}
                 isRequired
               />

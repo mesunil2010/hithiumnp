@@ -1,8 +1,10 @@
 import type { Config } from "tailwindcss";
+import { heroui } from "@heroui/react";
 
 const config: Config = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@heroui/react/node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -88,88 +90,7 @@ const config: Config = {
     },
   },
   darkMode: "class",
-  plugins: [
-    heroui({
-      themes: {
-        light: {
-          colors: {
-            primary: {
-              50: "#EFF6FF",
-              100: "#DBEAFE",
-              200: "#BFDBFE",
-              300: "#93C5FD",
-              400: "#60A5FA",
-              500: "#3B82F6",
-              600: "#2563EB",
-              700: "#1D4ED8",
-              800: "#1E40AF",
-              900: "#1E3A8A",
-              DEFAULT: "#1d4ed8",
-              foreground: "#FFFFFF",
-            },
-            secondary: {
-              50: "#FFF7ED",
-              100: "#FFEDD5",
-              200: "#FED7AA",
-              300: "#FDBA74",
-              400: "#FB923C",
-              500: "#F97316",
-              600: "#EA580C",
-              700: "#C2410C",
-              800: "#9A3412",
-              900: "#7C2D12",
-              DEFAULT: "#ea580c",
-              foreground: "#FFFFFF",
-            },
-            default: {
-              50: "#FAFAFA",
-              100: "#F4F4F5",
-              200: "#E4E4E7",
-              300: "#D4D4D8",
-              400: "#A1A1AA",
-              500: "#71717A",
-              600: "#52525B",
-              700: "#3F3F46",
-              800: "#27272A",
-              900: "#18181B",
-              DEFAULT: "#E4E4E7",
-              foreground: "#18181B",
-            },
-            background: "#FFFFFF",
-            foreground: "#18181B",
-            content1: "#FFFFFF",
-            content2: "#F4F4F5",
-            content3: "#E4E4E7",
-            content4: "#D4D4D8",
-          },
-        },
-        dark: {
-          colors: {
-            primary: {
-              50: "#001141",
-              100: "#001D6C",
-              200: "#002D9C",
-              300: "#0043CE",
-              400: "#0F62FE",
-              500: "#4589FF",
-              600: "#78A9FF",
-              700: "#A6C8FF",
-              800: "#D0E2FF",
-              900: "#EDF5FF",
-              DEFAULT: "#4589FF",
-              foreground: "#FFFFFF",
-            },
-            background: "#0a0f1a",
-            foreground: "#ECEDEE",
-            content1: "#18181B",
-            content2: "#27272A",
-            content3: "#3F3F46",
-            content4: "#52525B",
-          },
-        },
-      },
-    }),
-  ],
+  plugins: [heroui() as any],
 };
 
 export default config;

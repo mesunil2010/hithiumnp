@@ -299,9 +299,6 @@
     @apply outline-none ring-2 ring-hithium-primary ring-offset-2;
   }
 
-  /* ===== SMOOTH TRANSITIONS ===== */
-  /* Note: only applied to interactive elements via component-level classes */
-
   /* ===== PRINT STYLES ===== */
   @media print {
     .no-print {
@@ -338,43 +335,55 @@
     background: linear-gradient(white, white) padding-box,
                 linear-gradient(135deg, #0F62FE, #00D4FF) border-box;
   }
+}
 
-  /* ===== HITHIUM FORM FIXES ===== */
-  /* Floating label: must sit above the bordered input ring */
-  [data-slot="label"] {
-    @apply bg-white px-1;
-    z-index: 10;
-  }
+/* ===== HeroUI Form Label Positioning Fixes ===== */
+/* HeroUI's outside label classes get purged by Tailwind because the theme
+   package is nested in node_modules. These rules replace the purged classes. */
 
-  /* Keep input surfaces white so floating labels blend in */
-  [data-slot="input-wrapper"],
-  [data-slot="inner-wrapper"] {
-    @apply bg-white;
-  }
+/* Add top margin on inputs with outside labels to make room */
+[data-slot="base"][data-has-label="true"] {
+  margin-top: calc(var(--heroui-font-size-small, 0.875rem) + 10px);
+}
 
-  /* Select trigger */
-  [data-slot="trigger"] {
-    @apply bg-white;
-  }
+/* Label: absolute, centered vertically by default */
+[data-slot="label"] {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 
-  /* Dropdown content */
-  [data-slot="content"] {
-    @apply bg-white shadow-xl border border-gray-200;
-  }
+/* When input has content or focus, move label above the input */
+[data-filled-within="true"] > [data-slot="main-wrapper"] > [data-slot="input-wrapper"] > [data-slot="label"],
+[data-filled-within="true"] > [data-slot="main-wrapper"] > [data-slot="label"],
+[data-filled="true"] > [data-slot="main-wrapper"] > [data-slot="input-wrapper"] > [data-slot="label"],
+[data-filled="true"] > [data-slot="main-wrapper"] > [data-slot="label"] {
+  transform: translateY(calc(-100% - var(--heroui-font-size-small, 0.875rem) / 2 - 20px));
+  pointer-events: auto;
+  left: 0;
+}
 
-  [data-slot="listbox"] {
-    @apply bg-white;
-  }
+/* Select trigger: ensure white background */
+[data-slot="trigger"] {
+  background-color: white;
+}
 
-  [data-slot="listboxItem"]:hover {
-    @apply bg-hithium-light;
-  }
+/* Select dropdown content styling */
+[data-slot="content"] {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+}
 
-  [data-slot="wrapper"] {
-    @apply bg-white;
-  }
+[data-slot="listbox"] {
+  background-color: white;
+}
 
-  [data-slot="main-wrapper"] {
-    @apply bg-transparent;
-  }
+/* Input wrapper background */
+[data-slot="input-wrapper"] {
+  background-color: white;
 }

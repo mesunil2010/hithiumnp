@@ -8,7 +8,6 @@
  */
 
 import { MEDUSA_BACKEND_URL, PUBLISHABLE_KEY } from "./medusa";
-import { products as staticProducts } from "./data";
 
 export interface Product {
   id: string;
@@ -25,31 +24,23 @@ export interface Product {
   specs: Record<string, string>;
   features: string[];
   inStock: boolean;
+  variants?: any[]; // Keep original variants for potential future use
 }
 
 /**
  * Merge API product with static pricing data as fallback
  */
 function enrichProductWithPricing(apiProduct: Product): Product {
-  // If the API product has a price of 0 or empty, try to get it from static data
-  if (apiProduct.price === 0 || !apiProduct.price) {
-    const staticProduct = staticProducts.find(p => p.handle === apiProduct.handle);
-    if (staticProduct) {
-      return {
-        ...apiProduct,
-        price: staticProduct.price,
-        priceFormatted: staticProduct.priceFormatted,
-        currency: staticProduct.currency,
-        badge: apiProduct.badge || staticProduct.badge,
-        specs: apiProduct.specs || staticProduct.specs,
-        features: apiProduct.features || staticProduct.features,
-      };
-    }
-  }
+
+  const variant = apiProduct.variants?.[0];
+  
+  // Get price from calculated_price (correct source)
+  const priceAmount = variant?.calculated_price?.calculated_amount ?? 0;
 
   // Ensure price formatting is correct
-  if (apiProduct.price > 0 && !apiProduct.priceFormatted) {
-    apiProduct.priceFormatted = `${apiProduct.currency} ${apiProduct.price.toLocaleString()}`;
+  if (priceAmount > 0 && !apiProduct.priceFormatted) {
+    apiProduct.price = priceAmount;
+    apiProduct.priceFormatted = `${apiProduct.currency} ${priceAmount.toLocaleString()}`;
   }
 
   return apiProduct;
@@ -71,6 +62,29 @@ export class BackendUnavailableError extends Error {
 }
 
 /**
+ * Fetch the first region ID from Medusa (needed for pricing context)
+ */
+let cachedRegionId: string | null = null;
+async function getRegionId(): Promise<string | null> {
+  if (cachedRegionId) return cachedRegionId;
+  try {
+    const response = await fetch(`${MEDUSA_BACKEND_URL}/store/regions`, {
+      headers: {
+        "x-publishable-api-key": PUBLISHABLE_KEY || "",
+        "Content-Type": "application/json",
+      },
+      next: { revalidate: 300 },
+    });
+    if (!response.ok) return null;
+    const data = await response.json();
+    cachedRegionId = data.regions?.[0]?.id || null;
+    return cachedRegionId;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Transform Medusa product data to our frontend Product format
  */
 function transformMedusaProduct(medusaProduct: any): Product {
@@ -85,7 +99,7 @@ function transformMedusaProduct(medusaProduct: any): Product {
   // Get category from the product's categories
   const category = medusaProduct.categories?.[0];
   const categoryName = category?.name || "Uncategorized";
-  const categorySlug = categoryName.toLowerCase().replace(/\s+/g, "-");
+  const categorySlug = category?.handle || categoryName.toLowerCase().replace(/\s+/g, "-");
 
   // Extract metadata specs
   const metadata = medusaProduct.metadata || {};
@@ -142,6 +156,14 @@ function transformMedusaProduct(medusaProduct: any): Product {
   else if (medusaProduct.handle === "heroee-16") badge = "Premium";
   else if (medusaProduct.handle === "heroee-maxpower-8-aio") badge = "All-In-One";
 
+  // Rewrite image URL so the Next.js server (inside Docker) can reach the backend.
+  // Thumbnails are stored as http://localhost:9000/... but inside Docker the backend
+  // is reachable at MEDUSA_BACKEND_URL (e.g. http://backend:9000).
+  let imageUrl = medusaProduct.thumbnail || `/images/products/${medusaProduct.handle}.jpg`;
+  if (imageUrl.startsWith("http://localhost:9000")) {
+    imageUrl = imageUrl.replace("http://localhost:9000", MEDUSA_BACKEND_URL);
+  }
+
   return {
     id: medusaProduct.id,
     handle: medusaProduct.handle,
@@ -152,7 +174,7 @@ function transformMedusaProduct(medusaProduct: any): Product {
     priceFormatted: `NPR ${priceAmount.toLocaleString()}`,
     category: categoryName,
     categorySlug,
-    image: medusaProduct.thumbnail || `/images/products/${medusaProduct.handle}.jpg`,
+    image: imageUrl,
     badge,
     specs,
     features,
@@ -166,7 +188,11 @@ function transformMedusaProduct(medusaProduct: any): Product {
  */
 export async function fetchProducts(): Promise<Product[]> {
   try {
-    const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?limit=100&currency_code=npr`, {
+    const regionId = await getRegionId();
+    const params = new URLSearchParams({ limit: "100", fields: "*categories" });
+    if (regionId) params.set("region_id", regionId);
+
+    const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?${params}`, {
       headers: {
         "Content-Type": "application/json",
         "x-publishable-api-key": PUBLISHABLE_KEY || "",
@@ -174,7 +200,6 @@ export async function fetchProducts(): Promise<Product[]> {
       next: { revalidate: 60 }, // Cache for 60 seconds
     });
 
-    console.log("Fetching products from backend:", response.url, "Status:", response.status, "PUBLISHABLE_KEY:", PUBLISHABLE_KEY);
     if (!response.ok) {
       console.error("Failed to fetch products from backend:", response.status, response.statusText);
       throw new BackendUnavailableError(`Backend returned status ${response.status}`);
@@ -204,7 +229,11 @@ export async function fetchProducts(): Promise<Product[]> {
  */
 export async function fetchProductByHandle(handle: string): Promise<Product | undefined> {
   try {
-    const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?handle=${handle}&currency_code=npr`, {
+    const regionId = await getRegionId();
+    const params = new URLSearchParams({ handle, fields: "*categories" });
+    if (regionId) params.set("region_id", regionId);
+
+    const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products?${params}`, {
       headers: {
         "x-publishable-api-key": PUBLISHABLE_KEY || "",
         "Content-Type": "application/json",
@@ -268,7 +297,7 @@ export async function fetchCategories(): Promise<Category[]> {
     const products = await fetchProducts();
 
     return medusaCategories.map((cat: any) => {
-      const slug = cat.name.toLowerCase().replace(/\s+/g, "-");
+      const slug = cat.handle || cat.name.toLowerCase().replace(/\s+/g, "-");
       const productCount = products.filter((p) => p.categorySlug === slug).length;
 
       return {

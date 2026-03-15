@@ -109,7 +109,7 @@ export function Footer() {
             </Link>
 
             <p className="text-gray-400 mb-6 max-w-sm leading-relaxed">
-              Exclusive distributor of HiTHIUM and HiTHIUM HeroEE energy storage
+              HiTHIUM and HiTHIUM HeroEE energy storage by Arsa Energy
               products in Nepal. Powering a <span className="text-hithium-cyan">cleaner</span>, <span className="text-hithium-orange">greener</span> future.
             </p>
 
@@ -125,8 +125,8 @@ export function Footer() {
                 <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-hithium-primary/20 to-hithium-cyan/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Phone className="w-5 h-5 text-hithium-cyan" />
                 </div>
-                <a href="tel:+9771XXXXXXXX" className="text-gray-300 hover:text-white transition-colors">
-                  +977 1XXX-XXXXXX
+                <a href="tel:+9779705468001" className="text-gray-300 hover:text-white transition-colors">
+                  +977 9705468001
                 </a>
               </div>
               <div className="flex items-center gap-3 group">
@@ -225,7 +225,7 @@ export function Footer() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <p>
-            &copy; {new Date().getFullYear()} HiTHIUM Energy Storage Technology NP Ltd. All rights reserved.
+            &copy; {new Date().getFullYear()} HiTHIUM && HeroEE Energy Storage by Arsa Energy Pvt Ltd. All rights reserved.
           </p>
           <div className="flex items-center gap-2">
             <span>Powered by</span>

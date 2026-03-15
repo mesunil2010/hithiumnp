@@ -24,6 +24,8 @@ function HeroProductCard({ product }: { product: Product }) {
     setTimeout(() => setIsAdding(false), 1000);
   };
 
+  console.log("pricing", product.price, product.priceFormatted);
+
   return (
     <div className="relative group h-full min-h-[580px] rounded-3xl overflow-hidden bg-[#0a0f1c] border border-white/[0.07]">
       {/* Subtle grid pattern */}
@@ -66,7 +68,7 @@ function HeroProductCard({ product }: { product: Product }) {
           <div className="relative w-56 h-56 lg:w-72 lg:h-72 float-animation">
             {!imageError ? (
               <Image
-                src={`/images/products/${product.handle}.jpg`}
+                src={product.image}
                 alt={product.title}
                 fill
                 className="object-contain drop-shadow-2xl"
@@ -174,7 +176,7 @@ function CompactProductCard({ product }: { product: Product }) {
         <div className="relative w-24 h-24 group-hover:scale-105 transition-transform duration-300">
           {!imageError ? (
             <Image
-              src={`/images/products/${product.handle}.jpg`}
+              src={product.image}
               alt={product.title}
               fill
               className="object-contain"
@@ -256,7 +258,7 @@ function HorizontalProductCard({ product }: { product: Product }) {
           <div className="relative w-18 h-18 group-hover:scale-105 transition-transform duration-300 p-4">
             {!imageError ? (
               <Image
-                src={`/images/products/${product.handle}.jpg`}
+                src={product.image}
                 alt={product.title}
                 width={72}
                 height={72}

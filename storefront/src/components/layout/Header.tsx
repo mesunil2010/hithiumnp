@@ -81,7 +81,7 @@ export function Header() {
           <div className="flex items-center gap-2">
             <Zap className="w-3.5 h-3.5 text-hithium-cyan" />
             <p className="text-blue-100">
-              <span className="text-white font-semibold">Exclusive Distributor</span> of HiTHIUM & HiTHIUM HeroEE in Nepal
+              <span className="text-white font-semibold">Arsa Energy</span> x HiTHIUM & HiTHIUM HeroEE
             </p>
           </div>
           <div className="flex items-center gap-6">
@@ -93,11 +93,11 @@ export function Header() {
               <span>info@hithiumnp.com</span>
             </a>
             <a
-              href="tel:+9771XXXXXXXX"
+              href="tel:+9779705468001"
               className="flex items-center gap-1.5 text-blue-100 hover:text-white transition-colors"
             >
               <Phone className="w-3.5 h-3.5" />
-              <span>+977 1XXX-XXXXXX</span>
+              <span>+977 9705468001</span>
             </a>
           </div>
         </div>

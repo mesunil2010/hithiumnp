@@ -30,8 +30,8 @@ export default defineConfig({
             resolve: "@medusajs/medusa/file-local",
             id: "local",
             options: {
-              upload_dir: "uploads",
-              backend_url: process.env.MEDUSA_BACKEND_URL || "http://localhost:9000",
+              upload_dir: "static",
+              backend_url: `${process.env.MEDUSA_BACKEND_URL || "http://localhost:9000"}/static`,
             },
           },
         ],

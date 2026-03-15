@@ -140,7 +140,7 @@ export default function SupportClient() {
               </h3>
               <p className="text-gray-600 mb-2">HeroEE 1 & HeroEE 2</p>
               <Chip color="primary" variant="flat" size="lg" className="font-bold">
-                5-Year Warranty
+                2-Year Warranty
               </Chip>
               <ul className="mt-4 space-y-1 text-sm text-gray-600">
                 <li>Covers manufacturing defects</li>
@@ -156,7 +156,7 @@ export default function SupportClient() {
               </h3>
               <p className="text-gray-600 mb-2">HeroEE 8 & HeroEE 16</p>
               <Chip color="success" variant="flat" size="lg" className="font-bold">
-                10-Year Warranty
+                5-Year Warranty
               </Chip>
               <ul className="mt-4 space-y-1 text-sm text-gray-600">
                 <li>Covers manufacturing defects</li>

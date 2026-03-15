@@ -196,7 +196,8 @@ export default function WattCalculatorPage() {
                         variant="bordered"
                         size="sm"
                         className="flex-1 min-w-[140px]"
-                        label="Appliance"
+                        placeholder="Appliance"
+                        aria-label="Appliance name"
                       />
                       <Input
                         type="number"
@@ -207,7 +208,8 @@ export default function WattCalculatorPage() {
                         variant="bordered"
                         size="sm"
                         className="w-24"
-                        label="Watts"
+                        placeholder="Watts"
+                        aria-label="Watts"
                         min={0}
                       />
                       <Input
@@ -219,7 +221,8 @@ export default function WattCalculatorPage() {
                         variant="bordered"
                         size="sm"
                         className="w-24"
-                        label="Hours/day"
+                        placeholder="Hours/day"
+                        aria-label="Hours per day"
                         min={0}
                         max={24}
                       />
@@ -236,7 +239,8 @@ export default function WattCalculatorPage() {
                         variant="bordered"
                         size="sm"
                         className="w-20"
-                        label="Qty"
+                        placeholder="Qty"
+                        aria-label="Quantity"
                         min={1}
                       />
                       <Button

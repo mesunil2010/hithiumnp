@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   Button,
   Chip,
@@ -71,17 +72,12 @@ export function ProductDetail({ product, relatedProducts }: ProductDetailProps) 
                 {product.badge}
               </Chip>
             )}
-            <div className="text-center">
-              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mx-auto mb-4 shadow-xl">
-                <Zap className="w-12 h-12 text-hithium-accent" />
-              </div>
-              <p className="text-xl text-gray-500 font-semibold">
-                {product.title}
-              </p>
-              <p className="text-sm text-gray-400 mt-1">
-                {product.specs.Capacity || product.specs.Power}
-              </p>
-            </div>
+            <Image
+              src={product.image}
+              alt={product.title}
+              fill
+              className="object-contain p-8"
+            />
           </div>
         </div>
 

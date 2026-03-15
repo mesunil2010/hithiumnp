@@ -32,11 +32,6 @@ const features = [
     description: "Recognized by the World Economic Forum as a model smart manufacturing facility.",
   },
   {
-    icon: <ThermometerSun className="w-5 h-5" />,
-    title: "Climate Optimized",
-    description: "Engineered for Nepal's tropical climate — reliable performance from 0°C to 55°C.",
-  },
-  {
     icon: <Zap className="w-5 h-5" />,
     title: "Vertical Integration",
     description: "In-house production from raw materials to finished cells ensures unmatched quality control.",
@@ -170,7 +165,7 @@ export function WhyHithium() {
                   Local Support. Global Standards.
                 </p>
                 <p className="text-gray-500 text-sm">
-                  As Nepal&apos;s exclusive distributor, we provide installation support, warranty service, and technical consultation — all backed by HiTHIUM&apos;s global service network.
+                  As Nepal&apos;s exclusive partner, we provide installation support, warranty service, and technical consultation — all backed by HiTHIUM&apos;s global service network.
                 </p>
               </div>
             </div>

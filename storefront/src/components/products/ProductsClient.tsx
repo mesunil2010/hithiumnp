@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Card,
   CardBody,
@@ -56,14 +57,12 @@ function ProductCard({ product }: { product: Product }) {
               {product.badge}
             </Chip>
           )}
-          <div className="text-center">
-            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center mx-auto mb-2 shadow-lg">
-              <Zap className="w-7 h-7 text-hithium-accent" />
-            </div>
-            <p className="text-sm text-gray-500 font-medium">
-              {product.specs.Capacity || product.specs.Power}
-            </p>
-          </div>
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            className="object-contain p-4"
+          />
         </div>
 
         <div className="p-5">

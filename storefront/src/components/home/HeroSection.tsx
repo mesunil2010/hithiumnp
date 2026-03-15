@@ -38,7 +38,7 @@ export function HeroSection() {
             <div className="inline-flex items-center gap-2.5 bg-hithium-primary/10 border border-hithium-primary/20 rounded-full px-4 py-1.5 mb-8">
               <span className="w-2 h-2 rounded-full bg-hithium-cyan" />
               <span className="text-hithium-cyan font-semibold text-sm tracking-wide">
-                Exclusive Distributor in Nepal
+                Exclusive partner in Nepal
               </span>
             </div>
 
@@ -136,10 +136,10 @@ export function HeroSection() {
 
                 {/* Product image */}
                 <div className="relative z-10 flex flex-col items-center justify-center h-full p-10">
-                  <div className="relative w-52 h-52 mb-8 float-animation">
+                  <div className="relative w-64 h-64 mb-8 float-animation">
                     {!imageError ? (
                       <Image
-                        src="/images/products/heroee-main.jpg"
+                        src="/images/products/heroee-maxpower-8-aio.jpg"
                         alt="HiTHIUM HeroEE Energy Storage"
                         fill
                         className="object-contain drop-shadow-2xl"

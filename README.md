@@ -1,6 +1,6 @@
 # HiTHIUM Nepal E-Commerce Platform
 
-Official e-commerce platform for HiTHIUM Nepal — exclusive distributor of HiTHIUM and HiTHIUM HeroEE energy storage products.
+Official e-commerce platform for HiTHIUM Nepal — exclusive partner of HiTHIUM and HiTHIUM HeroEE energy storage products.
 
 ## Tech Stack
 

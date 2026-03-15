@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         port: "9000",
       },
       {
+        protocol: "http",
+        hostname: "backend",
+        port: "9000",
+      },
+      {
         protocol: "https",
         hostname: "hithiumbd.com",
       },
